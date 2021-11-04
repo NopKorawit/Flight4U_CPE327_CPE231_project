@@ -1,0 +1,140 @@
+/* mobile part */
+body{
+
+  font-family:"Lato", sans-serif;
+  height: 120vh;
+  background: rgb(255, 255, 255);
+  margin: 0;
+  padding: 0; /*remove nav border*/
+
+}
+
+.content{
+
+  margin: 100px 20px ;
+
+}
+
+nav{
+
+  display: flex ; /* to be top */
+  height: auto;
+  background: rgb(230, 103, 0);
+  justify-content: center;
+  align-items: center;
+  /* position: relative;  */
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+  flex-direction: column;
+
+}
+
+.nav-toggle {
+  /*Hamburger*/ 
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 30px;
+  color: white;
+  display: inline-block;
+  cursor: pointer;
+ 
+}
+
+.logo {
+
+  margin: 0;
+  /* color: white; */
+  font-size: 20px;
+
+}
+
+.logo a{
+  color: white;
+  text-decoration: none;
+}
+
+
+/*Menu*/
+ul{   
+
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 0px;
+  display: none;
+  
+}
+
+ul li {
+
+  list-style-type: none; /*remove bullet*/
+  font-size: 15px;
+  cursor: pointer;
+  margin: 10px;
+  text-align: center;
+  transition-duration: .1s;
+  /* display: none; */
+
+}
+
+ul li a {
+
+  text-decoration: none; /*remove underline link*/
+  color: white;
+
+}
+
+ul li:first-child {
+  margin-top: 0px;
+}
+
+ul li:hover {
+
+  background-color: #6b3900b7; /* Green */
+  padding: 10px;
+  border-radius: 5px;
+  transition-duration: .1s;
+  
+}
+
+.active { /* in js use with hamburger*/
+
+  display: flex;
+}
+
+/*Desktop part*/
+@media screen and (min-width: 800px) {
+  nav{
+    height: 80px;
+    flex-direction: row;
+  }
+
+  .logo {
+
+    padding-left: 20px;
+    margin: 0;
+    width: 20%; 
+
+  }
+
+  ul{
+    display: block;
+    justify-content: left;
+    width: 80%;
+    flex-direction: row;
+  }
+
+  ul li {
+    display: inline-block;
+    margin: 0 50px 0 0;
+    text-align: left;
+    padding: 0;
+
+  }
+
+  .nav-toggle {
+    display: none;
+  }
+
+}

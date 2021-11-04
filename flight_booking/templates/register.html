@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <script src="{% static 'js/register.js' %}" ></script>
+{% endblock %}
+
+
+{% block body %}
+
+<body class="register-form">
+
+{% if messages %}
+<div class="alert">
+    {% for message in messages %}
+        <div class="warn"><b>{{message}}</b></div>
+    {% endfor %}
+{% endif %}
+</div>
+
+<form action="addUser" method="post"> <!--addUser() in views.py-->
+<fieldset>
+    <legend align="center">REGISTER</legend>
+    {% csrf_token %}
+    <div class="register">
+        <label for="">Email:</label>
+        <input type="email" class="form-input" name="email">
+    </div>
+    <div class="register">
+        <label for="">phone no.:</label>
+        <input type="text" class="form-input" name="phone_no">
+    </div>
+    <div class="register">
+        <label for="">card no.:</label>
+        <input type="text" class="form-input" name="card_no">
+    </div>
+    <div class="register">
+        <label for="">set your password:</label>
+        <input type="password" class="form-input" name="password">
+    </div>
+    <div class="register">
+        <label for="">confirm your password:</label>
+        <input type="password" class="form-input" name="repassword">
+    </div>
+    <div class="register">
+        <input type="submit" value="register" class="btn">
+    </div>
+    <div class="register">
+        <p class="text-center">If you already have an account, 
+        <a href="loginform">login</a> instead.</p>
+    </div>
+
+</fieldset>
+</form>
+
+</body>
+
+{% endblock %}
