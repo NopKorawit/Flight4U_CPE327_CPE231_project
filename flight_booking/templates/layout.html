@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://use.typekit.net/cav5lva.css">
+  <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+  <link rel="icon" type="image/ico" href="/static/img/logo.jpg">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script src="{% static 'js/layout.js' %}" async></script>
+  <!-- Hamburger -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  
+  <title>{% block title %}Flight4U{% endblock %}</title>
+  {% block head %}
+  {% endblock %}
+
+</head>
+<body>
+
+  <nav>
+    <span class="nav-toggle" id="js-nav-toggle" > <!--id use with .js-->
+      <!--hamberger icon-->
+      <i class="fas fa-bars"></i> 
+    </span>
+    <div class="logo"><a href="/"><h1>Flight4U</h1></a></div>
+    <ul id="js-menu">
+      <li><a href="my_booking">My booking</a></li>
+      <li><a href="searchyourflight">Search Flight</a></li>
+      <li><a href="register">Sign up</a></li>
+      <li><a href="loginform">Log in</a></li>
+    </ul>
+
+  </nav>
+
+  
+
+  <div class="content">
+  {% block body %}
+  {% endblock %}
+  </div>
+  
+</body>
+</html>

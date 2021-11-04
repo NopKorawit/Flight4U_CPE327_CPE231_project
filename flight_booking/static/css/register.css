@@ -1,0 +1,43 @@
+body{
+    font-family:"Lato", sans-serif;
+}
+
+label{
+    margin-top: 10px;
+    display: flex;
+
+    
+}
+
+form{
+    margin: 20px;
+    
+}
+
+.btn{
+    margin: 15px 0 5px 0;
+}
+
+/* .alert {
+    padding: 15px;
+    width: 15cm;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 15px;
+  } */
+
+
+.warn{
+    padding: 15px;
+    width: 15cm;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    background-color: #ff9595;
+    color: rgb(105, 16, 16);
+}
+
+.alert b{
+
+    font-size: 15px;
+    margin-left: 20px;
+}

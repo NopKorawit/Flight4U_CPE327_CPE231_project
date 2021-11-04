@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+    <script src="{% static 'js/search.js' %}" ></script>
+{% endblock %}
+
+{% block body %}
+    <body class="section section1">
+        
+        <div class="search-flight">
+            <div class="container">
+            <form class="search-flight-form" action="viewflight" onsubmit=""> <!--create form-->   
+            <fieldset>
+                <legend align="center">SEARCH FLIGHT</legend> 
+                <div class="search-flight-form">       
+                    <!--Dropdown country-->
+                    <div class="input-row">
+                        <label for="flight-from">From: </label>
+                        <select name="Origin" id="flight-from">
+                            <option selected disabled>From</option>
+                            {% for city in city %} <!--from 'city' in def search (views.py)-->
+                            <option value="{{city.city_id}}">{{city.city_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="input-row">
+                        <label for="depart_date">Departure Date: </label>
+                        <input type="date" name="DepartDate" min="{{min_date}}" max="{{max_date}}" id="depart_date" placeholder="Date" class="form-control" value="{{depart_date}}">
+                    </div>
+                    <div class="input-row">
+                        <label for="seat_class">Class: </label>
+                        <select name="SeatClass" id="SeatType" class="form-control mr-sm-2">
+                            <option value="economy" {% if seat == 'economy' %}selected{% endif %}>Economy</option>
+                            <option value="business" {% if seat == 'business' %}selected{% endif %}>Business</option>
+                            <option value="first" {% if seat == 'first' %}selected{% endif %}>First</option>
+                        </select>
+                    </div>
+                    <div class="input-row">
+                        <button type="submit" class="btn">Search Flight</button>
+                    </div>
+                </div>
+            </fieldset>
+            </form>
+            </div>
+        </div>
+    </body>
+
+{% endblock %}
