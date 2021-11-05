@@ -5,7 +5,7 @@ from .DBHelper import DBHelper
 from flight_booking.models import *
 from datetime import datetime
 from django.contrib import messages
-from django.contrib.auth import login,authenticate
+from django.contrib.auth import login,authenticate,logout
 
 #Generate account_no
 
