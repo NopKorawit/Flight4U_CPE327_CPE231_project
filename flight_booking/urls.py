@@ -7,10 +7,11 @@ urlpatterns = [
     path("my_booking",views.my_booking),
     path("searchyourflight",views.search),
     path("register",views.registerForm),
-    path("viewflight",views.viewflight),
+    path("viewflight",views.flight_view),
     path("addUser",views.addUser),
     path("loginform",views.loginform),
     path("login",views.login),
+    # path("testflightlist",views.allflight)
     
 
 ]
