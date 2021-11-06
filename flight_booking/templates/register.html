@@ -20,33 +20,25 @@
 {% endif %}
 </div>
 
-
+<center>
 <form action="addUser" method="post"> <!--addUser() in views.py-->
 <fieldset>
     <legend align="center">REGISTER</legend>
     {% csrf_token %}
     <div class="register">
-        <label for="">Email:</label>
-        <input type="email" class="form-input" name="email">
+        <input type="email" class="form-input" name="email" placeholder="Email">
     </div>
     <div class="register">
-        <label for="">phone no.:</label>
-        <input type="text" class="form-input" name="phone_no">
+        <input type="text" class="form-input" name="phone_no" placeholder="Phone number">
     </div>
     <div class="register">
-        <label for="">card no.:</label>
-        <input type="text" class="form-input" name="card_no">
+        <input type="password" class="form-input" name="password" placeholder="Set your password">
     </div>
     <div class="register">
-        <label for="">set your password:</label>
-        <input type="password" class="form-input" name="password">
+        <input type="password" class="form-input" name="repassword" placeholder="Confirm your password">
     </div>
     <div class="register">
-        <label for="">confirm your password:</label>
-        <input type="password" class="form-input" name="repassword">
-    </div>
-    <div class="register">
-        <input type="submit" value="register" class="btn">
+        <input type="submit" value="Register" class="btn">
     </div>
     <div class="register">
         <p class="text-center">If you already have an account, 
@@ -55,7 +47,7 @@
 
 </fieldset>
 </form>
-
+</center>
 </body>
 
 {% endblock %}

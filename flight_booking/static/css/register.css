@@ -2,14 +2,33 @@ body{
     font-family:"Lato", sans-serif;
 }
 
+input{
+    margin: 10px 0 5px 0;
+    padding: 5px;
+    font-size: 15px;
+    width: 5cm;
+}
+
 form{
-    margin: 20px;
+    width: 70vh; 
+    
+}
+
+.register{
+
+    width: 50%;
+    flex-direction: column;
 }
 
 .btn{
-    margin: 15px 0 5px 0;
+    margin: 10px 0 10px 0;
+    padding: 10px;
+    width: 75px;
+    background-color: rgb(226, 97, 37);
+    color: white;
+    border: none;
+    border-radius: 3px;
 }
-
 /* .alert {
     padding: 15px;
     width: 15cm;
@@ -33,3 +52,5 @@ form{
     font-size: 15px;
     margin-left: 20px;
 }
+
+

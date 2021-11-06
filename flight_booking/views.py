@@ -38,7 +38,8 @@ def genID():
         if not Account.objects.filter(account_no=id).exists():
             break
     return(id)
-# Create your views here.
+
+#--------------------------------------------------------------
 
 def index(request):
     return render(request,'index.html')
@@ -103,7 +104,6 @@ def addUser(request):
     account_no = genID()
     email = request.POST['email']
     phone_no = request.POST['phone_no']
-    card_no = request.POST['card_no']
     password = request.POST['password']
     repassword = request.POST['repassword']
 
@@ -114,18 +114,13 @@ def addUser(request):
         elif Account.objects.filter(phone_no=phone_no).exists():
             messages.info(request,"This phone number is already used.")
             return redirect('/register')
-        elif Account.objects.filter(card_no=card_no).exists():
-            messages.info(request,"This card number is already used.")
-            return redirect('/register')
         else:
             account = Account.objects.create(
                 account_no=account_no,
                 email=email,
                 password=password,
-                phone_no=phone_no,
-                card_no=card_no )
+                phone_no=phone_no,)
             account.save()
-            messages.info(request,"Register success!")
             return redirect('/')
 
     else :
@@ -148,5 +143,33 @@ def login(request):
         messages.info(request,'this email does not exist')
         return redirect('/loginform')
 
+#------------------Fetch part--------------------------
 
-    
+def flight_view(request):
+    db = DBHelper()
+    data,col = db.fetch(' '
+                        ' '
+                        ' '
+                        ' '
+                        ' '
+                        ' ')
+
+#--------------------------test-------------------------------  
+# fetch all data in Flight                    
+def allflight(request):
+    flight_list = Flight.objects.all()
+    return render(request,'view.html',{
+        'flight_list':flight_list
+    })
+
+
+
+def CursorToDict(data,columns):
+    result = []
+    fieldnames = [name.replace(" ", "_").lower() for name in columns]
+    for row in data:
+        rowset = []
+        for field in zip(fieldnames, row):
+            rowset.append(field)
+        result.append(dict(rowset))
+    return result
