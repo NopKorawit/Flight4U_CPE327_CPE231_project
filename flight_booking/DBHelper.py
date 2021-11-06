@@ -7,7 +7,7 @@ class DBHelper:
         self.host = "127.0.0.1"
         self.user = "postgres"
         self.password = "Slth_1811"
-        self.db = "CPE327"
+        self.db = "Flight4U"
 
     def __connect__(self):
         self.con = psycopg2.connect(host=self.host, user=self.user, password=self.password, dbname=self.db)

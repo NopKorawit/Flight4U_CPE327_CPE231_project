@@ -45,7 +45,7 @@ def index(request):
     return render(request,'index.html')
 
 def search(request):
-    city = City.objects.all
+    city = City.objects.all()
     min_date = f"{datetime.now().date().year}-{datetime.now().date().month}-{datetime.now().date().day}"
     max_date = f"{datetime.now().date().year if (datetime.now().date().month+3)<=12 else datetime.now().date().year+1}-{(datetime.now().date().month + 3) if (datetime.now().date().month+3)<=12 else (datetime.now().date().month+3-12)}-{datetime.now().date().day}"
     if request.method == 'POST':
@@ -54,8 +54,7 @@ def search(request):
         depart_date = request.POST.get('DepartDate')
         seat = request.POST.get('SeatClass')
         trip_type = request.POST.get('TripType')
-        if(trip_type == '1'):
-            return render(request, 'search.html', {
+        return render(request, 'search.html', {
             'origin': origin,
             'destination': destination,
             'depart_date': depart_date,
@@ -63,19 +62,7 @@ def search(request):
             'trip_type': trip_type,
             'city': city
         })
-        elif(trip_type == '2'):
-            return_date = request.POST.get('ReturnDate')
-            return render(request, 'search.html', {
-            'min_date': min_date,
-            'max_date': max_date,
-            'origin': origin,
-            'destination': destination,
-            'depart_date': depart_date,
-            'seat': seat.lower(),
-            'trip_type': trip_type,
-            'return_date': return_date,
-            'city': city
-        })
+        
     else:
         return render(request,"search.html", {
             'min_date': min_date,
@@ -147,12 +134,18 @@ def login(request):
 
 def flight_view(request):
     db = DBHelper()
-    data,col = db.fetch(' '
-                        ' '
-                        ' '
-                        ' '
-                        ' '
-                        ' ')
+    data, columns = db.fetch ('SELECT f.flight_id as "Flight", f.airline as "Airline", '
+                            'f.departure as "Departure", f.destination as "Destination",'
+                            'f.departure_time as "Departure Time", f.arrival_time as "Arrival Time",'
+                            'f.arrival_time-f.departure_time as "Duration" '
+                            'FROM flight f ORDER BY f.flight_id '
+                            ' ')
+    data_report = dict()
+    data_report['data'] = CursorToDict (data,columns)
+    data_report['column_name'] = columns
+
+    return render(request, 'view.html', data_report)
+
 
 #--------------------------test-------------------------------  
 # fetch all data in Flight                    
@@ -162,8 +155,7 @@ def allflight(request):
         'flight_list':flight_list
     })
 
-
-
+    
 def CursorToDict(data,columns):
     result = []
     fieldnames = [name.replace(" ", "_").lower() for name in columns]
@@ -173,3 +165,4 @@ def CursorToDict(data,columns):
             rowset.append(field)
         result.append(dict(rowset))
     return result
+

@@ -26,6 +26,16 @@
                         </select>
                     </div>
                     <div class="input-row">
+                        <label for="flight-from">To: </label>
+                        <select name="Origin" id="flight-from">
+                            <option selected disabled>To</option>
+                            {% for city in city %} <!--from 'city' in def search (views.py)-->
+                            <option value="{{city.city_id}}">{{city.city_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <!-- End Dropdown country-->
+                    <div class="input-row">
                         <label for="depart_date">Departure Date: </label>
                         <input type="date" name="DepartDate" min="{{min_date}}" max="{{max_date}}" id="depart_date" placeholder="Date" class="form-control" value="{{depart_date}}">
                     </div>

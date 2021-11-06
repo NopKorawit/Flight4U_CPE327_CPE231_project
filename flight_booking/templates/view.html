@@ -7,12 +7,32 @@
     <script src="{% static 'js/view.js' %}" ></script>
 {% endblock %}
 
+
+
 {% block body %}
-
-<center><h1>view page</h1></center>
-
-{{flight_list}}
-
+    
+    <table class='table'>
+        <tr>
+            <th>#</th>
+            {% for name in column_name %}
+            <th>{{ name }} </th>
+            {% endfor %}
+        </tr>
+    {% for lineitem in data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ lineitem.flight }}</td>
+            <td>{{ lineitem.airline }}</td>
+            <td>{{ lineitem.departure }}</td>
+            <td>{{ lineitem.destination }}</td>
+            <td>{{ lineitem.departure_time }}</td>
+            <td>{{ lineitem.arrival_time }}</td>
+            <td>{{ lineitem.duration }}</td>
+        <tr>
+    {% endfor %}
+    
 {% endblock %}
+    
 
-<!-- Slth1811 -->
+
+
