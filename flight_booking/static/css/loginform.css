@@ -20,14 +20,28 @@ fieldset{
 }
 
 .btn{
-
     margin: 10px 0 10px 0;
     padding: 10px;
     width: 75px;
-    background-color: rgb(226, 97, 37);
+    background-color: rgb(230, 103, 0);
     color: white;
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition-duration: .1s;
+}
+
+.btn:disabled{
+    background-color: rgba(255, 115, 0, 0.527);
+    color: rgb(255, 255, 255);
+
+}
+
+.btn:hover {
+    color: rgb(230, 103, 0) ;
+    background-color: rgba(255, 115, 1, 0.37); 
+    transition-duration: .1s;
+    
 }
 
 

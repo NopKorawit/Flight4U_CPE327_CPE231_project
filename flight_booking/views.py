@@ -94,6 +94,7 @@ def addUser(request):
     password = request.POST['password']
     repassword = request.POST['repassword']
 
+
     if password==repassword:
         if Account.objects.filter(email=email).exists():
             messages.info(request,"This email is already used.")

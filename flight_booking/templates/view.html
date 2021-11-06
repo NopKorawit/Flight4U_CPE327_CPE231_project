@@ -10,17 +10,18 @@
 
 
 {% block body %}
-    
+
+
     <table class='table'>
-        <tr>
-            <th>#</th>
+        <tr class="col">
             {% for name in column_name %}
-            <th>{{ name }} </th>
+            <th> {{ name }} </th>
             {% endfor %}
         </tr>
+    
     {% for lineitem in data %}
-        <tr>
-            <td>{{ forloop.counter }}</td>
+
+        <tr class="row">
             <td>{{ lineitem.flight }}</td>
             <td>{{ lineitem.airline }}</td>
             <td>{{ lineitem.departure }}</td>
@@ -28,9 +29,11 @@
             <td>{{ lineitem.departure_time }}</td>
             <td>{{ lineitem.arrival_time }}</td>
             <td>{{ lineitem.duration }}</td>
+            <td><button class="btn" id="btn">Choose</button></td>
         <tr>
+
     {% endfor %}
-    
+
 {% endblock %}
     
 

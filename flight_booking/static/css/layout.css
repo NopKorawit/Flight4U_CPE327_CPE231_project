@@ -91,7 +91,7 @@ ul li:first-child {
 
 ul li:hover {
 
-  background-color: #6b3900b7; /* Green */
+  background-color: #ffba6cb7; 
   padding: 10px;
   border-radius: 5px;
   transition-duration: .1s;
