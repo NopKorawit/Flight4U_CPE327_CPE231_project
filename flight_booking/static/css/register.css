@@ -2,16 +2,8 @@ body{
     font-family:"Lato", sans-serif;
 }
 
-label{
-    margin-top: 10px;
-    display: flex;
-
-    
-}
-
 form{
     margin: 20px;
-    
 }
 
 .btn{

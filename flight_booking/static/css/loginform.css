@@ -2,32 +2,33 @@ body{
     font-family:"Lato", sans-serif;
 }
 
-label{
-    margin-top: 10px;
-    display: flex;
-
-    
+input{
+    margin: 10px 0 10px 0;
+    padding: 5px;
+    font-size: 15px;
+    width: 5cm;
 }
 
 form{
-    margin: 20px;
+
+    width: 10cm; 
     
+}
+
+fieldset{
+    height: 200px;
 }
 
 .btn{
 
-    margin: 15px 0 5px 0;
+    margin: 10px 0 10px 0;
+    padding: 10px;
+    width: 75px;
+    background-color: rgb(226, 97, 37);
+    color: white;
+    border: none;
+    border-radius: 3px;
 }
-
-/* .alert {
-    padding: 15px;
-    width: 15cm;
-    background-color: #ffbab5;
-    color: rgb(145, 0, 0);
-    margin-bottom: 15px;
-    border-radius: 5px;
-    font-size: 15px;
-  } */
 
 
 .warn{

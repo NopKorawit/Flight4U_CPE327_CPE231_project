@@ -19,24 +19,30 @@
         {% endfor %}
     {% endif %}
 
+<center>
 <form action="login" method="post"> <!--addUser() in views.py-->
 <fieldset>
     <legend align="center">LOGIN</legend>
     {% csrf_token %}
     <div class="login-form">
-        <label for="">Email:</label>
-        <input type="email" class="form-input" name="email" placeholder="email">
+        <input type="email" class="form-input" name="email" placeholder="email" autocomplete="on" autofocus>
     </div>
     <div class="login-form">
-        <label for="">Password:</label>
-        <input type="password" class="form-input" name="password" placeholder="password">
+        <input type="password" class="form-input" name="password" placeholder="password" autocomplete="off">
     </div>
     <div class="login-form">
-        <input type="submit" value="login" class="btn">
+        <input type="submit" value="login" class="btn" disabled>
+    </div>
+
+    <div>
+        <center>
+            Don't have an account?&nbsp;&nbsp;<a href='register'>Sign Up</a>
+        </center>
     </div>
 
 </fieldset>
 </form>
+</center>
 
 </body>
 
