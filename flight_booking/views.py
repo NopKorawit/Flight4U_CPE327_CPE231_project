@@ -1,7 +1,5 @@
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
-
 from .DBHelper import DBHelper
 from flight_booking.models import *
 from datetime import datetime
@@ -92,21 +90,22 @@ def addUser(request):
     #account_no = genID()
     Firstname = request.POST['Firstname']
     Lastname = request.POST['Lastname']
-    phone_no = request.POST['phone_no']
+  #  phone_no = request.POST['phone_no']
     email = request.POST['email']
     username = request.POST['username']
     password = request.POST['password']
     repassword = request.POST['repassword']
+
     if password==repassword:
-        if Account.objects.filter(username=username).exists():
+        if User.objects.filter(username=username).exists():
             messages.info(request,"This Username is already used.")
             return redirect('/register')
-        elif Account.objects.filter(email=email).exists():
+        elif User.objects.filter(email=email).exists():
             messages.info(request,"This email is already used.")
             return redirect('/register')
-        elif Account.objects.filter(phone_no=phone_no).exists():
-            messages.info(request,"This phone number is already used.")
-            return redirect('/register')
+        # elif User.objects.filter(phone_no=phone_no).exists():
+        #     messages.info(request,"This phone number is already used.")
+        #     return redirect('/register')
         else:
             user = User.objects.create_user(
                 #account_no=account_no,
@@ -118,6 +117,7 @@ def addUser(request):
  #               phone_no=phone_no,
                 )
             user.save()
+
             return redirect('/login')
 
     else :
@@ -129,7 +129,7 @@ def login(request):
     password = request.POST['password']
     #check email and password
     user = authenticate(email=email,password=password)
-    if not Account.objects.filter(email=email).exists():
+    if not User.objects.filter(email=email).exists():
         messages.info(request,'this email does not exist')
 
     if user is not None: #user is exist
