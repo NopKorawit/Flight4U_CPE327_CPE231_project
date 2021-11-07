@@ -80,7 +80,7 @@ DATABASES = {
     'ENGINE': 'django.db.backends.postgresql_psycopg2',
     'NAME': 'Flight4U',
     'USER': 'postgres',
-    'PASSWORD': 'cpe231',  #nop,petch
+    'PASSWORD': 'cpe231', #nop,petch
     # 'PASSWORD': 'Slth_1811', #waen
     # 'PASSWORD': '0928127668',  #near
     'HOST': 'localhost',

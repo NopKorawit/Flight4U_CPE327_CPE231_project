@@ -7,6 +7,10 @@
     <script src="{% static 'js/register.js' %}" ></script>
 {% endblock %}
 
+{% block script %}
+    <script type"text/javascript" src="{% static 'js/signup.js' %}"></script>
+{% endblock %}
+
 
 {% block body %}
 
@@ -47,7 +51,7 @@
         <input type="password" class="form-input" name="repassword" id="repassword" placeholder="Confirm password" autocomplete="off">
     </div>
     <div class="register">
-        <input type="submit" value="Register" class="btn btn-primary" id="btn">
+        <input type="submit" value="Register" class="btn btn-primary" id="btn" > <!--disabled -->
     </div>
     
     <div class="register">

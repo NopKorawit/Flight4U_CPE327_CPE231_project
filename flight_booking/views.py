@@ -1,10 +1,11 @@
+from django.contrib import auth
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from .DBHelper import DBHelper
 from flight_booking.models import *
 from datetime import datetime
 from django.contrib import messages
-from django.contrib.auth import login,authenticate,logout
+# from django.contrib.auth import login,authenticate,logout
 
 #Generate account_no
 
@@ -108,37 +109,51 @@ def addUser(request):
         #     return redirect('/register')
         else:
             user = User.objects.create_user(
-                #account_no=account_no,
-                username=username,
-                email=email,
-                password=password,
-                first_name=Firstname,
-                last_name=Lastname
- #               phone_no=phone_no,
-                )
+            #account_no=account_no,
+            username=username,
+            email=email,
+            password=password,
+            first_name=Firstname,
+            last_name=Lastname
+#           phone_no=phone_no,
+            )
             user.save()
-
             return redirect('/login')
 
     else :
         messages.info(request,"Password doesn't match.")
         return redirect('/register')
 
-def login(request):
-    email = request.POST['email']
-    password = request.POST['password']
-    #check email and password
-    user = authenticate(email=email,password=password)
-    if not User.objects.filter(email=email).exists():
-        messages.info(request,'this email does not exist')
+# def login(request):
+#     email = request.POST['email']
+#     password = request.POST['password']
+#     #check email and password
+#     user = authenticate(email=email,password=password)
+#     if not User.objects.filter(email=email).exists():
+#         messages.info(request,'this email does not exist')
 
-    if user is not None: #user is exist
-        messages.info(request,'Login success!')
-        login(request,user)
-        return redirect('/')
-    else: 
-        messages.info(request,'this email does not exist')
+#     if user is not None: #user is exist
+#         messages.info(request,'Login success!')
+#         login(request,user)
+#         return redirect('/')
+#     else: 
+#         messages.info(request,'this email does not exist')
+#         return redirect('/loginform')
+
+def login(request):
+    if request.method=='POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = auth.authenticate(username=username,password=password)
+        if user is not None:
+            auth.login(request,user)
+            messages.success(request, f" Hello {username}, You Are Successfully Logged In")
+            return redirect('/')
+        else:
+            messages.info(request, "Incorrect Username/Password")
         return redirect('/loginform')
+    else:
+        return render(request,'/loginform')
 
 #------------------Fetch part--------------------------
 

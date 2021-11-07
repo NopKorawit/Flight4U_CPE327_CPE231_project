@@ -24,14 +24,14 @@
 <fieldset>
     <legend align="center">LOGIN</legend>
     {% csrf_token %}
-    <div class="login-form">
-        <input type="email" class="form-input" name="email" placeholder="email" autocomplete="on" autofocus>
+    <div class="register">
+        <input type="username" class="form-input" name="username" id="username" placeholder="Username" autofocus>
     </div>
     <div class="login-form">
         <input type="password" class="form-input" name="password" placeholder="password" autocomplete="off">
     </div>
     <div class="login-form">
-        <input type="submit" value="login" class="btn" disabled>
+        <input type="submit" value="login" class="btn">
     </div>
 
     <div>
