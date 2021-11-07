@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 
@@ -88,28 +89,36 @@ def loginform(request):
 #----------------------------------------------
 
 def addUser(request):
-    account_no = genID()
-    email = request.POST['email']
+    #account_no = genID()
+    Firstname = request.POST['Firstname']
+    Lastname = request.POST['Lastname']
     phone_no = request.POST['phone_no']
+    email = request.POST['email']
+    username = request.POST['username']
     password = request.POST['password']
     repassword = request.POST['repassword']
-
-
     if password==repassword:
-        if Account.objects.filter(email=email).exists():
+        if Account.objects.filter(username=username).exists():
+            messages.info(request,"This Username is already used.")
+            return redirect('/register')
+        elif Account.objects.filter(email=email).exists():
             messages.info(request,"This email is already used.")
             return redirect('/register')
         elif Account.objects.filter(phone_no=phone_no).exists():
             messages.info(request,"This phone number is already used.")
             return redirect('/register')
         else:
-            account = Account.objects.create(
-                account_no=account_no,
+            user = User.objects.create_user(
+                #account_no=account_no,
+                username=username,
                 email=email,
                 password=password,
-                phone_no=phone_no,)
-            account.save()
-            return redirect('/')
+                first_name=Firstname,
+                last_name=Lastname
+ #               phone_no=phone_no,
+                )
+            user.save()
+            return redirect('/login')
 
     else :
         messages.info(request,"Password doesn't match.")

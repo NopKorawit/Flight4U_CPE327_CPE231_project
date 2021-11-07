@@ -21,10 +21,16 @@
 </div>
 
 <center>
-<form action="addUser" method="post" id="register"> <!--addUser() in views.py-->
+<form action="register" method="post" id="register"> <!--addUser() in views.py-->
 <fieldset>
     <legend align="center">REGISTER</legend>
     {% csrf_token %}
+    <div class="register">
+        <input type="text" class="form-input" name="Firstname" id="Firstname" placeholder="First name" autofocus>
+    </div>
+    <div class="register">
+        <input type="text" class="form-input" name="Lastname" id="Lastname" placeholder="Last name" autofocus>
+    </div>
     <div class="register">
         <input type="email" class="form-input" name="email" id="email" placeholder="Email" autofocus>
     </div>
@@ -32,14 +38,18 @@
         <input type="text" class="form-input" name="phone_no" id="phone_no" placeholder="Phone number">
     </div>
     <div class="register">
-        <input type="password" class="form-input" name="password" id="password" placeholder="Set your password" autocomplete="off">
+        <input type="username" class="form-input" name="username" id="username" placeholder="Username" autofocus>
     </div>
     <div class="register">
-        <input type="password" class="form-input" name="repassword" id="repassword" placeholder="Confirm your password" autocomplete="off">
+        <input type="password" class="form-input" name="password" id="password" placeholder="password" autocomplete="off">
     </div>
     <div class="register">
-        <input type="submit" value="Register" class="btn" id="btn">
+        <input type="password" class="form-input" name="repassword" id="repassword" placeholder="Confirm password" autocomplete="off">
     </div>
+    <div class="register">
+        <input type="submit" value="Register" class="btn btn-primary" id="btn">
+    </div>
+    
     <div class="register">
         <p class="text-center">If you already have an account, 
         <a href="loginform">login</a> instead.</p>
