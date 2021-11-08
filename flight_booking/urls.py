@@ -11,6 +11,7 @@ urlpatterns = [
     path("addUser",views.addUser),
     path("loginform",views.loginform),
     path("login",views.login),
+    path("booking_ticket",views.booking_ticket),
     # path("testflightlist",views.allflight)
     
 

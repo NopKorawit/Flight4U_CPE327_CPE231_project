@@ -85,6 +85,9 @@ def registerForm(request):
 def loginform(request):
     return render(request,'loginform.html')
 
+def booking_ticket(request):
+    return render(request,'booking_ticket.html')
+
 #----------------------------------------------
 
 def addUser(request):
@@ -190,4 +193,6 @@ def CursorToDict(data,columns):
             rowset.append(field)
         result.append(dict(rowset))
     return result
+
+
 
