@@ -147,15 +147,7 @@ def flight_view(request):
 
     return render(request, 'view.html', data_report)
 
-
-#--------------------------test-------------------------------  
-# fetch all data in Flight                    
-def allflight(request):
-    flight_list = Flight.objects.all()
-    return render(request,'view.html',{
-        'flight_list':flight_list
-    })
-
+#-------------------------------------------------------
     
 def CursorToDict(data,columns):
     result = []
