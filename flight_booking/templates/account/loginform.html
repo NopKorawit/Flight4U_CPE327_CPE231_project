@@ -24,22 +24,16 @@
 <fieldset>
     <legend align="center">LOGIN</legend>
     {% csrf_token %}
-    <div class="register">
-        <input type="username" class="form-input" name="username" id="username" placeholder="Username" autofocus>
-    </div>
-    <div class="login-form">
-        <input type="password" class="form-input" name="password" placeholder="password" autocomplete="off">
-    </div>
-    <div class="login-form">
-        <input type="submit" value="login" class="btn">
-    </div>
-
-    <div>
-        <center>
-            Don't have an account?&nbsp;&nbsp;<a href='register'>Sign Up</a>
-        </center>
-    </div>
-
+    <form action="login" method="POST" novalidate>
+        <div class="login-form">
+            <input type="email" class="form-input" name="email" placeholder="email" autocomplete="on" autofocus>
+            <input type="password" class="form-input" name="password" placeholder="password" autocomplete="off">
+            <input type="submit" value="login" class="btn">
+        </div>
+    </form>
+    <center>
+        Don't have an account?&nbsp;&nbsp;<a href='register'>Sign Up</a>
+    </center>
 </fieldset>
 </form>
 </center>

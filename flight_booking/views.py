@@ -1,11 +1,11 @@
+from django.contrib import auth
+from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
-
 from .DBHelper import DBHelper
 from flight_booking.models import *
 from datetime import datetime
 from django.contrib import messages
-from django.contrib.auth import login,authenticate,logout
+# from django.contrib.auth import login,authenticate,logout
 
 #Generate account_no
 
@@ -85,51 +85,78 @@ def registerForm(request):
 def loginform(request):
     return render(request,'loginform.html')
 
+def booking_ticket(request):
+    return render(request,'booking_ticket.html')
+
 #----------------------------------------------
 
 def addUser(request):
-    account_no = genID()
+    #account_no = genID()
+    Firstname = request.POST['Firstname']
+    Lastname = request.POST['Lastname']
+  #  phone_no = request.POST['phone_no']
     email = request.POST['email']
-    phone_no = request.POST['phone_no']
+    username = request.POST['username']
     password = request.POST['password']
     repassword = request.POST['repassword']
 
-
     if password==repassword:
-        if Account.objects.filter(email=email).exists():
+        if User.objects.filter(username=username).exists():
+            messages.info(request,"This Username is already used.")
+            return redirect('/register')
+        elif User.objects.filter(email=email).exists():
             messages.info(request,"This email is already used.")
             return redirect('/register')
-        elif Account.objects.filter(phone_no=phone_no).exists():
-            messages.info(request,"This phone number is already used.")
-            return redirect('/register')
+        # elif User.objects.filter(phone_no=phone_no).exists():
+        #     messages.info(request,"This phone number is already used.")
+        #     return redirect('/register')
         else:
-            account = Account.objects.create(
-                account_no=account_no,
-                email=email,
-                password=password,
-                phone_no=phone_no,)
-            account.save()
-            return redirect('/')
+            user = User.objects.create_user(
+            #account_no=account_no,
+            username=username,
+            email=email,
+            password=password,
+            first_name=Firstname,
+            last_name=Lastname
+#           phone_no=phone_no,
+            )
+            user.save()
+            return redirect('/login')
 
     else :
         messages.info(request,"Password doesn't match.")
         return redirect('/register')
 
-def login(request):
-    email = request.POST['email']
-    password = request.POST['password']
-    #check email and password
-    user = authenticate(email=email,password=password)
-    if not Account.objects.filter(email=email).exists():
-        messages.info(request,'this email does not exist')
+# def login(request):
+#     email = request.POST['email']
+#     password = request.POST['password']
+#     #check email and password
+#     user = authenticate(email=email,password=password)
+#     if not User.objects.filter(email=email).exists():
+#         messages.info(request,'this email does not exist')
 
-    if user is not None: #user is exist
-        messages.info(request,'Login success!')
-        login(request,user)
-        return redirect('/')
-    else: 
-        messages.info(request,'this email does not exist')
+#     if user is not None: #user is exist
+#         messages.info(request,'Login success!')
+#         login(request,user)
+#         return redirect('/')
+#     else: 
+#         messages.info(request,'this email does not exist')
+#         return redirect('/loginform')
+
+def login(request):
+    if request.method=='POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = auth.authenticate(username=username,password=password)
+        if user is not None:
+            auth.login(request,user)
+            messages.success(request, f" Hello {username}, You Are Successfully Logged In")
+            return redirect('/')
+        else:
+            messages.info(request, "Incorrect Username/Password")
         return redirect('/loginform')
+    else:
+        return render(request,'/loginform')
 
 #------------------Fetch part--------------------------
 
@@ -158,4 +185,6 @@ def CursorToDict(data,columns):
             rowset.append(field)
         result.append(dict(rowset))
     return result
+
+
 
