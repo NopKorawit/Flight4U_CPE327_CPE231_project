@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/booking.css' %}">
+    <script src="{% static 'js/booking.js' %}" ></script>
+{% endblock %}
+
+{% block body %}
+
+<div class="detail">
+    <div class="flight_detail">
+        flight_detail part
+    </div>
+    <div class="fare">
+        Fare part
+    </div>
+</div>
+
+<form class="input" action="payment" onsubmit="">
+<h2>Contact Information</h2>
+<div class="warn">First name and last name in English as on ID card/passport/driving license</div>
+<div class="input-content"> 
+    <div class="name">
+        <label><span>*</span>First Name</label></br>
+        <input type="text" name="firstname" placeholder="e.g.ผู้ใหญ่บ้าน" required>
+    </div>
+    <div class="lastname">
+        <label><span>*</span>Last Name</label></br>
+        <input type="text" name="lastname" placeholder="e.g.หมู่สิบ" required>
+    </div>
+    <div class="lastname">
+        <label><span>*</span>Mobile number</label></br>
+        <input type="text" name="lastname" placeholder="e.g.0101234567" required>
+    </div>
+    <div class="email">
+        <label><span>*</span>Email</label></br>
+        <input type="email" name="email" placeholder="e.g.exam@example.com" required>
+    </div>
+    <div class="idnum">
+        <label><span>*</span>Passport/ID card number</label></br>
+        <input type="text" name="idnum" placeholder="e.g. E11111/123456789123" required>
+    </div>
+    <div class="btn">
+        <button type="submit" class="proceed" id="btnBook">Proceed to Payment</button>
+        <button type="button" class="add" id="addPassenger">Add</button>
+    </div>
+</div>
+
+</form>
+{% endblock %}

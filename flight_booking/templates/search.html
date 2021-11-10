@@ -11,14 +11,14 @@
         
         <div class="search-flight">
             <div class="container">
-            <form class="search-flight-form" action="viewflight" onsubmit=""> <!--create form-->   
+            <form class="search-flight-form" action="viewflight" onsubmit=""> <!--create form | onsubmit use with .js-->   
             <fieldset>
                 <legend align="center">SEARCH FLIGHT</legend> 
                 <div class="search-flight-form">       
                     <!--Dropdown country-->
                     <div class="input-row">
                         <label for="flight-from">From: </label>
-                        <select name="Origin" id="flight-from">
+                        <select name="departure" id="js_Departure">
                             <option selected disabled>From</option>
                             {% for city in city %} <!--from 'city' in def search (views.py)-->
                             <option value="{{city.city_id}}">{{city.city_name}}</option>
@@ -26,8 +26,8 @@
                         </select>
                     </div>
                     <div class="input-row">
-                        <label for="flight-from">To: </label>
-                        <select name="Origin" id="flight-from">
+                        <label for="flight-to">To: </label>
+                        <select name="destination" id="js_Destination">
                             <option selected disabled>To</option>
                             {% for city in city %} <!--from 'city' in def search (views.py)-->
                             <option value="{{city.city_id}}">{{city.city_name}}</option>
@@ -37,18 +37,18 @@
                     <!-- End Dropdown country-->
                     <div class="input-row">
                         <label for="depart_date">Departure Date: </label>
-                        <input type="date" name="DepartDate" min="{{min_date}}" max="{{max_date}}" id="depart_date" placeholder="Date" class="form-control" value="{{depart_date}}">
+                        <input type="date" name="depart_date" min="{{min_date}}" max="{{max_date}}" id="js_DepartDate" placeholder="Date" class="form-control" value="{{depart_date}}">
                     </div>
                     <div class="input-row">
-                        <label for="seat_class">Class: </label>
-                        <select name="SeatClass" id="SeatType" class="form-control mr-sm-2">
-                            <option value="economy" {% if seat == 'economy' %}selected{% endif %}>Economy</option>
-                            <option value="business" {% if seat == 'business' %}selected{% endif %}>Business</option>
-                            <option value="first" {% if seat == 'first' %}selected{% endif %}>First</option>
+                        <label for="class">Class: </label>
+                        <select name="seat_class" id="js_SeatClass" class="form-control">
+                            <option value="economy" >Economy</option>
+                            <option value="business" >Business</option>
+                            <option value="first" >First</option>
                         </select>
                     </div>
                     <div class="input-row">
-                        <button type="submit" class="btn">Search Flight</button>
+                        <button type="submit" class="btn" id="btnSearch">Search Flight</button>
                     </div>
                 </div>
             </fieldset>

@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/payment.css' %}">
+    <script src="{% static 'js/payment.js' %}" ></script>
+{% endblock %}
+
+{% block body %}
+
+<h2 align="center">Payment Information</h2>
+<form action="">
+<div></div>
+<div class="payment-content">
+    <div class="amount">
+        <label>PAYMENT AMOUNT</label><br>
+        <input type='text' id='js_Amount' name='amount' readonly>
+    </div>
+    <div class="creditcard">
+        <label>Credit Card Number<span>*</span></label><br>
+        <input type="text" name="card_no" required><br>
+        <label>Credit Card Holder's Name<span>*</span></label><br>
+        <input type="text" name="card_name" required>
+    </div>
+    <div class="expire-date">
+        <label>Expiration Date<span>*</span></label><br>
+        <input type="date" name="expire_date" id="js_DepartDate" placeholder="date" class="form-control" value="{{expire_date}}">
+    </div>
+    <div class="cvv">
+        <label>CVV Number<span>*</span></label><br>
+        <input type="text" name="cvv_no" required>
+    </div>
+    <div class="button">
+        <button type="button" class="cancle" id="btnCancle">CANCEL</button>
+        <button type="submit" class="confirm" id="btnConfirm">CONFIRM</button>
+    </div>
+</div>
+
+</form>
+
+{% endblock %}

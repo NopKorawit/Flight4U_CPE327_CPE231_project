@@ -37,7 +37,7 @@ class Flight(models.Model):
         db_table = "flight"
         managed = False
     def __str__(self):
-        return self.flight_id
+        return self.flight_id,self.airline
 
 
 class Account(models.Model):
@@ -53,3 +53,15 @@ class Account(models.Model):
         managed = False
     def __str__(self):
         return self.account_no
+
+# class FlightDetail(models.Model):
+#     flight_id = models.CharField(max_length=5,primary_key=True)
+#     depart_date = models.DateField()
+#     gate_no = models.CharField(max_length=5)
+
+#     class Meta:
+#         db_table = "flight_detail"
+#         unique_together = (("flight_id", "depart_date"),)
+#         managed = False
+#     def __str__(self):
+#         return '{"flight_id":"%s","depart_date":"%s","gate_no":"%s"}' % (self.flight_id, self.depart_date, self.gate_no)

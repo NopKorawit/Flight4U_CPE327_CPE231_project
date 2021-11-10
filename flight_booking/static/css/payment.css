@@ -1,0 +1,14 @@
+span{ color: red;}
+
+input{
+    margin-bottom: 10px;
+}
+
+form{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.payment-content{
+
+}

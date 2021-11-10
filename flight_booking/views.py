@@ -49,17 +49,15 @@ def search(request):
     min_date = f"{datetime.now().date().year}-{datetime.now().date().month}-{datetime.now().date().day}"
     max_date = f"{datetime.now().date().year if (datetime.now().date().month+3)<=12 else datetime.now().date().year+1}-{(datetime.now().date().month + 3) if (datetime.now().date().month+3)<=12 else (datetime.now().date().month+3-12)}-{datetime.now().date().day}"
     if request.method == 'POST':
-        origin = request.POST.get('Origin')
-        destination = request.POST.get('Destination')
-        depart_date = request.POST.get('DepartDate')
-        seat = request.POST.get('SeatClass')
-        trip_type = request.POST.get('TripType')
+        departure = request.POST.get('departure')
+        destination = request.POST.get('destination')
+        depart_date = request.POST.get('depart_date')
+        seat_class = request.POST.get('seat_class')
         return render(request, 'search.html', {
-            'origin': origin,
+            'departure': departure,
             'destination': destination,
             'depart_date': depart_date,
-            'seat': seat.lower(),
-            'trip_type': trip_type,
+            'seat_class': seat_class,
             'city': city
         })
         
@@ -69,7 +67,7 @@ def search(request):
             'max_date': max_date,
             'city': city
         })
-    return render(request,'index.html')
+    # return render(request,'index.html')
     
 def my_booking(request):
     return render(request,'my_booking.html')
@@ -85,8 +83,11 @@ def registerForm(request):
 def loginform(request):
     return render(request,'loginform.html')
 
-def booking_ticket(request):
-    return render(request,'booking_ticket.html')
+def booking(request):
+    return render(request,'booking.html')
+
+def payment(request):
+    return render(request,'payment.html')
 
 #----------------------------------------------
 
@@ -94,7 +95,7 @@ def addUser(request):
     #account_no = genID()
     Firstname = request.POST['Firstname']
     Lastname = request.POST['Lastname']
-  #  phone_no = request.POST['phone_no']
+ #  phone_no = request.POST['phone_no']
     email = request.POST['email']
     username = request.POST['username']
     password = request.POST['password']
@@ -161,6 +162,11 @@ def login(request):
 #------------------Fetch part--------------------------
 
 def flight_view(request):
+#     departure = request.GET.get('departure','')
+#     destination = request.GET.get('destination','')
+#     report_flight = dict()
+#     report_flight['flight'] = list(Flight.objects.filter(departure=departure,destination=destination).select_related('flight_id')
+# _
     db = DBHelper()
     data, columns = db.fetch ('SELECT f.flight_id as "Flight", f.airline as "Airline", '
                             'f.departure as "Departure", f.destination as "Destination",'

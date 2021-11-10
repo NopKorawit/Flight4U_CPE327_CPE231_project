@@ -12,10 +12,14 @@ th, td {
     border: none;
     padding: 5px;
     width: 100px;
-    color: white;
     border-radius: 5px;
-
 }
+
+.btn a {
+    text-decoration: none;
+    color: white;
+}
+
 
 .col{
     color: rgb(230, 103, 0);
