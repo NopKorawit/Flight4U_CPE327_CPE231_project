@@ -29,10 +29,14 @@
             <td>{{ lineitem.departure_time }}</td>
             <td>{{ lineitem.arrival_time }}</td>
             <td>{{ lineitem.duration }}</td>
-            <td><button class="btn" id="btnChoose"><a href="booking">Choose</a></button></td>
-        <tr>
+            <td>
+                <button class="btn" id="btnChoose"><a href="booking">Choose</a></button>
+                <button id="btnDetail">Detail</button>
+            </td>
+        <tr>  
 
     {% endfor %}
+    
 
 {% endblock %}
     

@@ -9,6 +9,11 @@ h2{
     margin: 10px;
 }
 
+
+input{
+    padding: 5px 5em 5px 1em ;
+}
+
 .warn{ 
     color:rgb(255, 187, 0);
     font-size: small;
@@ -36,9 +41,11 @@ form{
 .input-content{
     margin: 20px;
     display: grid;
-    grid-template-columns: 1fr 1fr ; /*2col 1:1*/
+    grid-template-columns: 1fr 1fr 1fr; /*2col 1:1*/
+    grid-template-rows: 1fr 1fr 1fr;
     row-gap: 20px;
 }
+
 
 .proceed{
     padding: 10px;
@@ -59,6 +66,9 @@ form{
 
 span{ color: red;}
 
+
+/* mobile screen */
+
 @media screen and (max-width: 800px) {
     .detail{
         display: grid;
@@ -66,5 +76,14 @@ span{ color: red;}
         grid-row: 2fr 1fr;
         row-gap: 20px;
     }
+
+    .input-content{
+        width: 50%;
+        display: grid;
+        grid-template-columns: 1fr;
+        margin: 20px auto;
+    }
+
+
     
 }
