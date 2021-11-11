@@ -1,3 +1,33 @@
+
+*{
+    font-family: "Lato", sans-serif;
+}
+
+.view-head{
+    margin: 10px 10%;
+    display: grid;
+    grid-template-columns:1fr 1fr 1fr 1fr 1fr;
+
+}
+
+.btnSearch{
+    margin: auto auto;
+    background-color: rgb(230, 103, 0);
+    border: none;
+    padding: 5px;
+    width: 100px;
+    border-radius: 5px;
+}
+
+.btnSearch a{
+    text-decoration: none;
+    color: white;
+}
+
+table{
+    margin: 2rem auto;
+}
+
 th, td {
     font-family: "Lato", sans-serif;
     padding: 15px;
@@ -6,6 +36,15 @@ th, td {
     
 }
 
+input{
+    pointer-events: none;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid gray;
+    margin: 0 20px 0 0 ;
+    font-size: medium;
+    text-align: center;
+}
 
 .btn{
     background-color: rgb(230, 103, 0);
@@ -23,4 +62,17 @@ th, td {
 
 .col{
     color: rgb(230, 103, 0);
+}
+
+/* mobile screen */
+
+@media screen and (max-width: 800px) {
+    .view-head{
+        margin: 10px 10%;
+        display: grid;
+        grid-template-columns:1fr 1fr;
+        row-gap: 20px;
+    
+    }
+    
 }

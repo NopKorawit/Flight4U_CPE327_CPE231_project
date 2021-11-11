@@ -11,31 +11,47 @@
 
 {% block body %}
 
+<div class="view-head">
+    <div class="departure">
+        <label>From:</label>
+        <input type='text' id='js_Departure' name='departure' value='{{departure}}' readonly>
+    </div>
+    <div class="destination">
+        <label>To:</label>
+        <input type='text' id='js_Destination' name='destination' value='{{destination}}' readonly>
+    </div>
+    <div class="date">
+        <label>Date:</label>
+        <input type='text' id='js_Date' name='date' value='' readonly>
+    </div>
+    <div class="seat_class">
+        <label>Class:</label>
+        <input type='text' id='js_Class' name='seat_class' value='{{seat_class}}' readonly>
+    </div>
+    <button type="button" class="btnSearch" ><a href="searchflight">Search</a></button>
+</div>
 
-    <table class='table'>
+<table class='table'>
+    <thead>
         <tr class="col">
-            {% for name in column_name %}
-            <th> {{ name }} </th>
-            {% endfor %}
+            <th>airline</th>
+            <th>departure time</th>
+            <th>arrival time</th>
+        
         </tr>
-    
-    {% for lineitem in data %}
-
-        <tr class="row">
-            <td>{{ lineitem.flight }}</td>
-            <td>{{ lineitem.airline }}</td>
-            <td>{{ lineitem.departure }}</td>
-            <td>{{ lineitem.destination }}</td>
-            <td>{{ lineitem.departure_time }}</td>
-            <td>{{ lineitem.arrival_time }}</td>
-            <td>{{ lineitem.duration }}</td>
+    </thead>
+    {% for flight in flights %}
+        <tr class="data">
+            <td>{{flight.airline}}</td>
+            <td>{{flight.departure_time}}</td>
+            <td>{{flight.arrival_time}}</td>
             <td>
                 <button class="btn" id="btnChoose"><a href="booking">Choose</a></button>
                 <button id="btnDetail">Detail</button>
             </td>
         <tr>  
-
     {% endfor %}
+
     
 
 {% endblock %}

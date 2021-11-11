@@ -162,23 +162,23 @@ def login(request):
 #------------------Fetch part--------------------------
 
 def flight_view(request):
-#     departure = request.GET.get('departure','')
-#     destination = request.GET.get('destination','')
-#     report_flight = dict()
-#     report_flight['flight'] = list(Flight.objects.filter(departure=departure,destination=destination).select_related('flight_id')
-# _
-    db = DBHelper()
-    data, columns = db.fetch ('SELECT f.flight_id as "Flight", f.airline as "Airline", '
-                            'f.departure as "Departure", f.destination as "Destination",'
-                            'f.departure_time as "Departure Time", f.arrival_time as "Arrival Time",'
-                            'f.arrival_time-f.departure_time as "Duration" '
-                            'FROM flight f ORDER BY f.flight_id '
-                            ' ')
-    data_report = dict()
-    data_report['data'] = CursorToDict (data,columns)
-    data_report['column_name'] = columns
+    if request.method=='GET':
+        departure = request.GET.get('departure')
+        destination = request.GET.get('destination')
+        seat_class = request.GET.get('seat_class')
+        #depart_date = request.GET.get('departure_date')
 
-    return render(request, 'view.html', data_report)
+        flights = Flight.objects.filter(departure=departure,destination=destination)
+
+        return render(request,'view.html',{
+            'flights' : flights,
+            'departure' : departure,
+            'destination' : destination,
+            'seat_class' : seat_class,
+            #'depart_date': depart_date
+
+        })
+    else: return redirect('/searchflight')
 
 #-------------------------------------------------------
     
