@@ -11,33 +11,38 @@
 
 {% block body %}
 
-<div class="view-head">
-    <div class="departure">
-        <label>From:</label>
-        <input type='text' id='js_Departure' name='departure' value='{{departure}}' readonly>
+<div class="container">
+    <div class='row'>
+        <div class="col-sm">
+            <label>From:</label>
+            <input type='text' id='js_Departure' name='departure' value='{{departure}}' readonly>
+        </div>
+        <div class="col-sm">
+            <label>To:</label>
+            <input type='text' id='js_Destination' name='destination' value='{{destination}}' readonly>
+        </div>
+        <div class="col-sm">
+            <label>Date:</label>
+            <input type='text' id='js_Date' name='date' value='{{departure_date}}' readonly>
+        </div>
+        <div class="col-sm">
+            <label>Class:</label>
+            <input type='text' id='js_Class' name='seat_class' value='{{seat_class}}' readonly>
+        </div>
+        <div class="col">
+            <button type="button" class="btnSearch" ><a href="searchflight">Search</a></button>
+        </div>
     </div>
-    <div class="destination">
-        <label>To:</label>
-        <input type='text' id='js_Destination' name='destination' value='{{destination}}' readonly>
-    </div>
-    <div class="date">
-        <label>Date:</label>
-        <input type='text' id='js_Date' name='date' value='' readonly>
-    </div>
-    <div class="seat_class">
-        <label>Class:</label>
-        <input type='text' id='js_Class' name='seat_class' value='{{seat_class}}' readonly>
-    </div>
-    <button type="button" class="btnSearch" ><a href="searchflight">Search</a></button>
 </div>
 
 <table class='table'>
     <thead>
-        <tr class="col">
-            <th>airline</th>
-            <th>departure time</th>
-            <th>arrival time</th>
-        
+        <tr>
+            <th> Airline </th>
+            <th> Departure Time </th>
+            <th> Arrival Time </th>
+            <th> Price </th>
+            <th> Duration </th>
         </tr>
     </thead>
     {% for flight in flights %}
@@ -45,12 +50,17 @@
             <td>{{flight.airline}}</td>
             <td>{{flight.departure_time}}</td>
             <td>{{flight.arrival_time}}</td>
+            <td> {{flight.flight_id.price}}฿ </td>
+            <td> </td>
             <td>
-                <button class="btn" id="btnChoose"><a href="booking">Choose</a></button>
-                <button id="btnDetail">Detail</button>
+                <button class="btn" id="btnChoose"><a href="{{flight.flight_id}}/{{flight.flight_id.seat_class}}">Choose</a></button>
+                <!-- <button id="btnDetail">Detail</button> -->
             </td>
-        <tr>  
+        <tr>
+
+
     {% endfor %}
+
 
     
 

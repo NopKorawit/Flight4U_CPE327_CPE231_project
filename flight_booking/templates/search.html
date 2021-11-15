@@ -18,7 +18,7 @@
                     <!--Dropdown country-->
                     <div class="input-row">
                         <label for="flight-from">From: </label>
-                        <select name="departure" id="js_Departure">
+                        <select name="departure" id="js_Departure" required>
                             <option selected disabled>From</option>
                             {% for city in city %} <!--from 'city' in def search (views.py)-->
                             <option value="{{city.city_id}}">{{city.city_name}}</option>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="input-row">
                         <label for="flight-to">To: </label>
-                        <select name="destination" id="js_Destination">
+                        <select name="destination" id="js_Destination" required>
                             <option selected disabled>To</option>
                             {% for city in city %} <!--from 'city' in def search (views.py)-->
                             <option value="{{city.city_id}}">{{city.city_name}}</option>
@@ -36,12 +36,12 @@
                     </div>
                     <!-- End Dropdown country-->
                     <div class="input-row">
-                        <label for="depart_date">Departure Date: </label>
-                        <input type="date" name="depart_date" min="{{min_date}}" max="{{max_date}}" id="js_DepartDate" placeholder="Date" class="form-control" value="{{depart_date}}">
+                        <label for="departure_date">Departure Date: </label>
+                        <input type="date" name="departure_date" min="{{min_date}}" max="{{max_date}}" id="js_DepartureDate" placeholder="Date" class="form-control" value="{{departure_date}}" required>
                     </div>
                     <div class="input-row">
                         <label for="class">Class: </label>
-                        <select name="seat_class" id="js_SeatClass" class="form-control">
+                        <select name="seat_class" id="js_SeatClass" class="form-control" required>
                             <option value="Economy" >Economy</option>
                             <option value="Business" >Business</option>
                             <option value="First" >First</option>

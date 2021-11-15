@@ -11,49 +11,27 @@ body{
 
 .content{
 
-  margin: 100px 20px ;
+  margin: 2em 2em  ;
 
 }
 
 nav{
 
-  display: flex ; /* to be top */
-  height: auto;
   background: rgb(230, 103, 0);
-  justify-content: center;
   align-items: center;
-  /* position: relative;  */
-  position: fixed; /* Set the navbar to fixed position */
-  top: 0; /* Position the navbar at the top of the page */
-  width: 100%; /* Full width */
-  flex-direction: column;
 
 }
 
-.nav-toggle {
-  /*Hamburger*/ 
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 30px;
-  color: white;
-  display: inline-block;
-  cursor: pointer;
- 
-}
 
-.logo {
+#brand {
 
   margin: 0;
-  /* color: white; */
-  font-size: 20px;
-
-}
-
-.logo a{
   color: white;
+  font-size: 30px;
   text-decoration: none;
+
 }
+
 
 
 /*Menu*/

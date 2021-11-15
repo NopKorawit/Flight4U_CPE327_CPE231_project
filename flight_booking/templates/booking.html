@@ -11,10 +11,15 @@
 
 <div class="detail">
     <div class="flight_detail">
-        flight_detail part
+        {{flight_detail.flight_id}}
+        {{flight_detail.airline}}
+        {{flight_detail.departure}}
+        {{flight_detail.destination}}
+        {{flight_detail.departure_time}}
+        {{flight_detail.arrival_time}}
     </div>
     <div class="fare">
-        Fare part
+        {{flight_detail.flight_id.price}}
     </div>
 </div>
 

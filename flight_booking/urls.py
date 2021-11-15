@@ -11,7 +11,7 @@ urlpatterns = [
     path("addUser",views.addUser),
     path("loginform",views.loginform),
     path("login",views.login),
-    path("booking",views.booking),
+    path("<str:id>/<str:seat_class>",views.booking),
     path("payment",views.payment),
 
     

@@ -3,15 +3,15 @@
     font-family: "Lato", sans-serif;
 }
 
-.view-head{
+/* .view-head{
     margin: 10px 10%;
     display: grid;
     grid-template-columns:1fr 1fr 1fr 1fr 1fr;
 
-}
+} */
 
 .btnSearch{
-    margin: auto auto;
+    margin: 2em auto;
     background-color: rgb(230, 103, 0);
     border: none;
     padding: 5px;
@@ -23,6 +23,7 @@
     text-decoration: none;
     color: white;
 }
+
 
 table{
     margin: 2rem auto;
@@ -60,19 +61,19 @@ input{
 }
 
 
-.col{
+/* .col{
     color: rgb(230, 103, 0);
-}
+} */
 
 /* mobile screen */
 
 @media screen and (max-width: 800px) {
-    .view-head{
+    /* .view-head{
         margin: 10px 10%;
         display: grid;
         grid-template-columns:1fr 1fr;
         row-gap: 20px;
     
     }
-    
+     */
 }

@@ -2,6 +2,7 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from .DBHelper import DBHelper
+from django.db import connection
 from flight_booking.models import *
 from datetime import datetime
 from django.contrib import messages
@@ -51,12 +52,12 @@ def search(request):
     if request.method == 'POST':
         departure = request.POST.get('departure')
         destination = request.POST.get('destination')
-        depart_date = request.POST.get('depart_date')
+        departure_date = reFormatDateMMDDYYYY(request.POST.get('departure_date'))
         seat_class = request.POST.get('seat_class')
         return render(request, 'search.html', {
             'departure': departure,
             'destination': destination,
-            'depart_date': depart_date,
+            'departure_date': departure_date,
             'seat_class': seat_class,
             'city': city
         })
@@ -83,8 +84,7 @@ def registerForm(request):
 def loginform(request):
     return render(request,'loginform.html')
 
-def booking(request):
-    return render(request,'booking.html')
+
 
 def payment(request):
     return render(request,'payment.html')
@@ -161,27 +161,43 @@ def login(request):
 
 #------------------Fetch part--------------------------
 
+#-----------------ORM ver.------------------------
+
 def flight_view(request):
     if request.method=='GET':
         departure = request.GET.get('departure')
         destination = request.GET.get('destination')
         seat_class = request.GET.get('seat_class')
-        #depart_date = request.GET.get('departure_date')
-
-        flights = Flight.objects.filter(departure=departure,destination=destination)
+        departure_date = reFormatDateMMDDYYYY(request.GET.get('departure_date'))
+        flights = Flight.objects.select_related("flight_id").filter(departure=departure,
+                                            destination=destination,flight_id__seat_class=seat_class)
 
         return render(request,'view.html',{
             'flights' : flights,
             'departure' : departure,
             'destination' : destination,
             'seat_class' : seat_class,
-            #'depart_date': depart_date
+            'departure_date': departure_date,
+            # 'duration' : duration
 
         })
     else: return redirect('/searchflight')
 
+#-------------------------------------------------------------
+
+def booking(request,id,seat_class):
+    flight_detail = Flight.objects.select_related("flight_id").get(flight_id=id,flight_id__seat_class=seat_class)
+
+    return render(request,'booking.html',{'flight_detail' : flight_detail})
+
 #-------------------------------------------------------
     
+def reFormatDateMMDDYYYY(ddmmyyyy):
+        if (ddmmyyyy == ''):
+            return ''
+        return ddmmyyyy[8:10] + "/" + ddmmyyyy[5:7] + "/" + ddmmyyyy[:4]
+
+
 def CursorToDict(data,columns):
     result = []
     fieldnames = [name.replace(" ", "_").lower() for name in columns]
@@ -191,6 +207,10 @@ def CursorToDict(data,columns):
             rowset.append(field)
         result.append(dict(rowset))
     return result
+
+
+
+
 
 
 
