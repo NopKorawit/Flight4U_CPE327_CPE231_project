@@ -151,13 +151,17 @@ def login(request):
         user = auth.authenticate(username=username,password=password)
         if user is not None:
             auth.login(request,user)
-            messages.success(request, f" Hello {username}, You Are Successfully Logged In")
             return redirect('/')
         else:
             messages.info(request, "Incorrect Username/Password")
         return redirect('/loginform')
     else:
         return render(request,'/loginform')
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
+
 
 #------------------Fetch part--------------------------
 
