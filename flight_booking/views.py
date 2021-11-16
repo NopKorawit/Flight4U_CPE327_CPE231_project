@@ -1,12 +1,21 @@
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
-from .DBHelper import DBHelper
+# from .DBHelper import DBHelper
 from django.db import connection
 from flight_booking.models import *
 from datetime import datetime
 from django.contrib import messages
 # from django.contrib.auth import login,authenticate,logout
+from django.shortcuts import get_object_or_404
+from django.views.generic import View
+from django.http import JsonResponse
+from django import forms
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+from django.forms.models import model_to_dict
+from django.db.models import Max
+import json
 
 #Generate account_no
 
@@ -159,7 +168,10 @@ def login(request):
     else:
         return render(request,'/loginform')
 
-#------------------Fetch part--------------------------
+#------------------LIST--------------------------
+
+
+
 
 #-----------------ORM ver.------------------------
 
@@ -168,9 +180,11 @@ def flight_view(request):
         departure = request.GET.get('departure')
         destination = request.GET.get('destination')
         seat_class = request.GET.get('seat_class')
-        departure_date = reFormatDateMMDDYYYY(request.GET.get('departure_date'))
+        departure_date = request.GET.get('departure_date')
         flights = Flight.objects.select_related("flight_id").filter(departure=departure,
-                                            destination=destination,flight_id__seat_class=seat_class)
+                                            destination=destination,flight_id__seat_class=seat_class,
+                                            flight_id__departure_date = departure_date)
+        departure_date = reFormatDateMMDDYYYY(request.GET.get('departure_date'))
 
         return render(request,'view.html',{
             'flights' : flights,

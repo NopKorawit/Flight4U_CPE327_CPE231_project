@@ -1,4 +1,3 @@
-from typing import ValuesView
 from django.urls import path
 from . import views
 
@@ -13,6 +12,9 @@ urlpatterns = [
     path("login",views.login),
     path("<str:id>/<str:seat_class>",views.booking),
     path("payment",views.payment),
+
+    # path('receipt/list', views.FlightList.as_view(), name='receipt_list'),
+    # path('receipt/detail/<str:id>', views.FlightDetail.as_view(), name='receipt_detail'),
 
     
 

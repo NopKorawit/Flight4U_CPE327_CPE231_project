@@ -15,16 +15,6 @@ class Passenger(models.Model):
     def __str__(self):
         return self.id_no
 
-class City(models.Model):
-    city_id = models.CharField(max_length=5,primary_key=True)
-    city_name = models.CharField(max_length=50)
-
-    class Meta:
-        db_table = "city"
-        managed = False
-    def __str__(self):
-        return self.city_id,self.city_name
-
 class Account(models.Model):
     username = models.CharField(max_length=10, primary_key=True) # id card/passport nunmber 
     firstname = models.CharField(max_length=30)
@@ -38,6 +28,25 @@ class Account(models.Model):
     def __str__(self):
         return self.username
 
+class City(models.Model):
+    city_id = models.CharField(max_length=5,primary_key=True)
+    city_name = models.CharField(max_length=50)
+    airport = models.TextField()
+    class Meta:
+        db_table = "city"
+        managed = False
+    def __str__(self):
+        return self.city_name
+
+class Travel(models.Model):
+    path_id = models.CharField(max_length=5,primary_key=True)
+    departure = models.CharField(max_length=5)
+    destination = models.CharField(max_length=5)
+    class Meta:
+        db_table = "travel"
+        managed = False
+    def __str__(self):
+        return self.path_id
 
 class FlightClass(models.Model):
     flight_id = models.CharField(max_length=5,primary_key=True)
@@ -53,8 +62,7 @@ class FlightClass(models.Model):
 class Flight(models.Model):
     flight_id = models.ForeignKey(FlightClass, primary_key=True, on_delete=models.CASCADE, db_column='flight_id')
     airline = models.CharField(max_length=20)
-    departure = models.CharField(max_length=5) #city_id
-    destination = models.CharField(max_length=5) #city_id
+    path_id = models.ForeignKey(Travel, on_delete=models.CASCADE, db_column='path_id')
     departure_time = models.TimeField()
     arrival_time = models.TimeField()
     
@@ -64,9 +72,8 @@ class Flight(models.Model):
     def __str__(self):
         return self.flight_id
 
-
 class FlightDetail(models.Model):
-    flight_id = models.CharField(max_length=5,primary_key=True)
+    flight_id = models.ForeignKey(Flight, primary_key=True, on_delete=models.CASCADE, db_column='flight_id')
     departure_date = models.DateField()
     gate_no = models.CharField(max_length=5)
 
@@ -75,4 +82,4 @@ class FlightDetail(models.Model):
         unique_together = (("flight_id", "departure_date"),)
         managed = False
     def __str__(self):
-        return '{"flight_id":"%s","departure_date":"%s","gate_no":"%s"}' % (self.flight_id, self.departure_date, self.gate_no)
+        return self.flight_id
