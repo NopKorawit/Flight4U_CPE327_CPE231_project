@@ -163,23 +163,18 @@ def login(request):
             return redirect('/')
         else:
             messages.info(request, "Incorrect Username/Password")
-        return redirect('/loginform')
+            return redirect('/loginform')
     else:
-        return render(request,'/loginform')
+        return render(request,'loginform.html')
 
-<<<<<<< HEAD
-#------------------LIST--------------------------
-
-
-
-=======
 def logout(request):
     auth.logout(request)
     return redirect('/')
 
 
+#------------------LIST--------------------------
 #------------------Fetch part--------------------------
->>>>>>> 33c38c262a3ad0a640b782b08a97ffeb47feb8b3
+
 
 #-----------------ORM ver.------------------------
 
@@ -188,11 +183,9 @@ def flight_view(request):
         departure = request.GET.get('departure')
         destination = request.GET.get('destination')
         seat_class = request.GET.get('seat_class')
-        departure_date = request.GET.get('departure_date')
-        flights = Flight.objects.select_related("flight_id").filter(departure=departure,
-                                            destination=destination,flight_id__seat_class=seat_class,
-                                            flight_id__departure_date = departure_date)
         departure_date = reFormatDateMMDDYYYY(request.GET.get('departure_date'))
+        flights = Flight.objects.select_related("flight_id").filter(path_id__departure = departure,
+                                            path_id__destination=destination,flight_id__seat_class=seat_class)
 
         return render(request,'view.html',{
             'flights' : flights,
