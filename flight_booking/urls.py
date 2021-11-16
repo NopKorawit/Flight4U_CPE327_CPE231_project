@@ -10,6 +10,7 @@ urlpatterns = [
     path("addUser",views.addUser),
     path("loginform",views.loginform),
     path("login",views.login),
+    path("logout",views.logout),
     path("<str:id>/<str:seat_class>",views.booking),
     path("payment",views.payment),
 

@@ -160,7 +160,6 @@ def login(request):
         user = auth.authenticate(username=username,password=password)
         if user is not None:
             auth.login(request,user)
-            messages.success(request, f" Hello {username}, You Are Successfully Logged In")
             return redirect('/')
         else:
             messages.info(request, "Incorrect Username/Password")
@@ -168,10 +167,19 @@ def login(request):
     else:
         return render(request,'/loginform')
 
+<<<<<<< HEAD
 #------------------LIST--------------------------
 
 
 
+=======
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
+
+
+#------------------Fetch part--------------------------
+>>>>>>> 33c38c262a3ad0a640b782b08a97ffeb47feb8b3
 
 #-----------------ORM ver.------------------------
 
