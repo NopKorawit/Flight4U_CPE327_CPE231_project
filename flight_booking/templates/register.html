@@ -30,25 +30,25 @@
     <legend align="center">REGISTER</legend>
     {% csrf_token %}
     <div class="register">
-        <input type="text" class="form-input" name="Firstname" id="Firstname" placeholder="First name" autofocus>
+        <input type="text" class="form-input" name="Firstname" id="Firstname" placeholder="*First name" autofocus required>
     </div>
     <div class="register">
-        <input type="text" class="form-input" name="Lastname" id="Lastname" placeholder="Last name" autofocus>
+        <input type="text" class="form-input" name="Lastname" id="Lastname" placeholder="*Last name" autofocus required>
     </div>
     <div class="register">
-        <input type="email" class="form-input" name="email" id="email" placeholder="Email" autofocus>
+        <input type="email" class="form-input" name="email" id="email" placeholder="*Email" autofocus required>
     </div>
     <div class="register">
-        <input type="text" class="form-input" name="phone_no" id="phone_no" placeholder="Phone number">
+        <input type="text" class="form-input" name="phone_no" id="phone_no" placeholder="*Phone number" required>
     </div>
     <div class="register">
-        <input type="username" class="form-input" name="username" id="username" placeholder="Username" autofocus>
+        <input type="username" class="form-input" name="username" id="username" placeholder="*Username" autofocus required>
     </div>
     <div class="register">
-        <input type="password" class="form-input" name="password" id="password" placeholder="password" autocomplete="off">
+        <input type="password" class="form-input" name="password" id="password" placeholder="*Password" autocomplete="off" required>
     </div>
     <div class="register">
-        <input type="password" class="form-input" name="repassword" id="repassword" placeholder="Confirm password" autocomplete="off">
+        <input type="password" class="form-input" name="repassword" id="repassword" placeholder="*Confirm password" autocomplete="off" required>
     </div>
     <div class="register">
         <input type="submit" value="Register" class="btn btn-primary" id="btn" > <!--disabled -->

@@ -3,13 +3,14 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 # from .DBHelper import DBHelper
 from django.db import connection
+from django.urls.conf import path
 from flight_booking.models import *
 from datetime import datetime
 from django.contrib import messages
 # from django.contrib.auth import login,authenticate,logout
 from django.shortcuts import get_object_or_404
 from django.views.generic import View
-from django.http import JsonResponse
+from django.http import JsonResponse, response
 from django import forms
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
@@ -173,6 +174,78 @@ def logout(request):
 
 
 #------------------LIST--------------------------
+class CityList(View):
+    def get(self,request):
+        cities = list(City.objects.all().values())
+        data = dict()
+        data['cities'] = cities
+        response = JsonResponse(data)
+        response["Access-Control-Allow-Origin"] = "*"
+        return response
+
+class PathList(View):
+    def get(self,request):
+        paths = list(Travel.objects.all().values())
+        data = dict()
+        data['paths'] = paths
+        response = JsonResponse(data)
+        response["Access-Control-Allow-Origin"] = "*"
+        return response
+
+class PathDetail(View):
+    def get(self, request, id):
+        path = list(Travel.objects.select_related("city").filter(path_id=id).values('path_id','departure__city_name','destination__city_name','departure__airport','destination__airport'))
+        path_detail = list(Flight.objects.select_related("flight_id").filter(path_id=id).values('flight_id','airline','departure_time','arrival_time','path_id__departure','path_id__destination','flight_id__seat_class'))
+        data = dict()
+        data['path'] = path[0]
+        data['path_detail'] = path_detail
+
+        response = JsonResponse(data)
+        response["Access-Control-Allow-Origin"] = "*"
+        return response
+
+
+class ClassList(View):
+    def get(self, request):
+        seat_classes = list(FlightClass.objects.all().values())
+        data = dict()
+        data['seat_classes'] = seat_classes
+        response = JsonResponse(data)
+        response["Access-Control-Allow-Origin"] = "*"
+        return response
+
+class ClassDetail(View):
+    def get(self, request, pk):
+        seat_class = get_object_or_404(FlightClass, pk=pk)
+        data = dict()
+        data['seat_classes'] = model_to_dict(seat_class)
+        response = JsonResponse(data)
+        response["Access-Control-Allow-Origin"] = "*"
+        return response
+
+#-----------------------------------------------------------      
+
+class FlightList(View):
+    def get(self, request):
+        flights = list(Flight.objects.order_by('flight_id').all().values())
+        data = dict()
+        data['flights'] = flights
+        response = JsonResponse(data)
+        response["Access-Control-Allow-Origin"] = "*"
+        return response
+
+class FlightDetail(View):
+    def get(self, request, id):
+        flight = list(Flight.objects.select_related("flightclass","travel").filter(flight_id=id).values('flight_id','airline','departure_time','arrival_time','path_id__departure','path_id__destination','flight_id__seat_class', 'flight_id__price'))
+        flight_detail = list(Flight_Detail.objects.select_related("flight_id").filter(flight_id=id).values('flight_id','departure_date','gate_no'))
+        data = dict()
+        data['flight'] = flight[0]
+        data['flight_detail'] = flight_detail
+
+        response = JsonResponse(data)
+        response["Access-Control-Allow-Origin"] = "*"
+        return response
+
 #------------------Fetch part--------------------------
 
 
@@ -183,27 +256,51 @@ def flight_view(request):
         departure = request.GET.get('departure')
         destination = request.GET.get('destination')
         seat_class = request.GET.get('seat_class')
+        date = request.GET.get('departure_date')
         departure_date = reFormatDateMMDDYYYY(request.GET.get('departure_date'))
-        flights = Flight.objects.select_related("flight_id").filter(path_id__departure = departure,
-                                            path_id__destination=destination,flight_id__seat_class=seat_class)
-
-        return render(request,'view.html',{
+        
+        try:
+            #print("try to check if departure date is exist in database")
+            flights = Flight.objects.select_related("flight_id","flight_detail").filter(path_id__departure = departure,
+                                            path_id__destination=destination,flight_id__seat_class=seat_class,
+                                            flight_detail__departure_date=date)
+            
+            city_a = City_A.objects.filter(city_id=departure)
+            city_b = City_B.objects.filter(city_id=destination)
+        except:
+            print("ERROR!")
+            return redirect('/searchflight')
+        else:
+            
+            return render(request,'view.html',{
             'flights' : flights,
-            'departure' : departure,
-            'destination' : destination,
+            'departure' : city_a[0] ,
+            'destination' : city_b[0],
             'seat_class' : seat_class,
             'departure_date': departure_date,
-            # 'duration' : duration
+            'date' : date
 
         })
-    else: return redirect('/searchflight')
+        
 
 #-------------------------------------------------------------
 
-def booking(request,id,seat_class):
-    flight_detail = Flight.objects.select_related("flight_id").get(flight_id=id,flight_id__seat_class=seat_class)
+def booking(request,fid,path,date,seat_class):
 
-    return render(request,'booking.html',{'flight_detail' : flight_detail})
+    booking_detail = Flight.objects.select_related("flight_detail","flight_id","path_id").get(flight_id=fid,flight_detail__departure_date=date, 
+                                                    flight_id__seat_class=seat_class,path_id=path)
+    duration = booking_detail.duration
+    path_id = Travel.objects.filter(path_id=path)
+    depart_detail = City_A.objects.filter(city_id=path_id[0].departure)
+    desti_detail = City_B.objects.filter(city_id=path_id[0].destination)
+    return render(request,'booking.html',{
+        'booking_detail' : booking_detail,
+        'departure' : depart_detail,
+        'destination' : desti_detail,
+        'duration' : duration
+        
+        })
+    #pass
 
 #-------------------------------------------------------
     
@@ -223,6 +320,13 @@ def CursorToDict(data,columns):
         result.append(dict(rowset))
     return result
 
+def dictfetchall(cursor):
+    "Return all rows from a cursor as a dict"
+    columns = [name[0].replace(" ", "_").lower() for name in cursor.description]
+    return [
+        dict(zip(columns, row))
+        for row in cursor.fetchall()
+    ]
 
 
 

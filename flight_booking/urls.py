@@ -11,11 +11,16 @@ urlpatterns = [
     path("loginform",views.loginform),
     path("login",views.login),
     path("logout",views.logout),
-    path("<str:id>/<str:seat_class>",views.booking),
+    path("booking/<str:fid>&<str:path>&<str:date>&<str:seat_class>",views.booking),
     path("payment",views.payment),
 
-    # path('receipt/list', views.FlightList.as_view(), name='receipt_list'),
-    # path('receipt/detail/<str:id>', views.FlightDetail.as_view(), name='receipt_detail'),
+    path('city/list',views.CityList.as_view(),name='city_list'),
+    path('flight/list', views.FlightList.as_view(), name='flight_list'),
+    path('flight/detail/<str:id>', views.FlightDetail.as_view(), name='flight_detail'),
+    path('path/list', views.PathList.as_view(), name='path_list'),
+    path('path/detail/<str:id>', views.PathDetail.as_view(), name='path_detail'),
+    path('class/list',views.ClassList.as_view(),name='class_list'),
+    path('class/detail/<str:id>', views.ClassDetail.as_view(), name='class_detail'),
 
     
 

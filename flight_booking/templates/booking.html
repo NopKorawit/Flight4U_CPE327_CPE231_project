@@ -10,16 +10,27 @@
 {% block body %}
 
 <div class="detail">
-    <div class="flight_detail">
-        {{flight_detail.flight_id}}
-        {{flight_detail.airline}}
-        {{flight_detail.departure}}
-        {{flight_detail.destination}}
-        {{flight_detail.departure_time}}
-        {{flight_detail.arrival_time}}
+    <div class="booking_detail">
+        {{booking_detail.flight_id}}
+        {{booking_detail.airline}}
+        <!-- {{booking_detail.path_id.departure}}
+        {{booking_detail.path_id.destination}} -->
+        {% for detail in departure %}
+        {{detail.city_name}}
+        {{detail.airport}}
+        {% endfor %}
+        {% for detail in destination %}
+        {{detail.city_name}}
+        {{detail.airport}}
+        {% endfor %}
+        
+        {{booking_detail.departure_time}}
+        {{booking_detail.arrival_time}}
+        {{booking_detail.flight_detail.departure_date}}
+        {{duration}}
     </div>
     <div class="fare">
-        {{flight_detail.flight_id.price}}
+        {{booking_detail.flight_id.price}}
     </div>
 </div>
 
