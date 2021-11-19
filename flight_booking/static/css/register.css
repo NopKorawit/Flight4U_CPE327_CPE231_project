@@ -72,7 +72,7 @@ html {
     margin-left: 0px;
 }
 
-.btn{
+.btn-block{
     margin: 10px 0 10px 0;
     padding: 10px;
     width: 75px;
@@ -83,13 +83,13 @@ html {
     transition-duration: .1s;
 }
 
-.btn:disabled{
+.btn-block:disabled{
     background-color: rgba(255, 115, 0, 0.527);
     color: rgb(255, 255, 255);
 
 }
 
-.btn:hover:enabled {
+.btn-block:hover:enabled {
     color: rgb(230, 103, 0) ;
     background-color: rgba(255, 115, 1, 0.37); 
     transition-duration: .1s;

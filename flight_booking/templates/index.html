@@ -1,7 +1,60 @@
 {% extends 'layout.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+    <script src="{% static 'js/search.js' %}" ></script>
+{% endblock %}
 
 {% block body %}
-
-<h2> this is home page </h2>
+    <body class="section section1">
+        
+        <div class="search-flight">
+            <div class="container h-100">
+                <div class="d-flex justify-content-center h-100">
+                    <div class="search_card">
+                        <form class="search-flight-form" action="viewflight" onsubmit=""> <!--create form | onsubmit use with .js-->   
+                            <fieldset>
+                            <h1 align="center"> SEARCH FLIGHT </h1> 
+                            <div class="search-flight-form">
+                                        <div class="input-row">
+                                            <label for="flight-from">From : </label>
+                                            <select name="departure" id="js_Departure" style="padding-inline: 300px;" required>
+                                                <option selected disabled>From</option>
+                                                {% for city in city %} <!--from 'city' in def search (views.py)-->
+                                                <option value="{{city.city_id}}">{{city.city_name}}</option>
+                                                {% endfor %}
+                                            </select>
+                                                <span style="display:inline-block; width: 10px;"></span>
+                                            <label for="flight-to">To : </label>
+                                            <select name="destination" id="js_Destination" style="padding-inline: 53px;" required>
+                                                <option selected disabled>To</option>
+                                                {% for city in city %} <!--from 'city' in def search (views.py)-->
+                                                <option value="{{city.city_id}}">{{city.city_name}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                <div class="input-row">
+                                    <label for="departure_date">Departure Date: </label>
+                                    <input type="date" name="departure_date" min="{{min_date}}" max="{{max_date}}" id="js_DepartureDate" placeholder="Date" class="form-control" value="{{departure_date}}" required>
+                                </div>
+                                <div class="input-row">
+                                    <label for="class">Class: </label>
+                                    <select name="seat_class" id="js_SeatClass" class="form-control" required>
+                                        <option value="Economy" >Economy</option>
+                                        <option value="Business" >Business</option>
+                                    </select>
+                                </div>
+                                <div class="input-row">
+                                    <button type="submit" class="btn" id="btnSearch">Search Flight</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 
 {% endblock %}

@@ -4,7 +4,7 @@ html {
     padding: 0;
     height: 100%;
     background-color:#ffffff;
-    background-image: url(https://sv1.picz.in.th/images/2021/11/19/6SI5Ua.jpg);
+    background-image: url(/static/img/blackgroud_Flight4U.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -15,10 +15,10 @@ html {
 }
   
 .user_card {
-    height: 400px;
+    height: 450px;
     width: 600px;
     margin-top: auto;
-    margin-bottom: auto;
+    margin-bottom: 0px;
     margin-left: 20px ;
     background: #ffffff;
     position: relative;
@@ -34,11 +34,11 @@ html {
 
 }
 .brand_logo_container {
-    margin-top: 200px;
+    margin-top: 170px;
     position: absolute;
-    height: 170px;
-    width: 170px;
-    top: -70px;
+    height: 160px;
+    width: 160px;
+    top: -80px;
     border-radius: 50%;
     /* background: rgb(255, 255, 255); */
     /* padding: 10px; */
@@ -59,7 +59,7 @@ html {
 
 .login_btn {
     /* height: 50px; */
-    width: 600px;
+    width: 550px;
     padding: 10px;
     /* width: 100%; */
     background: rgb(230, 103, 0) !important;
@@ -82,7 +82,7 @@ html {
 
 .login_container {
     height: 50px;
-    width: 500px;
+    width: 450px;
     justify-content: center;
     padding: 0 2rem;
 }

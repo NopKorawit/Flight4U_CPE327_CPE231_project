@@ -1,27 +1,40 @@
-*{
-    margin:0;
-    padding:0;
+body,html {
+    font-family:"Lato", sans-serif;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+    height: 100%;
+    background-color:#ffffff;
+    background-image: url(/static/img/blackgroud_Flight4U.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 span{ color: red;}
-
+label{
+    margin-top: 10px;
+}
 .payment-content{
-    width: 480px;
+    height: 500px;
+    width: 500px;
     margin: 2rem auto;
-    height: 400px;
     box-shadow:  3px 3px 10px rgba(0,0,0,0.2);
     border-radius:  50px;
+    background: #ffffff;
+    opacity: 0.8 ;
 }
 .payment-box{
     text-align:initial;
-    margin-left: 5rem;
+    margin-left: 4rem;
 }
 
 input{
-    margin-bottom: 10px;
-    width: 20em;
+    width: 25em;
     font-size: 15px;
+}
+button{
+    margin-top: 20px;
 }
 
 .payment-box-head{
@@ -84,6 +97,9 @@ input{
     color: rgb(0, 0, 0);
 }
 button{
-    padding: 8px;
+    padding: 10px;
 }
-
+.button button{
+    margin-right: 10px;
+    align-content: center;
+}
