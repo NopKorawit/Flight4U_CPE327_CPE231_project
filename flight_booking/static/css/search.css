@@ -1,17 +1,40 @@
-body{
+body,
+html {
     font-family:"Lato", sans-serif;
-    background-color: rgb(255, 255, 255);
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color:#ffffff;
+    background-image: url(https://sv1.picz.in.th/images/2021/11/19/6SI5Ua.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 label{
     margin-top: 10px;
-    display: flex;
-    
 }
 
 form{
-    margin: 20px;
+    margin: 170px;
     
+}
+
+.search_card {
+    margin: 150px ;
+    height: 400px;
+    width: 1000px;
+    background: #ffffff;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 30px;
+    opacity: 0.8 ;
 }
 
 .btn{
@@ -21,10 +44,7 @@ form{
     padding: 5px;
     width: 10rem;
     border-radius: 5px;
-    color: white;
+    color: rgb(255, 255, 255);
 }
-
-
-
 
 

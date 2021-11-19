@@ -1,67 +1,72 @@
 {% extends 'layout.html' %}
 
 {% load static %}
-
 {% block head %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>REGISTER</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
     <link rel="stylesheet" href="{% static 'css/register.css' %}">
-    <script src="{% static 'js/register.js' %}" ></script>
 {% endblock %}
 
 {% block script %}
-    <script type"text/javascript" src="{% static 'js/signup.js' %}"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <script src="{% static 'js/register.js' %}" ></script> 
+    <!-- <script src="assets/js/register2.js"></script> -->
 {% endblock %}
 
 
 {% block body %}
-
-<body class="register-form">
-
-{% if messages %}
-<div class="alert">
-    {% for message in messages %}
-        <div class="warn"><b>{{message}}</b></div>
-    {% endfor %}
-{% endif %}
-</div>
-
-<center>
-<form action="addUser" method="post" id="register"> <!--addUser() in views.py-->
-<fieldset>
-    <legend align="center">REGISTER</legend>
-    {% csrf_token %}
-    <div class="register">
-        <input type="text" class="form-input" name="Firstname" id="Firstname" placeholder="*First name" autofocus required>
+<body class="registration-form">
+    <center>
+        {% if messages %}
+    <div class="alert">
+        {% for message in messages %}
+            <div class="warn"><b>{{message}}</b></div>
+        {% endfor %}
+    {% endif %}
     </div>
-    <div class="register">
-        <input type="text" class="form-input" name="Lastname" id="Lastname" placeholder="*Last name" autofocus required>
-    </div>
-    <div class="register">
-        <input type="email" class="form-input" name="email" id="email" placeholder="*Email" autofocus required>
-    </div>
-    <div class="register">
-        <input type="text" class="form-input" name="phone_no" id="phone_no" placeholder="*Phone number" required>
-    </div>
-    <div class="register">
-        <input type="username" class="form-input" name="username" id="username" placeholder="*Username" autofocus required>
-    </div>
-    <div class="register">
-        <input type="password" class="form-input" name="password" id="password" placeholder="*Password" autocomplete="off" required>
-    </div>
-    <div class="register">
-        <input type="password" class="form-input" name="repassword" id="repassword" placeholder="*Confirm password" autocomplete="off" required>
-    </div>
-    <div class="register">
-        <input type="submit" value="Register" class="btn btn-primary" id="btn" > <!--disabled -->
-    </div>
+    <form action="addUser" method="post" id="register"> <!--addUser() in views.py-->
+        {% csrf_token %}
+    <fieldset>
+        <div class="form-group">
+            <h1 align="center">REGISTER</h1>
+        </div>
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" class="form-control item" name="Firstname" id="Firstname" placeholder="First name" autofocus required>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control item" name="Lastname" id="Lastname" placeholder="Last name" autofocus required>
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control item" name="email" id="email" placeholder="Email" autofocus required>
+        </div>
+        <div class="form-group">    
+            <input type="username" class="form-control item" name="username" id="username" placeholder="Username" autofocus required>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control item" name="password" id="password" placeholder="password" autocomplete="off" required>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control item" name="repassword" id="repassword" placeholder="Confirm password" autocomplete="off" required>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="create account" class="btn btn-block create-account" id="btn" required >
+        </div>
+        
+        <div class="form-group">
+            <p class="text-center">If you already have an account, 
+            <a href="loginform">login</a> instead.</p>
+        </div>
     
-    <div class="register">
-        <p class="text-center">If you already have an account, 
-        <a href="loginform">login</a> instead.</p>
-    </div>
-
-</fieldset>
-</form>
-</center>
-</body>
-
+    </fieldset>
+    </form>
+    </center>
+    </body>
 {% endblock %}
+

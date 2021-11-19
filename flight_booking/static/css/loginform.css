@@ -1,49 +1,108 @@
-body{
-    font-family:"Lato", sans-serif;
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color:#ffffff;
+    background-image: url(https://sv1.picz.in.th/images/2021/11/19/6SI5Ua.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-input{
-    margin: 10px 0 10px 0;
-    padding: 5px;
-    font-size: 15px;
-    width: 5cm;
+.content{
+    margin-top: 170px;
 }
-
-form{
-
-    width: 10cm; 
-    
-}
-
-fieldset{
-    height: 200px;
-}
-
-.btn{
-    margin: 10px 0 10px 0;
+  
+.user_card {
+    height: 400px;
+    width: 600px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 20px ;
+    background: #ffffff;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     padding: 10px;
-    width: 75px;
-    background-color: rgb(230, 103, 0);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition-duration: .1s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 30px;
+    opacity: 0.8 ;
+
+}
+.brand_logo_container {
+    margin-top: 200px;
+    position: absolute;
+    height: 170px;
+    width: 170px;
+    top: -70px;
+    border-radius: 50%;
+    /* background: rgb(255, 255, 255); */
+    /* padding: 10px; */
+    /* text-align: center; */
+
+}
+.brand_logo {
+    height: 200px;
+    width: 200px;
+    margin-right: 20px ;
+    border-radius: 50%;
+    border: 15px solid rgba(255, 255, 255,0.8);
+
+}
+.form_container {
+    margin-top: 30px;
 }
 
-.btn:disabled{
+.login_btn {
+    /* height: 50px; */
+    width: 600px;
+    padding: 10px;
+    /* width: 100%; */
+    background: rgb(230, 103, 0) !important;
+    color: white !important;
+}
+/* .login_btn:focus {
+    box-shadow: none !important;
+    outline: 0px !important;
+} */
+.login_btn:disabled{
     background-color: rgba(255, 115, 0, 0.527);
     color: rgb(255, 255, 255);
-
 }
-
-.btn:hover {
+.login_btn:hover {
     color: rgb(230, 103, 0) ;
     background-color: rgba(255, 115, 1, 0.37); 
     transition-duration: .1s;
-    
 }
 
+
+.login_container {
+    height: 50px;
+    width: 500px;
+    justify-content: center;
+    padding: 0 2rem;
+}
+.input-group-text {
+    height: 60px;
+    width: 60px;
+    background: rgb(230, 103, 0) !important;
+    color: white !important;
+    border: 0 !important;
+    border-radius: 0.25rem 0 0 0.25rem !important;
+    justify-content: center;
+}
+.input_user,
+.input_pass:focus {
+    box-shadow: none !important;
+    outline: 0px !important;
+}
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+    background-color: rgb(230, 103, 0) !important;
+}
 
 .warn{
     padding: 15px;
@@ -54,7 +113,7 @@ fieldset{
     color: rgb(105, 16, 16);
 }
 
-.alert b{
+.alert{
     font-size: 15px;
-    margin-left: 20px;
+    padding: 20px;
 }

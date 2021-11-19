@@ -163,7 +163,7 @@ def login(request):
             auth.login(request,user)
             return redirect('/')
         else:
-            messages.info(request, "Incorrect Username/Password")
+            messages.error(request, "Incorrect Username/Password")
             return redirect('/loginform')
     else:
         return render(request,'loginform.html')
