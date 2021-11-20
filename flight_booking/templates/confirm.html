@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/confirm.css' %}">
+<script src="{% static 'js/confirm.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+
+<body>
+    <div class="center">
+        <center>
+        <div class="display-img">
+            <img class="icon-img" src="{% static 'img/confirm.png' %}">
+        </div>
+         
+        <h2>
+            Congratulations,Your flight booking is comfirmed.
+        </h2>
+        <p>
+            Booking Ref. Number :XXXXXXXX
+        </p>
+        <button type="print" value="print" class="btn print_ticket">
+            <h5>Print Ticket</h5>
+        </button>
+    </center>
+    </div>
+</body>
+{% endblock %}

@@ -11,7 +11,7 @@
 
 {% block body %}
 
-<div class="container">
+<div class="container_views">
     <div class='row'>
         <div class="col-sm">
             <label>From:</label>
@@ -21,19 +21,23 @@
             <label>To:</label>
             <input type='text' id='js_Destination' name='destination' value='{{destination}}' readonly>
         </div>
+        <br>
         <div class="col-sm">
             <label>Date:</label>
             <input type='text' id='js_Date' name='date' value='{{departure_date}}' readonly>
         </div>
-        <div class="col-sm">
+        <br>
+        <br>
+        <br>
+        <div class="col">
             <label>Class:</label>
             <input type='text' id='js_Class' name='seat_class' value='{{seat_class}}' readonly>
         </div>
         <div class="col">
-            <button type="button" class="btnSearch" ><a href="searchflight">Search</a></button>
+            <button type="button" class="btnSearch" ><a href="/">Search</a></button>
         </div>
     </div>
-</div>
+
 
 <table class='table'>
     <thead>
@@ -53,8 +57,10 @@
             <td> {{flight.flight_id.price}}฿ </td>
             <td> {{flight.duration}} </td>
             <td>
-                <button class="btn" id="btnChoose"><a href="booking/{{flight.flight_id}}&{{flight.path_id}}&{{date}}&{{flight.flight_id.seat_class}}">Choose</a></button>
+                {% if user.is_authenticated %}
+                <button class="btnChoose" id="btn-Choose"><a href="booking/{{flight.flight_id}}&{{flight.path_id}}&{{date}}&{{flight.flight_id.seat_class}}">Choose</a></button>
                 <!-- <button id="btnDetail">Detail</button> -->
+                {% endif %}
             </td>
         <tr>
 
@@ -62,7 +68,7 @@
     {% endfor %}
 
 
-    
+</div>
 
 {% endblock %}
     

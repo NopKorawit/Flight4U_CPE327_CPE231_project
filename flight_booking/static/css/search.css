@@ -1,15 +1,12 @@
 body,
 html {
-    font-family:"Lato", sans-serif;
     margin: 0;
-    margin-bottom: 200px;
-    padding: 0;
-    height: 100%;
+    padding: 0; 
     background-color:#ffffff;
     background-image: url(/static/img/blackgroud_Flight4U.jpg);
-    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    
 }
 
 label{

@@ -1,14 +1,12 @@
-body,html {
-    font-family:"Lato", sans-serif;
+body,
+html {
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    height: 100%;
+    padding: 0; 
     background-color:#ffffff;
     background-image: url(/static/img/blackgroud_Flight4U.jpg);
-    background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
+    
 }
 
 span{ color: red;}
@@ -76,6 +74,10 @@ button{
     color: white;
     cursor: pointer;
     font-size: 13px;
+    padding: 10px;
+    text-decoration: none;
+    margin-top: 20px;
+    margin-left: 10px;
 }
 .confirm:hover{
     background-color: green;
@@ -87,6 +89,9 @@ button{
     border-radius: 5px;
     cursor: pointer;
     font-size: 13px;
+    padding: 10px;
+    text-decoration: none;
+    margin-top: 20px;
 }
 .cancle:hover{
     background-color: red;

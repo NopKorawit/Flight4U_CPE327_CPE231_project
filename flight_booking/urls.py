@@ -13,6 +13,7 @@ urlpatterns = [
     path("logout",views.logout),
     path("booking/<str:fid>&<str:path>&<str:date>&<str:seat_class>",views.booking),
     path("payment",views.payment),
+    path("confirm",views.confirm),
 
     path('city/list',views.CityList.as_view(),name='city_list'),
     path('flight/list', views.FlightList.as_view(), name='flight_list'),

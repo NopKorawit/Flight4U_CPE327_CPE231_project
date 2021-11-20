@@ -2,18 +2,12 @@ body,
 html {
     margin: 0;
     padding: 0; 
-    min-height: 100%;
     background-color:#ffffff;
     background-image: url(/static/img/blackgroud_Flight4U.jpg);
-    background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
     
 }
-
-/* .registration-form{
-	padding: 50px 0;
-}  */
 
 .registration-form form{
     background-color: #fff;
@@ -21,13 +15,12 @@ html {
     max-height: 700px;  
     margin: auto;
     padding: 25px 70px 0px 70px;
-
     border-radius: 30px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
     opacity: 0.8;
 }
 
-.registration-form .form-icon{
+/* .registration-form .form-icon{
 	text-align: center;
     background-color: rgb(230, 103, 0);
     border-radius: 50%;
@@ -38,7 +31,7 @@ html {
     margin: auto;
     margin-bottom: 50px;
     line-height: 100px;
-}
+} */
 
 .registration-form .item{
 	border-radius: 20px;

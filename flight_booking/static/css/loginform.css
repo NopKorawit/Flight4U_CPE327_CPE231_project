@@ -1,4 +1,4 @@
-body,
+/* body,
 html {
     margin: 0;
     padding: 0;
@@ -8,6 +8,16 @@ html {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+} */
+body,
+html {
+    margin: 0;
+    padding: 0; 
+    background-color:#ffffff;
+    background-image: url(/static/img/blackgroud_Flight4U.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    
 }
 
 .content{

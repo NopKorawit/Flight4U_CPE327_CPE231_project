@@ -94,10 +94,11 @@ def registerForm(request):
 def loginform(request):
     return render(request,'loginform.html')
 
-
-
 def payment(request):
     return render(request,'payment.html')
+
+def confirm(request):
+    return render(request,'confirm.html')
 
 #----------------------------------------------
 
@@ -171,6 +172,8 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+
 
 
 #------------------LIST--------------------------
