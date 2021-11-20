@@ -304,6 +304,64 @@ def booking(request,fid,path,date,seat_class):
         
         })
     #pass
+#-------------------------------------------------------------github
+# def get_ticket(request):
+#     id = request.GET.get("id")
+#     ticket1 = Ticket.objects.get(flight_id=id)
+#     data = {
+#         'ticket1':ticket1
+#     }
+#     return render(request,'ticket.html',data)
+
+# def ticket_data(request, id):
+#     ticket = Ticket.objects.get(ticket_id=id)
+#     return JsonResponse({
+#         'ticket_id': ticket.ticket_id,
+#         'seat_no': ticket.seat_no,
+#         'id_no': ticket.idcard_no,
+#         'flight_id': ticket.flight_id,
+#         'departure_date': ticket.departure_date,
+#         'flight_class': ticket.flight_class,
+#         'status': ticket.status
+#     })
+#-------------------------------------------------------------lab5
+class TicketDetail(View):
+    def get(self, request, pk):
+        ticket_id = pk
+
+        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id', 'seat_no', 'id_no','flight_id','departure_date','flight_class','status'))
+        # passenger = list(Passenger.objects.select_related('product_code').filter(invoice_no=invoice_no).order_by('item_no').values("item_no","invoice_no","product_code","product_code__name","product_code__units","unit_price","quantity","product_total"))
+
+        data = dict()
+        data['ticket'] = ticket[0]
+        # data['invoicelineitem'] = invoicelineitem
+
+        response = JsonResponse(data)
+        response["Access-Control-Allow-Origin"] = "*"
+        return response
+
+class TicketList(View):
+    def get(self, request):
+        ticket = list(Ticket.objects.order_by('ticket_id').all().values())
+        data = dict()
+        data['ticket'] = ticket
+        response = JsonResponse(data)
+        response["Access-Control-Allow-Origin"] = "*"
+        return response
+
+class TicketPDF(View):
+    def get(self, request, pk):
+        ticket_id = pk
+
+        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id', 'seat_no', 'id_no','flight_id','departure_date','flight_class','status'))
+        # invoice_line_item = list(InvoiceLineItem.objects.select_related('product_code').filter(invoice_no=invoice_no).order_by('invoice_no').values("invoice_no","product_code","product_code__name","unit_price","quantity","product_total"))
+
+        data = dict()
+        data['ticket'] = ticket[0]
+        # data['invoicelineitem'] = invoice_line_item
+        
+        #return JsonResponse(data)
+        return render(request, 'ticket.html', data)
 
 #-------------------------------------------------------
     

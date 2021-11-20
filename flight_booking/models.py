@@ -18,18 +18,20 @@ class Passenger(models.Model):
     def __str__(self):
         return self.id_no
 
-class Account(models.Model):
-    username = models.CharField(max_length=10, primary_key=True) # id card/passport nunmber 
-    firstname = models.CharField(max_length=30)
-    lastname = models.CharField(max_length=30)
-    email = models.EmailField()
-    password = models.CharField(max_length=20)
+class Ticket(models.Model):
+    ticket_id = models.CharField(max_length=10, primary_key=True)
+    seat_no = models.CharField(max_length=5)
+    id_no = models.CharField(max_length=15)
+    flight_id = models.CharField(max_length=5)
+    departure_date = models.DateField()
+    flight_class = models.CharField(max_length=10)
+    status = models.CharField(max_length=10)
 
     class Meta:
-        db_table = "account"
+        db_table = "ticket"
         managed = False
     def __str__(self):
-        return self.username
+        return self.ticket_id
 
 #Departure
 class City_A(models.Model):

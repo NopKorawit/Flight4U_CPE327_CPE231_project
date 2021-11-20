@@ -21,8 +21,6 @@ html {
     flex-direction: column;
 
     padding: 10px;
-    
-
 }
 .icon-img{
     width: 17%;
@@ -59,4 +57,8 @@ html {
     color: rgb(230, 103, 0) ;
     background-color: rgba(255, 115, 1, 0.37); 
     transition-duration: .1s;
+}
+.ticket_id{
+    width: 60px;
+    border: transparent;
 }

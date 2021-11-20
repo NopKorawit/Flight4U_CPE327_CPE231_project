@@ -1,0 +1,77 @@
+@page{
+    margin: 37px 50px;
+}
+*{
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+body{
+    padding: 7% 7%;
+}
+nav{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.logo{
+    display: flex;
+}
+.header{
+    text-align: right;
+    font-size: 2em;
+    font-weight: 600;
+}
+li{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.col{
+    -ms-flex-preferred-size:0;
+    flex-basis:0;
+    -ms-flex-positive:1;
+    flex-grow:1;
+    max-width:100%
+}
+table{
+    margin-top: 0;
+    width: 100%;
+}
+.table{
+    margin-top: 25px;
+}
+tr{
+    width: 100%;
+}
+th{
+    width: 25%;
+    text-align: left;
+    padding: 5px 20px;
+}
+td{
+    width: 25%;
+    text-align: left;
+    padding: 5px 15px;
+}
+caption{
+    text-align: left;
+    background-color: #a9a9a9;
+    color: white;
+    padding: 8px 15px;
+    font-weight: bold;
+}
+.tr-caption{
+    text-align: left;
+    background-color: #a9a9a9;
+    color: white;
+    padding: 0;
+    font-weight: bold;
+    width: 100%;
+    font-size: 1.4em;
+}
+.tr-even{
+    background-color: #f0f0f0;
+}
+.tr-odd{
+    background-color: white;
+}

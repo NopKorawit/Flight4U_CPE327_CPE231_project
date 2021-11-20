@@ -23,6 +23,13 @@ urlpatterns = [
     path('class/list',views.ClassList.as_view(),name='class_list'),
     path('class/detail/<str:id>', views.ClassDetail.as_view(), name='class_detail'),
 
+    path('ticket/list', views.TicketList.as_view(), name='Ticket_List'),
+    path('ticket/detail/<str:pk>', views.TicketDetail.as_view(), name='Ticket_detail'),
+    path('ticket/pdf/<str:pk>', views.TicketPDF.as_view(), name='Ticket_pdf'),
+
+
+    # path('flight/ticket/api/<str:ref>', views.TicketList, name="ticketdata"),
+    # path('ticket/print',views.get_ticket, name="getticket"),
     
 
 ]
