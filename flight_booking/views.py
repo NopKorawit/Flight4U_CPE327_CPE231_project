@@ -44,11 +44,11 @@ def listID():
             idlist.append(f"{no}{i:02}")
     return(idlist)
 
-def genID():
-    for id in listID():
-        if not Account.objects.filter(account_no=id).exists():
-            break
-    return(id)
+# def genID():
+#     for id in listID():
+#         if not Account.objects.filter(account_no=id).exists():
+#             break
+#     return(id)
 
 #--------------------------------------------------------------
 
