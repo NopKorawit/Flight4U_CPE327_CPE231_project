@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 from django.db.models import fields
 
 # Create your models here.
+<<<<<<< HEAD
+    
+=======
 
 class Passenger(models.Model):
     ticket_id = models.CharField(max_length=20, primary_key=True) # lineitem
@@ -33,6 +36,7 @@ class Ticket(models.Model):
     def __str__(self):
         return self.ticket_id
 
+>>>>>>> 2a8a0fc2358ae8d13a955afd1ccbf2be164a8c1d
 #Departure
 class City_A(models.Model):
     city_id = models.CharField(max_length=5,primary_key=True)
@@ -115,12 +119,12 @@ class Flight_Detail(models.Model):
         return '{"flight_id":"%s","departure_date":"%s","gate_no"}' % (self.flight_id,self.departure_date,self.gate_no)
 
 #-------------------------------------------------------------------------------
-
 class Ticket(models.Model):
     ticket_id = models.CharField(max_length=10, primary_key=True)
     flight_id = models.ForeignKey(Flight_Detail, on_delete=models.CASCADE, db_column='flight_id')
     departure_date = models.DateField()
-    flight_class = models.CharField(max_length=10)
+    seat_class = models.CharField(max_length=10)
+    #passengers = models.ManyToManyField(Passenger)
     status = models.CharField(max_length=10)
     class Meta:
         db_table = "ticket"
@@ -129,16 +133,15 @@ class Ticket(models.Model):
         return self.ticket_id
 
 class Passenger(models.Model):
-    id_no = models.CharField(max_length=20, primary_key=True) # id card/passport nunmber 
-    ticket_id = models.ForeignKey(Ticket, on_delete=models.CASCADE, db_column='ticket_id')
+    id = models.IntegerField(primary_key=True)
+    id_no = models.CharField(max_length=20) # id card/passport nunmber 
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     phone_no = models.CharField(max_length=10)
     email = models.CharField(max_length=30)
-
+    ticket_id = models.ForeignKey(Ticket, on_delete=models.CASCADE, db_column='ticket_id')
     class Meta:
         db_table = "passenger"
-        unique_together = (("id_no", "ticket_id"),)
         managed = False
     def __str__(self):
-        return self.id_no
+        return f"Passenger: {self.first_name} {self.last_name} {self.email}"
