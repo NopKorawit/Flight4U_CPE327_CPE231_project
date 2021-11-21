@@ -88,15 +88,11 @@ def search(request):
         })
 
 def my_booking(request):
-
-    tickets = Ticket.objects.filter(username=request.username).order_by('-booking_date')
-    return render(request, 'my_bookings.html', {
-        'page': 'bookings',
-        'tickets': tickets
-    })
-
-def my_booking(request):
-    return render(request, 'my_booking.html')
+    if request.user.is_authenticated:
+        tickets = Ticket.objects.filter(user_id=request.user).order_by('-booking_date')
+        return render(request, 'my_booking.html', {
+            'tickets': tickets
+        })
 
 
 def viewflight(request):
@@ -267,7 +263,7 @@ class TicketPDF(View):
 
 #-----------------------------------------------------------------------------
 
-def createticket(flight_id,departure_date,seat_class,total_amount):
+def createticket(flight_id,departure_date,seat_class,total_amount,username):
         
     if Ticket.objects.count() != 0:
         ticket_id_max = Ticket.objects.aggregate(Max('ticket_id'))['ticket_id__max']
@@ -291,7 +287,8 @@ def createticket(flight_id,departure_date,seat_class,total_amount):
             departure_date=date,
             seat_class=seat_class,
             status=status,
-            total_amount=total_amount
+            total_amount=total_amount,
+            username =username
             )
 
     ticket.save()
@@ -306,10 +303,10 @@ def addPassenger(request):
         departure_date = request.POST['departure_date']
         seat_class = request.POST['seat_class']
         total_amount = reFormatNumber(request.POST['total_amount'])
-        
+        username = request.POST['username']
         passengerscount = request.POST['passengersCount']
         # passengers_list = []
-        ticket = createticket(flight_id,departure_date,seat_class,total_amount)
+        ticket = createticket(flight_id,departure_date,seat_class,total_amount,username)
         for i in range(1, int(passengerscount)+1): 
             if Passenger.objects.count() != 0:
                 id_max = Passenger.objects.aggregate(Max('id'))['id__max']
@@ -329,7 +326,7 @@ def addPassenger(request):
                 email=email,
                 phone_no=phone,
                 id_no=id_no,
-                ticket_id=ticket
+                ticket_id=ticket,
             )
             passenger.save()
             # passengers_list.append(passenger)

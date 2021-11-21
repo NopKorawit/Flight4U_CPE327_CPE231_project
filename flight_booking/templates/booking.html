@@ -13,6 +13,9 @@
     <h3 style="margin-left: 10px;">Departure date:
         <input type="text" class="data-value" name="departure_date" value="{{departure_date}}" readonly>
     </h3>
+    {% if user.is_authenticated %}
+    <input type="hidden" class="data-value" name="username" value="{{user.username}}" readonly>
+    {% endif %}
     <div class="detail">
         <div class="booking_detail">
             <div class="row ticket-details-div">

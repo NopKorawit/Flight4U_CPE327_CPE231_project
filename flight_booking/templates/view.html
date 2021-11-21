@@ -63,7 +63,10 @@
                 <button class="btnChoose" id="btn-Choose"><a href="{{flight.flight_id}}&{{flight.path_id}}&{{date}}&{{flight.flight_id.seat_class}}">Choose</a></button>
 
                 <!-- <button id="btnDetail">Detail</button> -->
+                {% else %}
+                <button class="btnChoose" id="btn-Choose" disabled>Choose</button>
                 {% endif %}
+                
             </td>
         <tr>
 
