@@ -6,50 +6,6 @@ from django.db.models import fields
 
 # Create your models here.
 
-class Passenger(models.Model):
-    id_no = models.CharField(max_length=20, primary_key=True) # id card/passport nunmber 
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    phone_no = models.CharField(max_length=10)
-    email = models.CharField(max_length=30)
-
-    class Meta:
-        db_table = "passenger"
-        managed = False
-    def __str__(self):
-        return self.id_no
-
-<<<<<<< HEAD
-class Booking(models.Model):
-    booking_no = models.CharField(max_length=5,primary_key=True)
-    booking_date = models.DateTimeField(default=datetime.datetime.now, blank=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='id')
-    due_date = models.DateTimeField()
-    quantity = models.IntegerField()
-    total_price = models.IntegerField()
-
-    # class Meta:
-    #     db_table = "booking"
-    #     managed = False
-    # def __str__(self):
-    #     return self.booking_no
-=======
-class Ticket(models.Model):
-    ticket_id = models.CharField(max_length=10, primary_key=True)
-    seat_no = models.CharField(max_length=5)
-    id_no = models.CharField(max_length=15)
-    flight_id = models.CharField(max_length=5)
-    departure_date = models.DateField()
-    flight_class = models.CharField(max_length=10)
-    status = models.CharField(max_length=10)
-
-    class Meta:
-        db_table = "ticket"
-        managed = False
-    def __str__(self):
-        return self.ticket_id
->>>>>>> e825dab8bc60a5baaafc7d3a3e2250dba33a3daf
-
 #Departure
 class City_A(models.Model):
     city_id = models.CharField(max_length=5,primary_key=True)
@@ -131,3 +87,31 @@ class Flight_Detail(models.Model):
     def __str__(self):
         return '{"flight_id":"%s","departure_date":"%s","gate_no"}' % (self.flight_id,self.departure_date,self.gate_no)
 
+#-------------------------------------------------------------------------------
+
+class Ticket(models.Model):
+    ticket_id = models.CharField(max_length=10, primary_key=True)
+    flight_id = models.ForeignKey(Flight_Detail, on_delete=models.CASCADE, db_column='flight_id')
+    departure_date = models.DateField()
+    flight_class = models.CharField(max_length=10)
+    status = models.CharField(max_length=10)
+    class Meta:
+        db_table = "ticket"
+        managed = False
+    def __str__(self):
+        return self.ticket_id
+
+class Passenger(models.Model):
+    id_no = models.CharField(max_length=20, primary_key=True) # id card/passport nunmber 
+    ticket_id = models.ForeignKey(Ticket, on_delete=models.CASCADE, db_column='ticket_id')
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    phone_no = models.CharField(max_length=10)
+    email = models.CharField(max_length=30)
+
+    class Meta:
+        db_table = "passenger"
+        unique_together = (("id_no", "ticket_id"),)
+        managed = False
+    def __str__(self):
+        return self.id_no

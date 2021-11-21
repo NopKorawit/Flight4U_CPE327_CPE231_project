@@ -8,23 +8,25 @@
 {% endblock %}
 
 {% block body %}
-
+<form class="input" action="createTicket" onsubmit="return book_submit()" method="post">
+{% csrf_token %}
 <div class="detail">
     <div class="booking_detail">
-        {{booking_detail.flight_id}}
-        {{booking_detail.airline}}
+        <input type="text" name="flight_id" value="{{booking_detail.flight_id}}" readonly>
+        <input type="text" name="airline" value="{{booking_detail.airline}}" readonly>
         {% for detail in departure %}
-        {{detail.city_name}}
-        {{detail.airport}}
+        <input type="text" name="departure" value="{{detail.city_name}}" readonly>
+        <input type="text" name="departure_airport" value="{{detail.airport}}" readonly>
         {% endfor %}
         {% for detail in destination %}
-        {{detail.city_name}}
-        {{detail.airport}}
+        <input type="text" name="destination" value="{{detail.city_name}}" readonly>
+        <input type="text" name="destination_airport" value="{{detail.airport}}" readonly>
         {% endfor %}
-        
-        {{booking_detail.departure_time}}
-        {{booking_detail.arrival_time}}
-        {{booking_detail.flight_detail.departure_date}}
+        <input type="text" name="departure_time" value="{{booking_detail.departure_time}}" readonly>
+        <input type="text" name="arrival_time" value="{{booking_detail.arrival_time}}" readonly>
+        <input type="text" name="departure_date" value="{{departure_date}}" readonly>
+        <input type="hidden" name="duration" value="{{duration}}">
+        <input type="hidden" name="seat_class" value="{{booking_detail.flight_id.seat_class}}">
         <div class="duration" data-value="{{duration}}"></div>
         
     </div>
@@ -63,7 +65,7 @@
     </div>
 </div>
 
-<form class="input" action="addPassenger" onsubmit="return book_submit()" method="post">
+
 <h2>Contact Information</h2>
 {% csrf_token %}
 <div class="warn">First name and last name in English as on ID card/passport/driving license</div>

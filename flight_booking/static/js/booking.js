@@ -76,10 +76,16 @@ function displayDetails(num_p) {
     console.log(count_p);
     passenger = `
     <div class="row addP">
-        <div class="p_name col-3" name="pname${count_p+1}">${fname + ' ' + lname}</div>
-        <div class="p_email col-3" name="pemail${count_p+1}">${email}</div>
-        
-        <button class="btn fas fa-times col-3" type="button" onclick="del_passenger(this)"></button>
+        <div class="show-p col-3">
+            <span class="p-name">${fname}&nbsp;&nbsp;${lname}</span><span>,</span>
+            <span class="p-email">${email}</span>
+        </div> 
+        <input type="hidden" name="fname${count_p+1}" value="${fname}">
+        <input type="hidden" name="lname${count_p+1}" value="${lname}">
+        <input type="hidden" name="email${count_p+1}" value="${email}">
+        <input type="hidden" name="idno${count_p+1}" value="${idno}">
+        <input type="hidden" name="phone${count_p+1}" value="${phone}">
+        <button class="btn fas fa-times col-2" type="button" onclick="del_passenger(this)"></button>
     `;
 
     // <div class="p_email col-3" name="pemail${count_p+1}">${email}</div>

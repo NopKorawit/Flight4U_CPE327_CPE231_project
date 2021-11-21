@@ -11,15 +11,11 @@ urlpatterns = [
     path("loginform",views.loginform),
     path("login",views.login),
     path("logout",views.logout),
-<<<<<<< HEAD
     path("<str:fid>&<str:path>&<str:date>&<str:seat_class>",views.booking),
+    path("createTicket",views.createticket),
     path('addPassenger',views.addPassenger),
-    path('payment',views.payment),
-=======
-    path("booking/<str:fid>&<str:path>&<str:date>&<str:seat_class>",views.booking),
     path("payment",views.payment),
     path("confirm",views.confirm),
->>>>>>> e825dab8bc60a5baaafc7d3a3e2250dba33a3daf
 
     path('city/list',views.CityList.as_view(),name='city_list'),
     path('flight/list', views.FlightList.as_view(), name='flight_list'),

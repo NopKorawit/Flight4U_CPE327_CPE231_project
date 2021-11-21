@@ -57,12 +57,11 @@
             <td> {{flight.flight_id.price}}฿ </td>
             <td class="duration" data-value="{{flight.duration}}"></td>
             <td>
-<<<<<<< HEAD
-                <button class="btn" id="btnChoose"><a href="{{flight.flight_id}}&{{flight.path_id}}&{{date}}&{{flight.flight_id.seat_class}}">Choose</a></button>
-=======
+                <!-- <button class="btn" id="btnChoose"><a href="{{flight.flight_id}}&{{flight.path_id}}&{{date}}&{{flight.flight_id.seat_class}}">Choose</a></button> -->
+
                 {% if user.is_authenticated %}
-                <button class="btnChoose" id="btn-Choose"><a href="booking/{{flight.flight_id}}&{{flight.path_id}}&{{date}}&{{flight.flight_id.seat_class}}">Choose</a></button>
->>>>>>> e825dab8bc60a5baaafc7d3a3e2250dba33a3daf
+                <button class="btnChoose" id="btn-Choose"><a href="{{flight.flight_id}}&{{flight.path_id}}&{{date}}&{{flight.flight_id.seat_class}}">Choose</a></button>
+
                 <!-- <button id="btnDetail">Detail</button> -->
                 {% endif %}
             </td>

@@ -18,15 +18,17 @@ from django.forms.models import model_to_dict
 from django.db.models import Max
 import json
 
-#Generate account_no
+# Generate account_no
 
 from string import ascii_uppercase
 import itertools
+
 
 def iter_all_strings():
     for size in itertools.count(2):
         for s in itertools.product(ascii_uppercase, repeat=size):
             yield "".join(s)
+
 
 def noList():
     nolist = []
@@ -36,11 +38,12 @@ def noList():
             break
     return(nolist)
 
+
 def listID():
     nolist = noList()
     idlist = []
     for no in nolist:
-        for i in range(1,100):
+        for i in range(1, 100):
             idlist.append(f"{no}{i:02}")
     return(idlist)
 
@@ -50,10 +53,12 @@ def listID():
 #             break
 #     return(id)
 
-#--------------------------------------------------------------
+# --------------------------------------------------------------
+
 
 def index(request):
-    return render(request,'index.html')
+    return render(request, 'index.html')
+
 
 def search(request):
     city = City.objects.all()
@@ -62,7 +67,8 @@ def search(request):
     if request.method == 'POST':
         departure = request.POST.get('departure')
         destination = request.POST.get('destination')
-        departure_date = reFormatDateMMDDYYYY(request.POST.get('departure_date'))
+        departure_date = reFormatDateMMDDYYYY(
+            request.POST.get('departure_date'))
         seat_class = request.POST.get('seat_class')
         return render(request, 'search.html', {
             'departure': departure,
@@ -71,42 +77,45 @@ def search(request):
             'seat_class': seat_class,
             'city': city
         })
-        
+
     else:
-        return render(request,"search.html", {
+        return render(request, "search.html", {
             'min_date': min_date,
             'max_date': max_date,
             'city': city
         })
 
-    
+
 def my_booking(request):
-    return render(request,'my_booking.html')
+    return render(request, 'my_booking.html')
+
 
 def viewflight(request):
-    return render(request,'view.html')
+    return render(request, 'view.html')
 
 # form receive input
 
+
 def registerForm(request):
-    return render(request,'register.html')
+    return render(request, 'register.html')
+
 
 def loginform(request):
-    return render(request,'loginform.html')
+    return render(request, 'loginform.html')
+
 
 def payment(request):
-    return render(request,'payment.html')
+    return render(request, 'payment.html')
 
-<<<<<<< HEAD
-=======
+
 def confirm(request):
-    return render(request,'confirm.html')
->>>>>>> e825dab8bc60a5baaafc7d3a3e2250dba33a3daf
+    return render(request, 'confirm.html')
 
-#----------------------------------------------
+# ----------------------------------------------
+
 
 def addUser(request):
-    #account_no = genID()
+    # account_no = genID()
     Firstname = request.POST['Firstname']
     Lastname = request.POST['Lastname']
     # phone_no = request.POST['phone_no']
@@ -115,19 +124,19 @@ def addUser(request):
     password = request.POST['password']
     repassword = request.POST['repassword']
 
-    if password==repassword:
+    if password == repassword:
         if User.objects.filter(username=username).exists():
-            messages.info(request,"This Username is already used.")
+            messages.info(request, "This Username is already used.")
             return redirect('/register')
         elif User.objects.filter(email=email).exists():
-            messages.info(request,"This email is already used.")
+            messages.info(request, "This email is already used.")
             return redirect('/register')
         # elif User.objects.filter(phone_no=phone_no).exists():
         #     messages.info(request,"This phone number is already used.")
         #     return redirect('/register')
         else:
             user = User.objects.create_user(
-            #account_no=account_no,
+            # account_no=account_no,
             username=username,
             email=email,
             password=password,
@@ -138,70 +147,66 @@ def addUser(request):
             user.save()
             return redirect('/login')
 
-    else :
-        messages.info(request,"Password doesn't match.")
+    else:
+        messages.info(request, "Password doesn't match.")
         return redirect('/register')
 
+
 def login(request):
-    if request.method=='POST':
+    if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        user = auth.authenticate(username=username,password=password)
+        user = auth.authenticate(username=username, password=password)
         if user is not None:
-            auth.login(request,user)
+            auth.login(request, user)
             return redirect('/')
         else:
             messages.error(request, "Incorrect Username/Password")
             return redirect('/loginform')
     else:
-        return render(request,'loginform.html')
+        return render(request, 'loginform.html')
+
 
 def logout(request):
     auth.logout(request)
     return redirect('/')
 
-#-----------------------------------------------------------------------
-class BookingForm(forms.ModelForm):
+# -----------------------------------------------------------------------
+
+class TicketForm(forms.ModelForm):
     class Meta:
-        model = Booking
+        model = Ticket
         fields = '__all__'
 
-# class InvoiceLineItemForm(forms.ModelForm):
-#     class Meta:
-#         model = InvoiceLineItem
-#         fields = '__all__'
 
+#TicketLineItem 
+class PassengerForm(forms.ModelForm):
+    class Meta:
+        model = Passenger
+        fields = '__all__'
 @method_decorator(csrf_exempt, name='dispatch')
-class BookingCreate(View):
+class TicketCreate(View):
     def post(self, request):
         data = dict()
         request.POST = request.POST.copy()
-        if Booking.objects.count() != 0:
-            booking_no_max = Booking.objects.aggregate(Max('booking_no'))['booking_no__max']
-            next_booking_no = booking_no_max[0:2] + str(int(booking_no_max[2:5])+1) + "/" + booking_no_max[6:8]
+        if Ticket.objects.count() != 0:
+            ticket_id_max = Ticket.objects.aggregate(Max('ticket_id'))['ticket_id__max']
+            next_ticket_id = ticket_id_max[0:2] + str(int(ticket_id_max[2:5])+1) + "/" + ticket_id_max[6:8]
         else:
-            next_booking_no = "BK000/21"
+            next_ticket_id = "TK000/21"
         #*****input part*****
-        request.POST['booking_no'] = next_booking_no
-        request.POST['total'] = reFormatNumber(request.POST['total'])
-        request.POST['vat'] = reFormatNumber(request.POST['vat'])
-        request.POST['amount_due'] = reFormatNumber(request.POST['amount_due'])
+        request.POST['ticket_id'] = next_ticket_id
+
+        form = TicketForm(request.POST)
+
         if form.is_valid():
-            # Don't save yet because we need to provide the date field
-            my_object = form.save(commit=False)
-            my_object.date = datetime.datetime.now()
-            # Now we can save the object in the database
-            my_object.save()
-        form = BookingForm(request.POST)
-        if form.is_valid():
-            booking = form.save(commit=False)
-            booking.booking_date = 
+            ticket = form.save()
 
             dict_lineitem = json.loads(request.POST['lineitem'])
             for lineitem in dict_lineitem['lineitem']:
-                product_code = Product.objects.get(pk=lineitem['product_code'])
-                InvoiceLineItem.objects.create(
-                    invoice_no=invoice,
+                Passenger.objects.create(
+                    ticket_id=ticket,
+                    id_no=lineitem['']
                     item_no=lineitem['item_no'],
                     product_code=product_code,
                     unit_price=reFormatNumber(lineitem['unit_price']),
@@ -217,31 +222,82 @@ class BookingCreate(View):
         response["Access-Control-Allow-Origin"] = "*"
         return response
 
-def addPassenger(request):
-    if request.method=='POST':
-        firstname = request.POST['firstname']
-        lastname = request.POST['lastname']
-        phone = request.POST['phone']
-        email = request.POST['email']
-        id_no = request.POST['idnum']
-        passenger = Passenger.objects.create(
-            id_no = id_no,
-            first_name = firstname,
-            last_name = lastname,
-            phone_no = phone,
-            email = email
+#-----------------------------------------------------------------------------
+
+def createticket(request):
+    if request.method == 'POST':
+        flight_id = request.POST['flight_id']
+        airline = request.POST['airline']
+        departure = request.POST['departure']
+        departure_airport = request.POST['departure_airport']
+        destination = request.POST['destination']
+        destination_airport = request.POST['destination_airport']
+        departure_time = request.POST['departure_time']
+        arrival_time = request.POST['arrival_time']
+        departure_date = request.POST['departure_date']
+        duration = request.POST['duration']
+        seat_class = request.POST['seat_class']
+        if Ticket.objects.count() != 0:
+            ticket_id_max = Ticket.objects.aggregate(Max('ticket_id'))['ticket_id__max']
+            next_ticket_id = ticket_id_max[0:2] + str(int(ticket_id_max[2:5])+1) + "/" + ticket_id_max[6:8]
+        else:
+            next_ticket_id = "TK000/21"
+
+        status = False
+        if status == True:
+            status = 'Confirm'
+        else: 
+            status = 'Pending'
+
+        request.POST['ticket_id'] = next_ticket_id
+        ticket_id = request.POST['ticket_id']
+        ticket = Ticket.objects.create(
+            ticket_id=ticket_id,
+            flight_id=flight_id,
+            departure_date=departure_date,
+            seat_class=seat_class,
+            status=status,
             )
-        passenger.save()
-        # if request.POST['firstname1']:
-        #     count = request.POST['firstname']
-        #     passengers=[]
-        #     for i in range(1,int(passengerscount)+1):
-        #         fname = request.POST[f'passenger{i}FName']
-        #         lname = request.POST[f'passenger{i}LName']
-        #         gender = request.POST[f'passenger{i}Gender']
-        #         passengers.append(Passenger.objects.create(first_name=fname,last_name=lname,gender=gender.lower()))
-        #     coupon = request.POST.get('coupon') 
-        
+        ticket.save()
+        return redirect('/addPassenger',{
+            'ticket':ticket,
+            'airline':airline,
+            'departure':departure,
+            'departure_airport':departure_airport,
+            'destination':destination,
+            'departure_time':departure_time,
+            'arrival_time':arrival_time,
+            'duration':duration,
+            'destination_airport':destination_airport,
+            })
+
+    else: 
+        print("error creating")
+        return redirect('/viewflight')
+
+
+
+def addPassenger(request):
+    if request.method == 'POST':
+        passengerscount = request.POST['passengersCount']
+        passengers_list = []
+        for i in range(1, int(passengerscount)+1):
+            fname = request.POST[f'fname{i}']
+            lname = request.POST[f'lname{i}']
+            email = request.POST[f'email{i}']
+            phone = request.POST[f'phone{i}']
+            id_no = request.POST[f'idno{i}']
+            passenger = Passenger.objects.create(
+                ticket_id = tid,
+                first_name=fname, 
+                last_name=lname, 
+                email=email,
+                phone_no=phone,
+                id_no=id_no
+            )
+
+            passengers_list.append(passenger)
+
         return render(request,'payment.html')
     
     else:
@@ -250,7 +306,7 @@ def addPassenger(request):
 
 
 
-#------------------LIST--------------------------
+# ------------------LIST--------------------------
 class CityList(View):
     def get(self,request):
         cities = list(City.objects.all().values())
@@ -300,7 +356,7 @@ class ClassDetail(View):
         response["Access-Control-Allow-Origin"] = "*"
         return response
 
-#-----------------------------------------------------------      
+# -----------------------------------------------------------      
 
 class FlightList(View):
     def get(self, request):
@@ -323,10 +379,10 @@ class FlightDetail(View):
         response["Access-Control-Allow-Origin"] = "*"
         return response
 
-#------------------Fetch part--------------------------
+# ------------------Fetch part--------------------------
 
 
-#-----------------ORM ver.------------------------
+# -----------------ORM ver.------------------------
 
 def flight_view(request):
     if request.method=='GET':
@@ -337,7 +393,7 @@ def flight_view(request):
         departure_date = reFormatDateMMDDYYYY(request.GET.get('departure_date'))
         
         try:
-            #print("try to check if departure date is exist in database")
+            # print("try to check if departure date is exist in database")
             flights = Flight.objects.select_related("flight_id","flight_detail").filter(path_id__departure = departure,
                                             path_id__destination=destination,flight_id__seat_class=seat_class,
                                             flight_detail__departure_date=date)
@@ -362,7 +418,7 @@ def flight_view(request):
         return redirect('/')
         
 
-#-------------------------------------------------------------
+# -------------------------------------------------------------
 
 def booking(request,fid,path,date,seat_class):
 
@@ -372,45 +428,22 @@ def booking(request,fid,path,date,seat_class):
     path_id = Travel.objects.filter(path_id=path)
     depart_detail = City_A.objects.filter(city_id=path_id[0].departure)
     desti_detail = City_B.objects.filter(city_id=path_id[0].destination)
+    date = reFormatDateMMDDYYYY(date)
     return render(request,'booking.html',{
         'booking_detail' : booking_detail,
+        'departure_date' : date,
         'departure' : depart_detail,
         'destination' : desti_detail,
         'duration' : duration
-        
         })
-<<<<<<< HEAD
+    # pass
 
-
-=======
-    #pass
-#-------------------------------------------------------------github
-# def get_ticket(request):
-#     id = request.GET.get("id")
-#     ticket1 = Ticket.objects.get(flight_id=id)
-#     data = {
-#         'ticket1':ticket1
-#     }
-#     return render(request,'ticket.html',data)
-
-# def ticket_data(request, id):
-#     ticket = Ticket.objects.get(ticket_id=id)
-#     return JsonResponse({
-#         'ticket_id': ticket.ticket_id,
-#         'seat_no': ticket.seat_no,
-#         'id_no': ticket.idcard_no,
-#         'flight_id': ticket.flight_id,
-#         'departure_date': ticket.departure_date,
-#         'flight_class': ticket.flight_class,
-#         'status': ticket.status
-#     })
-#-------------------------------------------------------------lab5
 class TicketDetail(View):
     def get(self, request, pk):
         ticket_id = pk
 
         ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id', 'seat_no', 'id_no','flight_id','departure_date','flight_class','status'))
-        # passenger = list(Passenger.objects.select_related('product_code').filter(invoice_no=invoice_no).order_by('item_no').values("item_no","invoice_no","product_code","product_code__name","product_code__units","unit_price","quantity","product_total"))
+        passenger = list(Passenger.objects.select_related('ticket_id').filter(ticket_id=ticket_id).order_by('item_no').values("item_no","invoice_no","product_code","product_code__name","product_code__units","unit_price","quantity","product_total"))
 
         data = dict()
         data['ticket'] = ticket[0]
@@ -440,11 +473,10 @@ class TicketPDF(View):
         data['ticket'] = ticket[0]
         # data['invoicelineitem'] = invoice_line_item
         
-        #return JsonResponse(data)
+        # return JsonResponse(data)
         return render(request, 'ticket.html', data)
->>>>>>> e825dab8bc60a5baaafc7d3a3e2250dba33a3daf
 
-#-------------------------------------------------------
+# -------------------------------------------------------
     
 def reFormatDateMMDDYYYY(ddmmyyyy):
         if (ddmmyyyy == ''):

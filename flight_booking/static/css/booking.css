@@ -10,7 +10,7 @@ h2{
 }
 
 
-input{
+.input{
     padding: 5px 5em 5px 1em ;
 }
 
@@ -27,6 +27,10 @@ input{
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 5px 8px rgba(128, 128, 128, 0.459); 
+}
+
+.booking_detail input{
+    border: none;
 }
 
 
