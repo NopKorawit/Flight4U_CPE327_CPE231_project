@@ -6,6 +6,36 @@ from django.db.models import fields
 
 # Create your models here.
 
+<<<<<<< HEAD
+=======
+class Passenger(models.Model):
+    ticket_id = models.CharField(max_length=20, primary_key=True) # lineitem
+    id_no = models.CharField(max_length=20) # id card/passport nunmber 
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    phone_no = models.CharField(max_length=10)
+    email = models.CharField(max_length=30)
+
+    class Meta:
+        db_table = "passenger"
+        managed = False
+    def __str__(self):
+        return self.id_no
+
+class Ticket(models.Model):
+    ticket_id = models.CharField(max_length=10, primary_key=True)
+    flight_id = models.CharField(max_length=5)
+    departure_date = models.DateField()
+    flight_class = models.CharField(max_length=10)
+    status = models.CharField(max_length=10)
+
+    class Meta:
+        db_table = "ticket"
+        managed = False
+    def __str__(self):
+        return self.ticket_id
+
+>>>>>>> 78967da5ef47c2d64d3ae83e1b7e7e6f03e2e771
 #Departure
 class City_A(models.Model):
     city_id = models.CharField(max_length=5,primary_key=True)
