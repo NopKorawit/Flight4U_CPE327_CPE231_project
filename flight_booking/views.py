@@ -105,12 +105,6 @@ def loginform(request):
     return render(request, 'loginform.html')
 
 
-<<<<<<< HEAD
-=======
-# def payment(request):
-#     return render(request, 'payment.html')
-
->>>>>>> b61684eb334aaf0cd5390e2b6c0bcad282012314
 def confirm(request):
     if request.method == 'POST':
         ticket_id = request.POST.get('ticket_id')
@@ -120,18 +114,12 @@ def confirm(request):
             # ticket.booking_date = datetime.now()
             ticket.save()
             return render(request,'confirm.html',{
-              'ticket_id': ticket_id
+                'ticket_id': ticket_id
          })
         except Exception as e:
             return HttpResponse(e)
     else:
         return HttpResponse("Method must be post.")
-
-# def confirmold(request):
-#     ticket_id = request.POST.get('ticket_id')
-#     return render(request,'confirm.html',{
-#         'ticket_id': ticket_id
-#     })
 
 # ----------------------------------------------
 
@@ -478,13 +466,7 @@ def booking(request,fid,path,date,seat_class):
         'destination' : desti_detail,
         'duration' : duration
         })
-<<<<<<< HEAD
 
-    
-=======
-    # pass
-
->>>>>>> b61684eb334aaf0cd5390e2b6c0bcad282012314
 def reFormatDateMMDDYYYY(ddmmyyyy):
         if (ddmmyyyy == ''):
             return ''
