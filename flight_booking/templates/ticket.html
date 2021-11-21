@@ -40,7 +40,7 @@
             <span style="font-weight: bold; font-size: 1em;">FLIGHT DATE</span><br>
             {{ticket.departure_date | date:'d M y' | upper}}<br>
             <br><span style="font-weight: bold; font-size: 1em;">Path</span><br>
-            {{travel.departure}}&nbsp;to&nbsp;{{travel.destination}}
+            {{departure.city_name}}&nbsp;to&nbsp;{{destination.city_name}}
         </div>
         <div class="in_inform">
             <span style="font-weight: bold; font-size: 1em;">STATUS</span><br>
@@ -81,7 +81,7 @@
             <span style="font-weight: lighter; font-size: 1em;">แสดงตั๋วเครื่องบินอิเล็กทรอนิกส์<br>และเอกสารประจำตัวที่ใช้การได้เมื่อเช็คอิน</span>
         </div>
         <div class="in_brand_add">
-            <span style="font-weight: lighter; font-size: 1em;">เช็คอินก่อนเวลาออเดินทาง</span><br>
+            <span style="font-weight: lighter; font-size: 1em;">เช็คอินก่อนเวลาออกเดินทาง</span><br>
             <span style="font-weight: bold; font-size: 1.05em;">อย่างน้อย 90 นาที</span>
         </div>
         <div class="in_brand_add">
@@ -132,14 +132,14 @@
                 <th>AIRPORT/TERMINAL</th>
             </tr>
             <tr class="tr-even">
-                <td style="width: 29%; padding-left: 20px;">{{ticket1.flight.airline | upper}}<br>{{ticket1.flight.plane | upper}}</td>
-                <td style="width: 22%; padding-left: 20px;">{{ticket1.flight_ddate | date:'d M y' | upper}}<br>{{ticket1.flight.depart_time | time:'Hi'}}</td>
-                <td style="width: 49%; padding-left: 20px;">{{ticket1.flight.origin.airport | upper}} ({{ticket1.flight.origin.code | upper}})</td>
+                <td style="width: 29%; padding-left: 20px;">{{flight_detail.airline | upper}}<br>{{flight_detail.flight_id | upper}}</td>
+                <td style="width: 22%; padding-left: 20px;">{{ticket.departure_date | date:'d M y' | upper}}<br>{{flight_detail.departure_time | time:'H:i'}}</td>
+                <td style="width: 49%; padding-left: 20px;">{{departure.airport | upper}} ({{departure.city_id | upper}})</td>
             </tr>
             <tr class="tr-odd">
                 <td style="width: 29%; padding-left: 20px;"></td>
-                <td style="width: 22%; padding-left: 20px;">{{ticket1.flight_adate | date:'d M y' | upper}}<br>{{ticket1.flight.arrival_time | time:'Hi'}}</td>
-                <td style="width: 49%; padding-left: 20px;">{{ticket1.flight.destination.airport | upper}} ({{ticket1.flight.destination.code | upper}})</td>
+                <td style="width: 22%; padding-left: 20px;">{{ticket.departure_date | date:'d M y' | upper}}<br>{{flight_detail.arrival_time | time:'H:i'}}</td>
+                <td style="width: 49%; padding-left: 20px;">{{destination.airport | upper}} ({{destination.city_id | upper}})</td>
             </tr>
         </table>
     </div>

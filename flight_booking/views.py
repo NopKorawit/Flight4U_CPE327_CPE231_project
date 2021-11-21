@@ -104,10 +104,6 @@ def loginform(request):
     return render(request, 'loginform.html')
 
 
-# def payment(request):
-#     return render(request, 'payment.html')
-
-
 def confirm(request):
     ticket_id = request.POST.get('ticket_id')
     return render(request,'confirm.html',{
@@ -176,18 +172,6 @@ def logout(request):
 
 # -----------------------------------------------------------------------
 
-# class TicketForm(forms.ModelForm):
-#     class Meta:
-#         model = Ticket
-#         fields = '__all__'
-
-
-# #TicketLineItem 
-# class PassengerForm(forms.ModelForm):
-#     class Meta:
-#         model = Passenger
-#         fields = '__all__'
-
 class TicketForm(forms.ModelForm):
     class Meta:
         model = Ticket
@@ -204,11 +188,23 @@ class PassengerForm(forms.ModelForm):
 class TicketDetail(View):
     def get(self, request, pk):
         ticket_id = pk
-        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id','flight_id','departure_date','flight_class','status'))
+        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id','flight_id','departure_date','seat_class','status'))
         passenger = list(Passenger.objects.filter(ticket_id=ticket_id).order_by('id_no').values("id_no","ticket_id","first_name","last_name","phone_no","email"))
+        flight_id = ticket[0]['flight_id']
+        flight_detail = list(Flight.objects.select_related("flight_detail","flight_id","path_id").filter(flight_id=flight_id).values(
+                                                            'flight_id','airline','path_id__departure','path_id__destination','departure_time',
+                                                            'arrival_time','duration'))
+        departure_code = flight_detail[0]['path_id__departure']
+        destination_code = flight_detail[0]['path_id__destination']
+        departure = list(City_A.objects.filter(city_id=departure_code).values('city_id','city_name','airport'))
+        destination = list(City_B.objects.filter(city_id=destination_code).values('city_id','city_name','airport'))
+
         data = dict()
         data['ticket'] = ticket[0]
         data['passenger'] = passenger
+        data['flight_detail'] = flight_detail[0]
+        data['departure'] = departure[0]
+        data['destination'] = destination[0]
 
         response = JsonResponse(data)
         response["Access-Control-Allow-Origin"] = "*"
@@ -227,12 +223,24 @@ class TicketPDF(View):
     def get(self, request, pk):
         ticket_id = pk
 
-        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id','flight_id','departure_date','flight_class','status'))
+        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id','flight_id','departure_date','seat_class','status'))
         passenger = list(Passenger.objects.filter(ticket_id=ticket_id).order_by('id_no').values("id_no","ticket_id","first_name","last_name","phone_no","email"))
+        flight_id = ticket[0]['flight_id']
+        flight_detail = list(Flight.objects.select_related("flight_detail","flight_id","path_id").filter(flight_id=flight_id).values(
+                                                            'flight_id','airline','path_id__departure','path_id__destination','departure_time',
+                                                            'arrival_time','duration'))
+        departure_code = flight_detail[0]['path_id__departure']
+        destination_code = flight_detail[0]['path_id__destination']
+        departure = list(City_A.objects.filter(city_id=departure_code).values('city_id','city_name','airport'))
+        destination = list(City_B.objects.filter(city_id=destination_code).values('city_id','city_name','airport'))
 
         data = dict()
         data['ticket'] = ticket[0]
         data['passenger'] = passenger
+        data['flight_detail'] = flight_detail[0]
+        data['departure'] = departure[0]
+        data['destination'] = destination[0]
+
         
         # return JsonResponse(data)
         return render(request, 'ticket.html', data)
@@ -322,15 +330,7 @@ def createticket(flight_id,departure_date,seat_class,total_amount):
 def addPassenger(request):
     if request.method == 'POST':
         flight_id = request.POST['flight_id']
-        airline = request.POST['airline']
-        departure = request.POST['departure']
-        departure_airport = request.POST['departure_airport']
-        destination = request.POST['destination']
-        destination_airport = request.POST['destination_airport']
-        departure_time = request.POST['departure_time']
-        arrival_time = request.POST['arrival_time']
         departure_date = request.POST['departure_date']
-        duration = request.POST['duration']
         seat_class = request.POST['seat_class']
         total_amount = reFormatNumber(request.POST['total_amount'])
         
@@ -365,14 +365,6 @@ def addPassenger(request):
 
         return render(request,'payment.html',{
             'ticket_id':ticket_id,
-            # 'airline':airline,
-            # 'departure':departure,
-            # 'departure_airport':departure_airport,
-            # 'destination':destination,
-            # 'departure_time':departure_time,
-            # 'arrival_time':arrival_time,
-            # 'duration':duration,
-            # 'destination_airport':destination_airport,
             'total_amount':total_amount
             })
     
@@ -454,46 +446,6 @@ class FlightDetail(View):
         response = JsonResponse(data)
         response["Access-Control-Allow-Origin"] = "*"
         return response
-# -------------------------------------------------------
-class TicketDetail(View):
-    def get(self, request, pk):
-        ticket_id = pk
-
-        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id','flight_id','departure_date','seat_class','total_amount','status'))
-        passenger = list(Passenger.objects.filter(ticket_id=ticket_id).order_by('id_no').values("id_no","ticket_id","first_name","last_name","phone_no","email"))
-
-        data = dict()
-        data['ticket'] = ticket[0]
-        data['passenger'] = passenger
-
-        response = JsonResponse(data)
-        response["Access-Control-Allow-Origin"] = "*"
-        return response
-
-class TicketList(View):
-    def get(self, request):
-        ticket = list(Ticket.objects.order_by('ticket_id').all().values())
-        data = dict()
-        data['ticket'] = ticket
-        response = JsonResponse(data)
-        response["Access-Control-Allow-Origin"] = "*"
-        return response
-
-class TicketPDF(View):
-    def get(self, request, pk):
-        ticket_id = pk
-
-        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id','flight_id','departure_date','seat_class','total_amount','status'))
-        passenger = list(Passenger.objects.filter(ticket_id=ticket_id).order_by('id_no').values("id_no","ticket_id","first_name","last_name","phone_no","email"))
-
-        data = dict()
-        data['ticket'] = ticket[0]
-        data['passenger'] = passenger
-        
-        # return JsonResponse(data)
-        return render(request, 'ticket.html', data)
-
-
 
 # ------------------Fetch part--------------------------
 
@@ -552,12 +504,7 @@ def booking(request,fid,path,date,seat_class):
         'destination' : desti_detail,
         'duration' : duration
         })
-    # pass
-<<<<<<< HEAD
-=======
 
-
->>>>>>> aac2b9103e2ae5c4462a8fba266cb1e22b7f3e0d
     
 def reFormatDateMMDDYYYY(ddmmyyyy):
         if (ddmmyyyy == ''):
