@@ -8,17 +8,19 @@
 {% endblock %}
 
 {% block body %}
-<form class="input" action="createTicket" onsubmit="return book_submit()" method="post">
+<form class="input" action="addPassenger" onsubmit="return book_submit()" method="post">
 {% csrf_token %}
 <div class="detail">
     <div class="booking_detail">
         <input type="text" name="flight_id" value="{{booking_detail.flight_id}}" readonly>
         <input type="text" name="airline" value="{{booking_detail.airline}}" readonly>
         {% for detail in departure %}
+        <input type="text" name="departure_id" value="{{detail.city_id}}" readonly>
         <input type="text" name="departure" value="{{detail.city_name}}" readonly>
         <input type="text" name="departure_airport" value="{{detail.airport}}" readonly>
         {% endfor %}
         {% for detail in destination %}
+        <input type="text" name="destination_id" value="{{detail.city_id}}" readonly>
         <input type="text" name="destination" value="{{detail.city_name}}" readonly>
         <input type="text" name="destination_airport" value="{{detail.airport}}" readonly>
         {% endfor %}
@@ -55,9 +57,8 @@
                 <tr>
                     <th scope="row">Total Amount: </th>
                     <td class="total-amount" align="right"><label id='lbl_TotalAmount' ></label></td>
-                    <input type='hidden' id='txt_Fee' name='fee' />
+                    <input type='hidden' id='txt_TotalAmount' name='total_amount' value="" />
                     <td align="right"> ฿</td>
-                    <input type='hidden' id='txt_TotalAmount' name='total_amount' />
                 </tr>
             </tbody>
         </table>

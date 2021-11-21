@@ -157,6 +157,7 @@ function re_calculate_total_price () {
     $('#txt_VAT').val($('#lbl_Fee').text());
     $('#lbl_TotalAmount').text(formatNumber(total_price * 1.07));
     $('#total_amount').val($('#lbl_TotalAmount').text());
+    
 }
 
 // ---------------------------------------------------------------
