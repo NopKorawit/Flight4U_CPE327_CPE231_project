@@ -66,10 +66,11 @@
                         <div>
                             <div class="ticket-action-div">
                                 {% if ticket.status == 'CONFIRMED' %}
-                                    <!--<button class="btn btn-outline-primary btnp">Print Ticket</button>-->
-                                    <form action="confirm" method="POST" target="_blank">
-                                        <input type="hidden" name="ticket_id" value="{{ticket.ticket_id}}">
-                                        <button type="submit" class="btn btn-outline-primary btnp">Print Ticket</button>
+                                    <!-- <form action="confirm" method="POST"> -->
+                                    <form action="confirm" method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="ticket_id" id="txt_ticketID" value="{{ticket.ticket_id}}">
+                                        <button type="submit" class="btn btn-outline-primary btnp" id="btnPdf">Print Ticket</button>
                                     </form>
                                     <form action="cancle" method="POST">
                                         {% csrf_token %}
