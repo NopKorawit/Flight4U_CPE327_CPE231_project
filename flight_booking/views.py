@@ -89,7 +89,7 @@ def search(request):
 
 def my_booking(request):
     if request.user.is_authenticated:
-        tickets = Ticket.objects.filter(user_id=request.user).order_by('-booking_date')
+        tickets = Ticket.objects.filter(username=request.user).order_by('-booking_date')
         return render(request, 'my_booking.html', {
             'tickets': tickets
         })
