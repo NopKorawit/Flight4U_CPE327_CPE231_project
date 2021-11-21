@@ -78,7 +78,7 @@ def search(request):
             'max_date': max_date,
             'city': city
         })
-    # return render(request,'index.html')
+
     
 def my_booking(request):
     return render(request,'my_booking.html')
@@ -94,10 +94,9 @@ def registerForm(request):
 def loginform(request):
     return render(request,'loginform.html')
 
-
-
 def payment(request):
     return render(request,'payment.html')
+
 
 #----------------------------------------------
 
@@ -105,7 +104,7 @@ def addUser(request):
     #account_no = genID()
     Firstname = request.POST['Firstname']
     Lastname = request.POST['Lastname']
- #  phone_no = request.POST['phone_no']
+    # phone_no = request.POST['phone_no']
     email = request.POST['email']
     username = request.POST['username']
     password = request.POST['password']
@@ -138,22 +137,6 @@ def addUser(request):
         messages.info(request,"Password doesn't match.")
         return redirect('/register')
 
-# def login(request):
-#     email = request.POST['email']
-#     password = request.POST['password']
-#     #check email and password
-#     user = authenticate(email=email,password=password)
-#     if not User.objects.filter(email=email).exists():
-#         messages.info(request,'this email does not exist')
-
-#     if user is not None: #user is exist
-#         messages.info(request,'Login success!')
-#         login(request,user)
-#         return redirect('/')
-#     else: 
-#         messages.info(request,'this email does not exist')
-#         return redirect('/loginform')
-
 def login(request):
     if request.method=='POST':
         username = request.POST['username']
@@ -171,6 +154,93 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+#-----------------------------------------------------------------------
+class BookingForm(forms.ModelForm):
+    class Meta:
+        model = Booking
+        fields = '__all__'
+
+# class InvoiceLineItemForm(forms.ModelForm):
+#     class Meta:
+#         model = InvoiceLineItem
+#         fields = '__all__'
+
+@method_decorator(csrf_exempt, name='dispatch')
+class BookingCreate(View):
+    def post(self, request):
+        data = dict()
+        request.POST = request.POST.copy()
+        if Booking.objects.count() != 0:
+            booking_no_max = Booking.objects.aggregate(Max('booking_no'))['booking_no__max']
+            next_booking_no = booking_no_max[0:2] + str(int(booking_no_max[2:5])+1) + "/" + booking_no_max[6:8]
+        else:
+            next_booking_no = "BK000/21"
+        #*****input part*****
+        request.POST['booking_no'] = next_booking_no
+        request.POST['total'] = reFormatNumber(request.POST['total'])
+        request.POST['vat'] = reFormatNumber(request.POST['vat'])
+        request.POST['amount_due'] = reFormatNumber(request.POST['amount_due'])
+        if form.is_valid():
+            # Don't save yet because we need to provide the date field
+            my_object = form.save(commit=False)
+            my_object.date = datetime.datetime.now()
+            # Now we can save the object in the database
+            my_object.save()
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            booking = form.save(commit=False)
+            booking.booking_date = 
+
+            dict_lineitem = json.loads(request.POST['lineitem'])
+            for lineitem in dict_lineitem['lineitem']:
+                product_code = Product.objects.get(pk=lineitem['product_code'])
+                InvoiceLineItem.objects.create(
+                    invoice_no=invoice,
+                    item_no=lineitem['item_no'],
+                    product_code=product_code,
+                    unit_price=reFormatNumber(lineitem['unit_price']),
+                    quantity=reFormatNumber(lineitem['quantity']),
+                    product_total=reFormatNumber(lineitem['product_total'])
+                )
+
+            data['invoice'] = model_to_dict(invoice)
+        else:
+            data['error'] = 'form not valid!'
+
+        response = JsonResponse(data)
+        response["Access-Control-Allow-Origin"] = "*"
+        return response
+
+def addPassenger(request):
+    if request.method=='POST':
+        firstname = request.POST['firstname']
+        lastname = request.POST['lastname']
+        phone = request.POST['phone']
+        email = request.POST['email']
+        id_no = request.POST['idnum']
+        passenger = Passenger.objects.create(
+            id_no = id_no,
+            first_name = firstname,
+            last_name = lastname,
+            phone_no = phone,
+            email = email
+            )
+        passenger.save()
+        # if request.POST['firstname1']:
+        #     count = request.POST['firstname']
+        #     passengers=[]
+        #     for i in range(1,int(passengerscount)+1):
+        #         fname = request.POST[f'passenger{i}FName']
+        #         lname = request.POST[f'passenger{i}LName']
+        #         gender = request.POST[f'passenger{i}Gender']
+        #         passengers.append(Passenger.objects.create(first_name=fname,last_name=lname,gender=gender.lower()))
+        #     coupon = request.POST.get('coupon') 
+        
+        return render(request,'payment.html')
+    
+    else:
+        return redirect('/')
 
 
 #------------------LIST--------------------------
@@ -279,8 +349,10 @@ def flight_view(request):
             'seat_class' : seat_class,
             'departure_date': departure_date,
             'date' : date
-
         })
+    else: 
+        print('ERROR!')
+        return redirect('/')
         
 
 #-------------------------------------------------------------
@@ -300,7 +372,8 @@ def booking(request,fid,path,date,seat_class):
         'duration' : duration
         
         })
-    #pass
+
+
 
 #-------------------------------------------------------
     

@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+from django.contrib.auth.models import User
 
 from django.db.models import fields
 
@@ -18,18 +19,19 @@ class Passenger(models.Model):
     def __str__(self):
         return self.id_no
 
-class Account(models.Model):
-    username = models.CharField(max_length=10, primary_key=True) # id card/passport nunmber 
-    firstname = models.CharField(max_length=30)
-    lastname = models.CharField(max_length=30)
-    email = models.EmailField()
-    password = models.CharField(max_length=20)
+class Booking(models.Model):
+    booking_no = models.CharField(max_length=5,primary_key=True)
+    booking_date = models.DateTimeField(default=datetime.datetime.now, blank=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='id')
+    due_date = models.DateTimeField()
+    quantity = models.IntegerField()
+    total_price = models.IntegerField()
 
-    class Meta:
-        db_table = "account"
-        managed = False
-    def __str__(self):
-        return self.username
+    # class Meta:
+    #     db_table = "booking"
+    #     managed = False
+    # def __str__(self):
+    #     return self.booking_no
 
 #Departure
 class City_A(models.Model):
@@ -66,8 +68,6 @@ class City(models.Model):
 #----------------------------------------------------------------
 class Travel(models.Model):
     path_id = models.CharField(max_length=5,primary_key=True)
-    # departure = models.ForeignKey(City_A, on_delete=models.CASCADE, db_column='departure')
-    # destination = models.ForeignKey(City_B, on_delete=models.CASCADE, db_column='cityb_id')
     departure = models.CharField(max_length=5)
     destination = models.CharField(max_length=5)
     class Meta:
@@ -113,3 +113,4 @@ class Flight_Detail(models.Model):
         managed = False
     def __str__(self):
         return '{"flight_id":"%s","departure_date":"%s","gate_no"}' % (self.flight_id,self.departure_date,self.gate_no)
+

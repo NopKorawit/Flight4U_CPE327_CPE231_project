@@ -47,13 +47,13 @@
     </thead>
     {% for flight in flights %}
         <tr class="data">
-            <td>{{flight.airline}}</td>
-            <td>{{flight.departure_time}}</td>
-            <td>{{flight.arrival_time}}</td>
+            <td> {{flight.airline}} </td>
+            <td> {{flight.departure_time}} </td>
+            <td> {{flight.arrival_time}} </td>
             <td> {{flight.flight_id.price}}฿ </td>
-            <td> {{flight.duration}} </td>
+            <td class="duration" data-value="{{flight.duration}}"></td>
             <td>
-                <button class="btn" id="btnChoose"><a href="booking/{{flight.flight_id}}&{{flight.path_id}}&{{date}}&{{flight.flight_id.seat_class}}">Choose</a></button>
+                <button class="btn" id="btnChoose"><a href="{{flight.flight_id}}&{{flight.path_id}}&{{date}}&{{flight.flight_id.seat_class}}">Choose</a></button>
                 <!-- <button id="btnDetail">Detail</button> -->
             </td>
         <tr>

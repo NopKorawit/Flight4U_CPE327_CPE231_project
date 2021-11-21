@@ -13,8 +13,6 @@
     <div class="booking_detail">
         {{booking_detail.flight_id}}
         {{booking_detail.airline}}
-        <!-- {{booking_detail.path_id.departure}}
-        {{booking_detail.path_id.destination}} -->
         {% for detail in departure %}
         {{detail.city_name}}
         {{detail.airport}}
@@ -27,42 +25,91 @@
         {{booking_detail.departure_time}}
         {{booking_detail.arrival_time}}
         {{booking_detail.flight_detail.departure_date}}
-        {{duration}}
+        <div class="duration" data-value="{{duration}}"></div>
+        
     </div>
-    <div class="fare">
-        {{booking_detail.flight_id.price}}
+    <div class="row fare shadow-3">
+        <table class="table" id="t_fare">
+            <tbody>
+                <tr>
+                    <th scope="row">Base fare: </th>
+                    <td class="base-fare" align="right" id="baseFare">{{booking_detail.flight_id.price}}</td>
+                    <input type='hidden' id='txt_Fee' name='fee' />
+                    <td align="right"> ฿ /passenger</td>
+                </tr>
+                <tr>
+                    <th scope="row">Total Passengers: </th>
+                    <td class="total-p" id="totalP" align="right">0</td>
+                    <input type='hidden' id='txt_Fee' name='fee' />
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">Fee: </th>
+                    <td class="fee" align="right"><label id='lbl_Fee' >0.00</label></td>
+                    <input type='hidden' id='txt_Fee' name='fee' />
+                    <td align="right"> ฿</td>
+                    
+                </tr>
+                <tr>
+                    <th scope="row">Total Amount: </th>
+                    <td class="total-amount" align="right"><label id='lbl_TotalAmount' ></label></td>
+                    <input type='hidden' id='txt_Fee' name='fee' />
+                    <td align="right"> ฿</td>
+                    <input type='hidden' id='txt_TotalAmount' name='total_amount' />
+                </tr>
+            </tbody>
+        </table>
+        
     </div>
 </div>
 
-<form class="input" action="payment" onsubmit="">
+<form class="input" action="addPassenger" onsubmit="return book_submit()" method="post">
 <h2>Contact Information</h2>
+{% csrf_token %}
 <div class="warn">First name and last name in English as on ID card/passport/driving license</div>
 <div class="input-content"> 
-    <div class="name">
-        <label><span>*</span>First Name</label></br>
-        <input type="text" name="firstname" placeholder="e.g.ผู้ใหญ่บ้าน" required>
+    <div class="firstname" >
+        <label class="required">First Name</label></br>
+        <input type="text" name="firstname" id="fname" placeholder="e.g.ผู้ใหญ่บ้าน">
     </div>
-    <div class="lastname">
-        <label><span>*</span>Last Name</label></br>
-        <input type="text" name="lastname" placeholder="e.g.หมู่สิบ" required>
+    <div class="lastname" >
+        <label class="required">Last Name</label></br>
+        <input type="text" name="lastname" placeholder="e.g.หมู่สิบ" id="lname" >
     </div>
-    <div class="lastname">
-        <label><span>*</span>Mobile number</label></br>
-        <input type="text" name="lastname" placeholder="e.g.0101234567" required>
+    <div class="phone" >
+        <label class="required">Mobile number</label></br>
+        <input type="text" name="phone" placeholder="e.g.0101234567" id="phone" >
     </div>
-    <div class="email">
-        <label><span>*</span>Email</label></br>
-        <input type="email" name="email" placeholder="e.g.exam@example.com" required>
+    <div class="email" >
+        <label class="required">Email</label></br>
+        <input type="email" name="email" placeholder="e.g.exam@example.com" id="่js_email" >
     </div>
-    <div class="idnum">
-        <label><span>*</span>Passport/ID card number</label></br>
-        <input type="text" name="idnum" placeholder="e.g. E11111/123456789123" required>
-    </div>
-    <div class="btn">
-        <button type="submit" class="proceed" id="btnBook">Proceed to Payment</button>
-        <button type="button" class="add" id="addPassenger">Add</button>
+    <div class="idnum" >
+        <label class="required">Passport/ID card number</label></br>
+        <input type="text" name="idnum" placeholder="e.g. E11111/123456789123" id="idno" >
     </div>
 </div>
+<button type="button" class="btn btn-outline-success" id="btnAdd">+Add</button>
+<button type="submit" class="proceed" id="btnBook" >Proceed to Payment</button>
+
+    <!-- --------------for add passenger------------------- -->
+<hr>
+<div class="p-head">
+    <h5>Passenger Details</h5>
+    <h6><span>0</span> Passengers</h6>
+</div>
+<hr>
+<input type="hidden" id="p-count" name="passengersCount" value="0"> 
+<!-- for count -->
+
+<div class="passenger-list" id="plist"></div>
+
+<!---------------------- test ----------------------->
+
+
+<!------------------------------------------------------->
 
 </form>
+
+
 {% endblock %}

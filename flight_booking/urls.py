@@ -11,8 +11,9 @@ urlpatterns = [
     path("loginform",views.loginform),
     path("login",views.login),
     path("logout",views.logout),
-    path("booking/<str:fid>&<str:path>&<str:date>&<str:seat_class>",views.booking),
-    path("payment",views.payment),
+    path("<str:fid>&<str:path>&<str:date>&<str:seat_class>",views.booking),
+    path('addPassenger',views.addPassenger),
+    path('payment',views.payment),
 
     path('city/list',views.CityList.as_view(),name='city_list'),
     path('flight/list', views.FlightList.as_view(), name='flight_list'),
