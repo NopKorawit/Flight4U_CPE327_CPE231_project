@@ -312,6 +312,32 @@ def resume_booking(request):
     else:
         return HttpResponse("Method must be post.")
 
+@csrf_exempt
+def cancel_ticket(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            ticket_id = request.POST['ticket_id']
+            try:
+                ticket = Ticket.objects.get(ticket_id=ticket_id)
+                if ticket.user == request.user:
+                    ticket.status = 'CANCELLED'
+                    ticket.save()
+                    return JsonResponse({'success': True})
+                else:
+                    return JsonResponse({
+                        'success': False,
+                        'error': "User unauthorised"
+                    })
+            except Exception as e:
+                return JsonResponse({
+                    'success': False,
+                    'error': e
+                })
+        else:
+            return HttpResponse("User unauthorised")
+    else:
+        return HttpResponse("Method must be POST.")
+
 def addPassenger(request):
     if request.method == 'POST':
         flight_id = request.POST['flight_id']
