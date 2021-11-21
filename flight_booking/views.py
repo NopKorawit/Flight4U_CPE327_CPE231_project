@@ -319,7 +319,7 @@ def cancel_ticket(request):
             ticket_id = request.POST['ticket_id']
             try:
                 ticket = Ticket.objects.get(ticket_id=ticket_id)
-                if ticket.user == request.user:
+                if ticket.username == request.user.username:
                     ticket.status = 'CANCELLED'
                     ticket.save()
                     return JsonResponse({'success': True})
