@@ -1,12 +1,12 @@
 function popup(element) {
-    let ref = element.dataset.ref;
-    document.querySelector("#cancel_ticket_btn").dataset.ref = ref;
+    let ticket_id = element.dataset.ticket_id;
+    document.querySelector("#cancel_ticket_btn").dataset.ticket_id = ticket_id;
     document.querySelector(".popup").style.display = 'block';
 }
 
 function remove_popup() {
     document.querySelector(".popup").style.display = 'none';
-    document.querySelector("#cancel_ticket_btn").dataset.ref = "";
+    document.querySelector("#cancel_ticket_btn").dataset.ticket_id = "";
 }
 
 function cancel_tkt() {
