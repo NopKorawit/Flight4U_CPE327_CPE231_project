@@ -70,12 +70,12 @@
                                     <form action="confirm" method="POST">
                                         {% csrf_token %}
                                         <input type="hidden" name="ticket_id" id="txt_ticketID" value="{{ticket.ticket_id}}">
-                                        <button type="submit" class="btn btn-outline-primary btnp" id="btnPdf">Print Ticket</button>
+                                        <button type="submit" class="btn btn-primary btnp" id="btnPdf">Print Ticket</button>
                                     </form>
                                     <form action="cancel" method="POST">
                                         {% csrf_token %}
                                         <input type="hidden" name="ticket_id" value="{{ticket.ticket_id}}">
-                                        <button type="submit" class="btn btn-outline-primary btnp">Cancel Ticket</button>
+                                        <button type="submit" class="btn btn-danger btnp">Cancel Ticket</button>
                                         <!-- <button class="btn btn-outline-primary btnp"  data-ref="{{ticket.ticket_id}}" onclick="popup(this)">Cancel Ticket</button> -->
                                     </form>
                                 {% endif %}
@@ -83,12 +83,12 @@
                                     <form action="resume" method="POST">
                                         {% csrf_token %}
                                         <input type="hidden" name="ticket_id" value="{{ticket.ticket_id}}">
-                                        <button type="submit" class="btn btn-outline-primary btnp">Resume Booking</button>
+                                        <button type="submit" class="btn btn-warning btnp">Resume Booking</button>
                                     </form>
                                     <form action="cancel" method="POST">
                                         {% csrf_token %}
                                         <input type="hidden" name="ticket_id" value="{{ticket.ticket_id}}">
-                                        <button type="submit" class="btn btn-outline-primary btnp">Cancel Ticket</button>
+                                        <button type="submit" class="btn btn-danger btnp">Cancel Ticket</button>
                                         <!-- <button class="btn btn-outline-primary btnp"  data-ref="{{ticket.ticket_id}}" onclick="popup(this)">Cancel Ticket</button> -->
                                     </form>
                                 {% endif %}
