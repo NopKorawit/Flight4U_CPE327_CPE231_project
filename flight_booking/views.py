@@ -88,7 +88,8 @@ def search(request):
         })
 
 def my_booking(request):
-    tickets = Ticket.objects.filter(username=request.user.username).order_by('-booking_date')
+    tickets = Ticket.objects.filter(username=request.user.username).order_by('-booking_date').values('ticket_id','flight_id','departure_date',
+                                                                                            'seat_class','total_amount','booking_date','status')
     return render(request, 'my_booking.html', {
         'tickets': tickets
     })
@@ -272,9 +273,9 @@ def createticket(flight_id,departure_date,seat_class,total_amount,username):
 
     status = False
     if status == True:
-        status = 'Confirmed'
+        status = 'CONFIRMED'
     else: 
-        status = 'Pending'
+        status = 'PENDING'
 
     ticket_id = next_ticket_id
     date = reFormatDateYYYYMMDD(departure_date)
@@ -294,7 +295,22 @@ def createticket(flight_id,departure_date,seat_class,total_amount,username):
 
     return ticket
 
-
+def resume_booking(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            ticket_id = request.POST['ticket_id']
+            ticket = Ticket.objects.get(ticket_id=ticket_id)
+            if ticket.username == request.user.username:
+                return render(request, "payment.html", {
+                    'total_amount': ticket.total_amount,
+                    'ticket_id': ticket.ticket_id
+                })
+            else:
+                return HttpResponse("User unauthorised")
+        else:
+            return HttpResponseRedirect(reverse("login"))
+    else:
+        return HttpResponse("Method must be post.")
 
 def addPassenger(request):
     if request.method == 'POST':
