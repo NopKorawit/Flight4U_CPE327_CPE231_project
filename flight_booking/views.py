@@ -245,53 +245,6 @@ class TicketPDF(View):
         # return JsonResponse(data)
         return render(request, 'ticket.html', data)
 
-
-# @method_decorator(csrf_exempt, name='dispatch')
-# class TicketCreate(View):
-#     def post(self, request):
-#         data = dict()
-#         request.POST = request.POST.copy()
-#         if Ticket.objects.count() != 0:
-#             ticket_id_max = Ticket.objects.aggregate(Max('ticket_id'))['ticket_id__max']
-#             next_ticket_id = ticket_id_max[0:2] + str(int(ticket_id_max[2:5])+1) + "/" + ticket_id_max[6:8]
-#         else:
-#             next_ticket_id = "TK000/21"
-#         #*****input part*****
-#         request.POST['ticket_id'] = next_ticket_id
-
-#         form = TicketForm(request.POST)
-
-#         if form.is_valid():
-#             ticket = form.save()
-
-#             dict_lineitem = json.loads(request.POST['lineitem'])
-#             for lineitem in dict_lineitem['lineitem']:
-#                 Passenger.objects.create(
-#                     ticket_id=ticket,
-
-#                     id_no=reFormatNumber(lineitem['id_no']),
-#                     first_name=lineitem['first_name'],
-#                     last_name=lineitem['last_name'],
-#                     phone_no=reFormatNumber(lineitem['phone_no']),
-#                     email=lineitem['email']
-
-#                     id_no=lineitem['']
-#                     # item_no=lineitem['item_no'],
-#                     # product_code=product_code,
-#                     # unit_price=reFormatNumber(lineitem['unit_price']),
-#                     # quantity=reFormatNumber(lineitem['quantity']),
-#                     # product_total=reFormatNumber(lineitem['product_total'])
-
-#                 )
-
-#             data['ticket'] = model_to_dict(ticket)
-#         else:
-#             data['error'] = 'form not valid!'
-
-#         response = JsonResponse(data)
-#         response["Access-Control-Allow-Origin"] = "*"
-#         return response
-
 #-----------------------------------------------------------------------------
 
 def createticket(flight_id,departure_date,seat_class,total_amount):
@@ -370,8 +323,6 @@ def addPassenger(request):
     
     else:
         return redirect('/')
-
-
 
 
 # ------------------LIST--------------------------
