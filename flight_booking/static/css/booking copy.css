@@ -1,0 +1,102 @@
+.detail{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    column-gap: 20px;
+    margin: 0 10px 30px 10px;
+}
+
+h2{
+    margin: 10px;
+}
+
+
+.input{
+    padding: 5px 5em 5px 1em ;
+}
+
+.warn{ 
+    color:rgb(255, 187, 0);
+    font-size: small;
+    margin-left: 10px ;
+}
+
+
+.booking_detail{
+    text-align: center;
+    display: flex;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 5px 8px rgba(128, 128, 128, 0.459); 
+}
+
+.booking_detail input{
+    border: none;
+}
+
+
+
+.fare{
+    display: flex;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 5px 8px rgba(128, 128, 128, 0.493); 
+}
+
+#plist{
+    margin: 20px;
+
+}
+
+form{
+    margin-bottom: 10em;
+}
+.input-content{
+    margin: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /*2col 1:1*/
+    grid-template-rows: 1fr 1fr 1fr;
+    row-gap: 20px;
+}
+
+
+.proceed{
+    padding: 10px;
+    cursor: pointer;
+    background-color: rgb(230, 103, 0);
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.add{
+    width: fit-content;
+    background-color: white;
+    border: none;
+    color: blue;
+    cursor: pointer;
+}
+
+.required:before {
+    content:" *";
+    color: red;
+}
+/* mobile screen */
+
+@media screen and (max-width: 800px) {
+    .detail{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-row: 2fr 1fr;
+        row-gap: 20px;
+    }
+
+    .input-content{
+        width: 50%;
+        display: grid;
+        grid-template-columns: 1fr;
+        margin: 20px auto;
+    }
+
+
+    
+}

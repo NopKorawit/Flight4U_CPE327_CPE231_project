@@ -172,7 +172,6 @@ def logout(request):
     return redirect('/')
 
 # -----------------------------------------------------------------------
-
 class TicketForm(forms.ModelForm):
     class Meta:
         model = Ticket
@@ -184,43 +183,44 @@ class PassengerForm(forms.ModelForm):
     class Meta:
         model = Passenger
         fields = '__all__'
-@method_decorator(csrf_exempt, name='dispatch')
-class TicketCreate(View):
-    def post(self, request):
-        data = dict()
-        request.POST = request.POST.copy()
-        if Ticket.objects.count() != 0:
-            ticket_id_max = Ticket.objects.aggregate(Max('ticket_id'))['ticket_id__max']
-            next_ticket_id = ticket_id_max[0:2] + str(int(ticket_id_max[2:5])+1) + "/" + ticket_id_max[6:8]
-        else:
-            next_ticket_id = "TK000/21"
-        #*****input part*****
-        request.POST['ticket_id'] = next_ticket_id
 
-        form = TicketForm(request.POST)
+# @method_decorator(csrf_exempt, name='dispatch')
+# class TicketCreate(View):
+#     def post(self, request):
+#         data = dict()
+#         request.POST = request.POST.copy()
+#         if Ticket.objects.count() != 0:
+#             ticket_id_max = Ticket.objects.aggregate(Max('ticket_id'))['ticket_id__max']
+#             next_ticket_id = ticket_id_max[0:2] + str(int(ticket_id_max[2:5])+1)
+#         else:
+#             next_ticket_id = "TK000"
+#         #*****input part*****
+#         request.POST['ticket_id'] = next_ticket_id
 
-        if form.is_valid():
-            ticket = form.save()
+#         form = TicketForm(request.POST)
 
-            dict_lineitem = json.loads(request.POST['lineitem'])
-            for lineitem in dict_lineitem['lineitem']:
-                Passenger.objects.create(
-                    ticket_id=ticket,
-                    id_no=lineitem['']
-                    item_no=lineitem['item_no'],
-                    product_code=product_code,
-                    unit_price=reFormatNumber(lineitem['unit_price']),
-                    quantity=reFormatNumber(lineitem['quantity']),
-                    product_total=reFormatNumber(lineitem['product_total'])
-                )
+#         if form.is_valid():
+#             ticket = form.save()
 
-            data['invoice'] = model_to_dict(invoice)
-        else:
-            data['error'] = 'form not valid!'
+#             dict_lineitem = json.loads(request.POST['lineitem'])
+#             for lineitem in dict_lineitem['lineitem']:
+#                 Passenger.objects.create(
+#                     ticket_id=ticket,
+#                     id_no=lineitem['']
+#                     item_no=lineitem['item_no'],
+#                     product_code=product_code,
+#                     unit_price=reFormatNumber(lineitem['unit_price']),
+#                     quantity=reFormatNumber(lineitem['quantity']),
+#                     product_total=reFormatNumber(lineitem['product_total'])
+#                 )
 
-        response = JsonResponse(data)
-        response["Access-Control-Allow-Origin"] = "*"
-        return response
+#             data['invoice'] = model_to_dict(invoice)
+#         else:
+#             data['error'] = 'form not valid!'
+
+#         response = JsonResponse(data)
+#         response["Access-Control-Allow-Origin"] = "*"
+#         return response
 
 #-----------------------------------------------------------------------------
 
@@ -441,15 +441,8 @@ def booking(request,fid,path,date,seat_class):
 class TicketDetail(View):
     def get(self, request, pk):
         ticket_id = pk
-
-<<<<<<< HEAD
-        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id', 'seat_no', 'id_no','flight_id','departure_date','flight_class','status'))
-        passenger = list(Passenger.objects.select_related('ticket_id').filter(ticket_id=ticket_id).order_by('item_no').values("item_no","invoice_no","product_code","product_code__name","product_code__units","unit_price","quantity","product_total"))
-=======
         ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id','flight_id','departure_date','flight_class','status'))
         passenger = list(Passenger.objects.filter(ticket_id=ticket_id).order_by('id_no').values("id_no","ticket_id","first_name","last_name","phone_no","email"))
->>>>>>> 78967da5ef47c2d64d3ae83e1b7e7e6f03e2e771
-
         data = dict()
         data['ticket'] = ticket[0]
         data['passenger'] = passenger

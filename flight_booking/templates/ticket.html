@@ -7,17 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/ticket.css' %}">
     <title>E-Ticket</title>
+    
 </head>
 <body>
     <nav>
         <div class="col logo" style="width: 50%;">
-            <!--<img src="{% static 'img/icon_logo.png' %}" width="45%">-->
-            <span style="color: rgb(230, 103, 0); font-weight: bold; font-size: 2.5em;">Flight4U</span>
+            <span style="color: rgb(255, 255, 255); font-weight: bold; font-size: 2.5em;">&nbsp;Flight4U</span>
+            <img src="https://sv1.picz.in.th/images/2021/11/21/6Np1yZ.png" class="brand_logo" alt="6SFnPD.png" border="0">
         </div>
         <div class="col header" style="width: 50%;">
-            <span style="margin: auto 0 auto auto;">E-Ticket</span>
+            <span style="color: rgb(255, 255, 255); font-weight: bold; font-size: 2.5em;">E-Ticket&nbsp;</span>
         </div>
     </nav>
+
     <hr style="height: 1px; border: 0; background-color: grey;" noshade>
     <div class="table-div">
         <table class="table">
@@ -25,12 +27,35 @@
                 <td style="width: 100%;">TICKET INFORMATION</td>
             </tr>
         </table>
-        <table cellspacing='0' >
+    </div>    
+
+    <div class="col inform style="width: 100%;">
+        <div class="in_inform">
+            <span style="font-weight: bold; font-size: 1em;">TICKET REFERENCE</span><br>
+            {{ticket.ticket_id}}<br>
+            <br><span style="font-weight: bold; font-size: 1em;">CLASS</span><br>
+            {{ticket.flight_class | upper}}
+        </div>
+        <div class="in_inform">
+            <span style="font-weight: bold; font-size: 1em;">FLIGHT DATE</span><br>
+            {{ticket.departure_date | date:'d M y' | upper}}<br>
+            <br><span style="font-weight: bold; font-size: 1em;">Path</span><br>
+            {{travel.departure}}&nbsp;to&nbsp;{{travel.destination}}
+        </div>
+        <div class="in_inform">
+            <span style="font-weight: bold; font-size: 1em;">STATUS</span><br>
+            {{ticket.status | upper}}<br>
+            <br><span style="font-weight: bold; font-size: 1em;">BOOKER</span><br>
+            {{user.first_name}}<br>
+            {{user.email}}
+        </div>
+    </div>
+    
+        <!-- <table cellspacing='0' >
             <tr class="tr-odd">
                 <th>TICKET REFERENCE</th>
                 <td>{{ticket.ticket_id}}</td>
-                <th>STATUS</th>
-                <td>{{ticket.status | upper}}</td>
+                
             </tr>
             <tr class="tr-even">
                 <th>FLIGHT DATE</th>
@@ -50,7 +75,19 @@
                 <th>สำรอง</th>
                 <td></td>
             </tr>
-        </table>
+        </table> -->
+    <div class="col brand_add" style="width: 100%;">
+        <div class="in_brand_add">
+            <span style="font-weight: lighter; font-size: 1em;">แสดงตั๋วเครื่องบินอิเล็กทรอนิกส์<br>และเอกสารประจำตัวที่ใช้การได้เมื่อเช็คอิน</span>
+        </div>
+        <div class="in_brand_add">
+            <span style="font-weight: lighter; font-size: 1em;">เช็คอินก่อนเวลาออเดินทาง</span><br>
+            <span style="font-weight: bold; font-size: 1.05em;">อย่างน้อย 90 นาที</span>
+        </div>
+        <div class="in_brand_add">
+            <span style="font-weight: lighter; font-size: 1em;">เวลาที่ระบุทั้งหมด<br>เป็นเวลาท้องถิ่นของสนามบิน</span>
+        </div>
+    </div>
         <table class="table">
             <tr class="tr-caption">
                 <td style="width: 100%;">PASSENGER INFORMATION</td>
@@ -69,14 +106,14 @@
                     <tr class="tr-odd">
                         <td style="width: 20%; padding-left: 20px;">{{forloop.counter}}</td>
                         <td style="width: 35%; padding-left: 20px;">{{lineitem.last_name | upper}}/{{lineitem.first_name | upper}}</td>
-                        <td style="width: 20%; padding-left: 20px;">{{lineitem.email | upper}}</td>
+                        <td style="width: 20%; padding-left: 20px;">{{lineitem.email}}</td>
                         <td style="width: 25%; padding-left: 20px;">{{ticket.flight_class | upper}}</td>
                     </tr>
                 {% else %}
                     <tr class="tr-even">
                         <td style="width: 20%; padding-left: 20px;">{{forloop.counter}}</td>
                         <td style="width: 35%; padding-left: 20px;">{{lineitem.last_name | upper}}/{{lineitem.first_name | upper}}</td>
-                        <td style="width: 20%; padding-left: 20px;">{{lineitem.email | upper}}</td>
+                        <td style="width: 20%; padding-left: 20px;">{{lineitem.email}}</td>
                         <td style="width: 25%; padding-left: 20px;">{{ticket.flight_class | upper}}</td>
                     </tr>
                 {% endif %}

@@ -3,113 +3,153 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'css/booking.css' %}">
-    <script src="{% static 'js/booking.js' %}" ></script>
+<link rel="stylesheet" href="{% static 'css/booking.css' %}">
+<script src="{% static 'js/booking.js' %}"></script>
 {% endblock %}
 
 {% block body %}
 <form class="input" action="createTicket" onsubmit="return book_submit()" method="post">
-{% csrf_token %}
-<div class="detail">
-    <div class="booking_detail">
-        <input type="text" name="flight_id" value="{{booking_detail.flight_id}}" readonly>
-        <input type="text" name="airline" value="{{booking_detail.airline}}" readonly>
-        {% for detail in departure %}
-        <input type="text" name="departure" value="{{detail.city_name}}" readonly>
-        <input type="text" name="departure_airport" value="{{detail.airport}}" readonly>
-        {% endfor %}
-        {% for detail in destination %}
-        <input type="text" name="destination" value="{{detail.city_name}}" readonly>
-        <input type="text" name="destination_airport" value="{{detail.airport}}" readonly>
-        {% endfor %}
-        <input type="text" name="departure_time" value="{{booking_detail.departure_time}}" readonly>
-        <input type="text" name="arrival_time" value="{{booking_detail.arrival_time}}" readonly>
-        <input type="text" name="departure_date" value="{{departure_date}}" readonly>
-        <input type="hidden" name="duration" value="{{duration}}">
-        <input type="hidden" name="seat_class" value="{{booking_detail.flight_id.seat_class}}">
-        <div class="duration" data-value="{{duration}}"></div>
-        
+    {% csrf_token %}
+    <h3 style="margin-left: 10px;">Departure date:
+        <input type="text" class="data-value" name="departure_date" value="{{departure_date }}" readonly>
+    </h3>
+    <div class="detail">
+        <div class="booking_detail">
+            <div class="row ticket-details-div">
+                <div class="col-3 airline-name">
+                    <br><br>
+                    <div class="brand">{{booking_detail.airline}}</div>
+                    <div class="plane-name">{{booking_detail.flight_id}}</div>
+                    <div class="plane-name">{{booking_detail.flight_id.seat_class}} Class</div>
+                </div>
+                <div class="col-3 depart-time">
+                    <br>
+                    {% for detail in departure %}
+                    <div class="time">{{booking_detail.departure_time}}</div>
+                    <div class="date ddate" data-value='{{departure_date | date:"d-m-Y"}}'>{{departure_date}}</div>
+                    <div class="place">{{detail.city_name}}</div>
+                    <div class="airport">{{detail.airport}}</div>
+                    {% endfor %}
+                </div>
+                <div class="col-3 time-details">
+                    <br>
+                    <br>
+                    <div class="duration" data-value="{{duration}}"></div>
+                    <hr>
+                </div>
+                <div class="col-3 arrival-time">
+                    <br>
+                    {% for detail in destination %}
+                    <div class="time">{{booking_detail.arrival_time}}</div>
+                    <div class="date adate" data-value='{{flight1adate | date:"d-m-Y"}}'>{{departure_date}}</div>
+                    <div class="place">{{detail.city_name}}</div>
+                    <div class="airport">{{detail.airport}}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- <input type="text" name="flight_id" value="{{booking_detail.flight_id}}" readonly>
+            <input type="text" name="airline" value="{{booking_detail.airline}}" readonly>
+            {% for detail in departure %}
+            <input type="text" name="departure" value="{{detail.city_name}}" readonly>
+            <input type="text" name="departure_airport" value="{{detail.airport}}" readonly>
+            {% endfor %}
+            {% for detail in destination %}
+            <input type="text" name="destination" value="{{detail.city_name}}" readonly>
+            <input type="text" name="destination_airport" value="{{detail.airport}}" readonly>
+            {% endfor %}
+            <input type="text" name="departure_time" value="{{booking_detail.departure_time}}" readonly>
+            <input type="text" name="arrival_time" value="{{booking_detail.arrival_time}}" readonly>
+            <input type="text" name="duration" value="duration: {{duration}}">
+            <input type="hidden" name="seat_class" value="{{booking_detail.flight_id.seat_class}}">
+            <div class="duration" data-value="{{duration}}"></div> -->
+
+        </div>
+        <div class="row fare shadow-3">
+            <table class="table" id="t_fare">
+                <tbody>
+                    <tr>
+                        <th scope="row">Base fare: </th>
+                        <td class="base-fare" align="right" id="baseFare">{{booking_detail.flight_id.price}}</td>
+                        <input type='hidden' id='txt_Fee' name='fee' />
+                        <td align="right"> ฿ /passenger</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Total Passengers: </th>
+                        <td class="total-p" id="totalP" align="right">0</td>
+                        <input type='hidden' id='txt_Fee' name='fee' />
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Fee: </th>
+                        <td class="fee" align="right"><label id='lbl_Fee'>0.00</label></td>
+                        <input type='hidden' id='txt_Fee' name='fee' />
+                        <td align="right"> ฿</td>
+
+                    </tr>
+                    <tr>
+                        <th scope="row">Total Amount: </th>
+                        <td class="total-amount" align="right"><label id='lbl_TotalAmount'></label></td>
+                        <input type='hidden' id='txt_Fee' name='fee' />
+                        <td align="right"> ฿</td>
+                        <input type='hidden' id='txt_TotalAmount' name='total_amount' />
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
     </div>
-    <div class="row fare shadow-3">
-        <table class="table" id="t_fare">
-            <tbody>
-                <tr>
-                    <th scope="row">Base fare: </th>
-                    <td class="base-fare" align="right" id="baseFare">{{booking_detail.flight_id.price}}</td>
-                    <input type='hidden' id='txt_Fee' name='fee' />
-                    <td align="right"> ฿ /passenger</td>
-                </tr>
-                <tr>
-                    <th scope="row">Total Passengers: </th>
-                    <td class="total-p" id="totalP" align="right">0</td>
-                    <input type='hidden' id='txt_Fee' name='fee' />
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">Fee: </th>
-                    <td class="fee" align="right"><label id='lbl_Fee' >0.00</label></td>
-                    <input type='hidden' id='txt_Fee' name='fee' />
-                    <td align="right"> ฿</td>
-                    
-                </tr>
-                <tr>
-                    <th scope="row">Total Amount: </th>
-                    <td class="total-amount" align="right"><label id='lbl_TotalAmount' ></label></td>
-                    <input type='hidden' id='txt_Fee' name='fee' />
-                    <td align="right"> ฿</td>
-                    <input type='hidden' id='txt_TotalAmount' name='total_amount' />
-                </tr>
-            </tbody>
-        </table>
-        
-    </div>
-</div>
 
 
-<h2>Contact Information</h2>
-{% csrf_token %}
-<div class="warn">First name and last name in English as on ID card/passport/driving license</div>
-<div class="input-content"> 
-    <div class="firstname" >
-        <label class="required">First Name</label></br>
-        <input type="text" name="firstname" id="fname" placeholder="e.g.ผู้ใหญ่บ้าน">
+    <h2>Contact Information</h2>
+    {% csrf_token %}
+    <div class="warn">First name and last name in English as on ID card/passport/driving license</div>
+    <div class="input-content">
+        <center>
+            <div class="row passenger-details-div">
+            <br><br>
+            <div class="input-detail">
+                <div class="firstname">
+                    <label class="required">First Name</label></br>
+                    <input type="text" name="firstname" id="fname" placeholder="e.g.ผู้ใหญ่บ้าน">
+                </div>
+                <div class="lastname">
+                    <label class="required">Last Name</label></br>
+                    <input type="text" name="lastname" placeholder="e.g.หมู่สิบ" id="lname">
+                </div>
+                <div class="phone">
+                    <label class="required">Mobile number</label></br>
+                    <input type="text" name="phone" placeholder="e.g.0101234567" id="phone">
+                </div>
+                <div class="email">
+                    <label class="required">Email</label></br>
+                    <input type="email" name="email" placeholder="e.g.exam@example.com" id="่js_email">
+                </div>
+                <div class="idnum">
+                    <label class="required">Passport/ID card number</label></br>
+                    <input type="text" name="idnum" placeholder="e.g. E11111/123456789123" id="idno">
+                </div>
+            </div>
+        </center>
     </div>
-    <div class="lastname" >
-        <label class="required">Last Name</label></br>
-        <input type="text" name="lastname" placeholder="e.g.หมู่สิบ" id="lname" >
-    </div>
-    <div class="phone" >
-        <label class="required">Mobile number</label></br>
-        <input type="text" name="phone" placeholder="e.g.0101234567" id="phone" >
-    </div>
-    <div class="email" >
-        <label class="required">Email</label></br>
-        <input type="email" name="email" placeholder="e.g.exam@example.com" id="่js_email" >
-    </div>
-    <div class="idnum" >
-        <label class="required">Passport/ID card number</label></br>
-        <input type="text" name="idnum" placeholder="e.g. E11111/123456789123" id="idno" >
-    </div>
-</div>
-<button type="button" class="btn btn-outline-success" id="btnAdd">+Add</button>
-<button type="submit" class="proceed" id="btnBook" >Proceed to Payment</button>
+    <button type="button" class="btn btn-outline-success" id="btnAdd">+Add</button>
+    <button type="submit" class="proceed" id="btnBook">Proceed to Payment</button>
 
     <!-- --------------for add passenger------------------- -->
-<hr>
-<div class="p-head">
-    <h5>Passenger Details</h5>
-    <h6><span>0</span> Passengers</h6>
-</div>
-<hr>
-<input type="hidden" id="p-count" name="passengersCount" value="0"> 
-<!-- for count -->
+    <hr>
+    <div class="p-head">
+        <h5>Passenger Details</h5>
+        <h6><span>0</span> Passengers</h6>
+    </div>
+    <hr>
+    <input type="hidden" id="p-count" name="passengersCount" value="0">
+    <!-- for count -->
 
-<div class="passenger-list" id="plist"></div>
+    <div class="passenger-list" id="plist"></div>
 
-<!---------------------- test ----------------------->
+    <!---------------------- test ----------------------->
 
 
-<!------------------------------------------------------->
+    <!------------------------------------------------------->
 
 </form>
 
