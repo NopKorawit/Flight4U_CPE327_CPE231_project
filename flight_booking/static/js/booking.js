@@ -218,13 +218,13 @@ function formatNumber (num) {
 
 //---------------------No use----------------------------
 
-function lineitem_to_json () {
+function lineitem_to_json() {
     var rows = [];
     var i = 0;
-    $("#table_main tbody tr").each(function(index) {
+    $("#table_main tbody tr").each(function (index) {
         if ($(this).find('.project_code_1 > span').html() != '') {
             rows[i] = {};
-            rows[i]["item_no"] = (i+1);
+            rows[i]["item_no"] = (i + 1);
             rows[i]["product_code"] = $(this).find('.project_code_1 > span').html();
             rows[i]["product_name"] = $(this).find('.product_name').html();
             rows[i]["unit_price"] = $(this).find('.unit_price').html();
@@ -233,21 +233,6 @@ function lineitem_to_json () {
             i++;
         }
     });
-
-    $("#table_main tbody tr").each(function(index) {
-        if ($(this).find('.project_code_1 > span').html() != '') {
-            rows[i] = {};
-            rows[i]["item_no"] = (i+1);
-            rows[i]["product_code"] = $(this).find('.project_code_1 > span').html();
-            rows[i]["product_name"] = $(this).find('.product_name').html();
-            rows[i]["unit_price"] = $(this).find('.unit_price').html();
-            rows[i]["quantity"] = $(this).find('.quantity').html();
-            rows[i]["product_total"] = $(this).find('.product_total').html();
-            i++;
-        }
-    });
-
-
     var obj = {};
     obj.lineitem = rows;
     //console.log(JSON.stringify(obj));
@@ -255,25 +240,25 @@ function lineitem_to_json () {
     return JSON.stringify(obj);
 }
 
-function get_invoice_detail (invoice_no) {
+function get_ticket_detail (ticket_id) {
     $.ajax({
-        url:  '/invoice/detail/' + encodeURIComponent(invoice_no),
+        url:  '/ticket/detail/' + encodeURIComponent(ticket_id),
         type:  'get',
         dataType:  'json',
         success: function  (data) {
-            //console.log(data.invoicelineitem.length);
+            //console.log(data.ticketlineitem.length);
 
             reset_table();
-            for(var i=ROW_NUMBER;i<data.invoicelineitem.length;i++) {
+            for(var i=ROW_NUMBER;i<data.ticketlineitem.length;i++) {
                 $('.table-add').click();
             }
             var i = 0;
             $("#table_main tbody tr").each(function() {
-                if (i < data.invoicelineitem.length) {
-                    $(this).find('.project_code_1 > span').html(data.invoicelineitem[i].product_code);
-                    $(this).find('.product_name').html(data.invoicelineitem[i].product_code__name);
-                    $(this).find('.unit_price').html(data.invoicelineitem[i].unit_price);
-                    $(this).find('.quantity').html(data.invoicelineitem[i].quantity);
+                if (i < data.ticketlineitem.length) {
+                    $(this).find('.first_name').html(data.ticketlineitem[i].first_name);
+                    $(this).find('.last_name').html(data.ticketlineitem[i].last_name);
+                    $(this).find('.phone_no').html(data.ticketlineitem[i].phone_no);
+                    $(this).find('.email').html(data.ticketlineitem[i].email);
                 }
                 i++;
             });
@@ -281,3 +266,47 @@ function get_invoice_detail (invoice_no) {
         },
     });
 }
+
+// $(document).ready(function () {
+//     $('#btnSave').click(function () {
+//         if ($('#txt_ticketNo').val() == '<new>') {
+//             var token = $('[name=csrfmiddlewaretoken]').val();
+
+//             $.ajax({
+//                 url: '/ticket/create',
+//                 type: 'post',
+//                 data: $('#form_ticket').serialize() + "&lineitem=" + lineitem_to_json(),
+//                 headers: { "X-CSRFToken": token },
+//                 dataType: 'json',
+//                 success: function (data) {
+//                     if (data.error) {
+//                         alert(data.error);
+//                     } else {
+//                         $('#txt_ticketNo').val(data.ticket.ticket_id)
+//                         alert('บันทึกสำเร็จ');
+//                     }
+//                 },
+//             });
+//         }
+        // } else {
+        //     var token = $('[name=csrfmiddlewaretoken]').val();
+        //     console.log($('#form_ticket').serialize());
+        //     console.log(lineitem_to_json());
+        //     $.ajax({
+        //         url: '/ticket/update/' + $('#txt_ticketNo').val(),
+        //         type: 'post',
+        //         data: $('#form_ticket').serialize() + "&lineitem=" + lineitem_to_json(),
+        //         headers: { "X-CSRFToken": token },
+        //         dataType: 'json',
+        //         success: function (data) {
+        //             if (data.error) {
+        //                 alert(data.error);
+        //             } else {
+        //                 alert('บันทึกสำเร็จ');
+        //             }
+        //         },
+        //     });
+        // }
+
+//     });
+// });

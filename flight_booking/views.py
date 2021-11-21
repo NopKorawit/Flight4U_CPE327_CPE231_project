@@ -187,6 +187,57 @@ def logout(request):
 #     class Meta:
 #         model = Passenger
 #         fields = '__all__'
+
+class TicketForm(forms.ModelForm):
+    class Meta:
+        model = Ticket
+        fields = '__all__'
+
+
+#TicketLineItem 
+class PassengerForm(forms.ModelForm):
+    class Meta:
+        model = Passenger
+        fields = '__all__'
+# -------------------------------------------------------
+
+class TicketDetail(View):
+    def get(self, request, pk):
+        ticket_id = pk
+        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id','flight_id','departure_date','flight_class','status'))
+        passenger = list(Passenger.objects.filter(ticket_id=ticket_id).order_by('id_no').values("id_no","ticket_id","first_name","last_name","phone_no","email"))
+        data = dict()
+        data['ticket'] = ticket[0]
+        data['passenger'] = passenger
+
+        response = JsonResponse(data)
+        response["Access-Control-Allow-Origin"] = "*"
+        return response
+
+class TicketList(View):
+    def get(self, request):
+        ticket = list(Ticket.objects.order_by('ticket_id').all().values())
+        data = dict()
+        data['ticket'] = ticket
+        response = JsonResponse(data)
+        response["Access-Control-Allow-Origin"] = "*"
+        return response
+
+class TicketPDF(View):
+    def get(self, request, pk):
+        ticket_id = pk
+
+        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id','flight_id','departure_date','flight_class','status'))
+        passenger = list(Passenger.objects.filter(ticket_id=ticket_id).order_by('id_no').values("id_no","ticket_id","first_name","last_name","phone_no","email"))
+
+        data = dict()
+        data['ticket'] = ticket[0]
+        data['passenger'] = passenger
+        
+        # return JsonResponse(data)
+        return render(request, 'ticket.html', data)
+
+
 # @method_decorator(csrf_exempt, name='dispatch')
 # class TicketCreate(View):
 #     def post(self, request):
@@ -209,15 +260,23 @@ def logout(request):
 #             for lineitem in dict_lineitem['lineitem']:
 #                 Passenger.objects.create(
 #                     ticket_id=ticket,
+
+#                     id_no=reFormatNumber(lineitem['id_no']),
+#                     first_name=lineitem['first_name'],
+#                     last_name=lineitem['last_name'],
+#                     phone_no=reFormatNumber(lineitem['phone_no']),
+#                     email=lineitem['email']
+
 #                     id_no=lineitem['']
 #                     # item_no=lineitem['item_no'],
 #                     # product_code=product_code,
 #                     # unit_price=reFormatNumber(lineitem['unit_price']),
 #                     # quantity=reFormatNumber(lineitem['quantity']),
 #                     # product_total=reFormatNumber(lineitem['product_total'])
+
 #                 )
 
-#             data['invoice'] = model_to_dict(invoice)
+#             data['ticket'] = model_to_dict(ticket)
 #         else:
 #             data['error'] = 'form not valid!'
 
@@ -494,8 +553,11 @@ def booking(request,fid,path,date,seat_class):
         'duration' : duration
         })
     # pass
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> aac2b9103e2ae5c4462a8fba266cb1e22b7f3e0d
     
 def reFormatDateMMDDYYYY(ddmmyyyy):
         if (ddmmyyyy == ''):
@@ -532,6 +594,9 @@ def reFormatNumber(str):
         return str.replace(",", "")
 
 
-
+def reFormatNumber(str):
+        if (str == ''):
+            return ''
+        return str.replace(",", "")
 
 
