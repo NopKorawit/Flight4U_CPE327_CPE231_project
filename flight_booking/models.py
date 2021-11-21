@@ -95,7 +95,7 @@ class Ticket(models.Model):
     seat_class = models.CharField(max_length=10)
     total_amount = models.FloatField()
     booking_date = models.DateTimeField(blank=True,null=True)
-    username = models.ForeignKey(User,on_delete=models.CASCADE, blank=True, null=True)
+    # user_id = models.ForeignKey(User,on_delete=models.CASCADE, blank=TruSe, null=True, db_column='id' )
     status = models.CharField(max_length=10)
     class Meta:
         db_table = "ticket"

@@ -37,8 +37,8 @@
             {{ticket.seat_class | upper}}
         </div>
         <div class="in_inform">
-            <span style="font-weight: bold; font-size: 1em;">FLIGHT DATE</span><br>
-            {{ticket.departure_date | date:'d M y' | upper}}<br>
+            <span style="font-weight: bold; font-size: 1em;">BOOKING DATE</span><br>
+            {{ticket.booking_date | date:'d M y' | upper}}<br>
             <br><span style="font-weight: bold; font-size: 1em;">Path</span><br>
             {{departure.city_name}}&nbsp;to&nbsp;{{destination.city_name}}
         </div>
@@ -78,16 +78,18 @@
         </table> -->
     <div class="col brand_add" style="width: 100%;">
         <div class="in_brand_add">
-            <span style="font-weight: lighter; font-size: 1em;">แสดงตั๋วเครื่องบินอิเล็กทรอนิกส์<br>และเอกสารประจำตัวที่ใช้การได้เมื่อเช็คอิน</span>
+            <span style="font-weight: lighter; font-size: 1em;">Present E-ticket and <br> passport at check-in</span>
         </div>
         <div class="in_brand_add">
-            <span style="font-weight: lighter; font-size: 1em;">เช็คอินก่อนเวลาออกเดินทาง</span><br>
-            <span style="font-weight: bold; font-size: 1.05em;">อย่างน้อย 90 นาที</span>
+            <span style="font-weight: lighter; font-size: 1em;">check-in  </span>
+            <span style="font-weight: bold; font-size: 1.05em;">at least 90 minutes</span><br>
+            <span style="font-weight: lighter; font-size: 1em;">before departure </span>
         </div>
         <div class="in_brand_add">
-            <span style="font-weight: lighter; font-size: 1em;">เวลาที่ระบุทั้งหมด<br>เป็นเวลาท้องถิ่นของสนามบิน</span>
+            <span style="font-weight: lighter; font-size: 1em;">All time shown are in<br>local airport time</span>
         </div>
     </div>
+                
         <table class="table">
             <tr class="tr-caption">
                 <td style="width: 100%;">PASSENGER INFORMATION</td>
