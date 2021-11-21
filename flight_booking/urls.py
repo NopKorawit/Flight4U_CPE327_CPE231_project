@@ -15,6 +15,7 @@ urlpatterns = [
     path("createTicket",views.createticket),
     path('payment',views.addPassenger),
     path("confirm",views.confirm),
+    path('resume', views.resume_booking, name="resumebooking"),
 
     path('city/list',views.CityList.as_view(),name='city_list'),
     path('flight/list', views.FlightList.as_view(), name='flight_list'),

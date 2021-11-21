@@ -4,29 +4,13 @@
 
 {% block head %}
     <script type="text/javascript" src="{% static 'js/bookings.js' %}"></script>
-<<<<<<< HEAD
-    <link rel="stylesheet" href="{% static 'css/bookings_style.css' %}">
-=======
     <link rel="stylesheet" href="{% static 'css/my_bookings_style.css' %}">
->>>>>>> ac63009430bb215be3ac0d806e4207d4d1490e02
 {% endblock head %}
 
 {% block body %}
     <section class="section section1">
         <div class="container">
             {% for ticket in tickets %}
-<<<<<<< HEAD
-                <div class="row each-booking-div" id="{{ticket.ticket_id}}">
-                    <div class="col-2" style="display: flex;">
-                        <div style="display: flex; color: #666666; margin-top: auto;">
-                            <div>
-                                <span style="font-size: 2.1em;">{{ticket.flight_ddate | date:"d"}}</span>
-                            </div>
-                            <div style="font-size: smaller; display: flex; margin: auto 0; padding-left: 5px; line-height: 1em;">
-                                <div style="margin: auto;">
-                                    <div style="margin-bottom: 1px;">{{ticket.flight_ddate | date:"D"}}</div>
-                                    <div style="margin-top: 1px;">{{ticket.flight_ddate | date:"M'y"}}</div>
-=======
                 <div class="row each-booking-div" id="{{ticket.ref_no}}">
                     <div class="col-2" style="display: flex;">
                         <div style="display: flex; color: #666666; margin-top: auto;">
@@ -37,7 +21,6 @@
                                 <div style="margin: auto;">
                                     <div style="margin-bottom: 1px;">{{ticket.departure_date | date:"D"}}</div>
                                     <div style="margin-top: 1px;">{{ticket.departure_date | date:"M'y"}}</div>
->>>>>>> ac63009430bb215be3ac0d806e4207d4d1490e02
                                 </div>
                             </div>
                         </div>
@@ -45,17 +28,14 @@
                     <div class="col-4 middle-div">
                         <div style="width:100%">
                             <div class="row places-div" style=" display: flex;">
-                                <div style="max-width: 45%;">{{ticket.flight.origin.city}}</div>
+                                <div style="max-width: 45%;">Flight ID</div>
                                 <div>&nbsp;-&nbsp;</div>
-                                <div style="max-width: 45%;">{{ticket.flight.destination.city}}</div>
-                            </div>
-                            <div class="row places-div" style="font-size: .8em; color: #999999; ">
-                                <div style="max-width: 100%;">{{ticket.flight.airline}} &middot; {{ticket.flight.plane}} &middot; {{ticket.passengers.count}} Passengers</div>
+                                <div style="max-width: 45%;">{{ticket.flight_id}}</div>
                             </div>
                         </div>
                     </div>
                     <div class="col-2 middle-div">
-                        <div style="font-size: 1.2em; color: #945937;">{{ticket.ref_no}}</div>
+                        <div style="font-size: 1.2em; color: #945937;">{{ticket.ticket_id}}</div>
                     </div>
                     <div class="col-2 middle-div">
                         <div>
@@ -87,16 +67,16 @@
                             <div class="ticket-action-div">
                                 {% if ticket.status == 'CONFIRMED' %}
                                     <!--<button class="btn btn-outline-primary btnp">Print Ticket</button>-->
-                                    <form action="{% url 'getticket' %}" method="get" target="_blank">
+                                    <form action="confirm" method="get" target="_blank">
                                         <input type="hidden" name="ref" value="{{ticket.ticket_id}}">
                                         <button type="submit" class="btn btn-outline-primary btnp">Print Ticket</button>
                                     </form>
                                     <button class="btn btn-outline-primary btnp"  data-ref="{{ticket.ticket_id}}" onclick="popup(this)">Cancel Ticket</button>
                                 {% endif %}
                                 {% if ticket.status == 'PENDING' %}
-                                    <form action="{% url 'resumebooking' %}" method="POST">
+                                    <form action="resume" method="POST">
                                         {% csrf_token %}
-                                        <input type="hidden" name="ref" value="{{ticket.ticket_id}}">
+                                        <input type="hidden" name="ticket_id" value="{{ticket.ticket_id}}">
                                         <button type="submit" class="btn btn-outline-primary btnp">Resume Booking</button>
                                     </form>
 
