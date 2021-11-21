@@ -67,8 +67,8 @@
                             <div class="ticket-action-div">
                                 {% if ticket.status == 'CONFIRMED' %}
                                     <!--<button class="btn btn-outline-primary btnp">Print Ticket</button>-->
-                                    <form action="confirm" method="get" target="_blank">
-                                        <input type="hidden" name="ref" value="{{ticket.ticket_id}}">
+                                    <form action="confirm" method="POST" target="_blank">
+                                        <input type="hidden" name="ticket_id" value="{{ticket.ticket_id}}">
                                         <button type="submit" class="btn btn-outline-primary btnp">Print Ticket</button>
                                     </form>
                                     <button class="btn btn-outline-primary btnp"  data-ref="{{ticket.ticket_id}}" onclick="popup(this)">Cancel Ticket</button>
