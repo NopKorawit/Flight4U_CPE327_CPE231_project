@@ -19,7 +19,7 @@ form{
 }
 
 .search_card {
-    margin-top: 80px;
+    margin-top: 50px;
     margin-right: 670px ;
     height: 360px;
     width: 500px;
@@ -46,3 +46,18 @@ form{
 }
 
 
+
+    /* mobile screen */
+
+@media screen and (max-width: 1200px) {
+    .search_card{
+     margin: 80px auto;
+     height: 360px;
+    width: 500px;
+     padding: 10px;
+    flex-direction: column
+        /* grid-template-columns: 1fr;
+        grid-row: 2fr 1fr; */
+        }
+    
+    }

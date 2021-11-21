@@ -1,3 +1,6 @@
+body,html{
+    background-color: rgb(255, 227, 196);
+}
 .detail{
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -10,76 +13,85 @@ h2{
 }
 
 
-.input{
+input{
     padding: 5px 5em 5px 1em ;
+    border-radius: 20px;
 }
 
 .warn{ 
     color:rgb(255, 187, 0);
-    font-size: small;
+    font-size: 15px;
     margin-left: 10px ;
 }
 
-
 .booking_detail{
     text-align: center;
-    display: flex;
-    border-radius: 10px;
-    padding: 20px;
     box-shadow: 0 5px 8px rgba(128, 128, 128, 0.459); 
+    border-radius: 20px;
+    margin-right: 30px;
 }
-
-.booking_detail input{
+/* .booking_detail input{
     border: none;
-}
-
-
+} */
 
 .fare{
     display: flex;
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 20px;
     box-shadow: 0 5px 8px rgba(128, 128, 128, 0.493); 
-}
-
-#plist{
-    margin: 20px;
-
+    margin-right: 5px;
 }
 
 form{
+    padding: 20px;
+    box-shadow: 0 5px 8px rgba(128, 128, 128, 0.493); 
     margin-bottom: 10em;
+    border-radius: 20px;
+    background-color: white;
 }
 .input-content{
-    margin: 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /*2col 1:1*/
-    grid-template-rows: 1fr 1fr 1fr;
-    row-gap: 20px;
+    border-radius: 20px;
+    margin: 20px 10px 20px 10px;
+    /* background-color:linear-gradient(to bottom right ,#eeb759,#4f7de6 );; */
+    box-shadow: 0 5px 8px rgba(128, 128, 128, 0.459); 
+}
+.data-value{
+    pointer-events: none;
+    outline: none;
+    border: none;
 }
 
-
 .proceed{
-    padding: 10px;
+    padding: 7px;
     cursor: pointer;
     background-color: rgb(230, 103, 0);
     color: white;
     border: none;
     border-radius: 5px;
+    margin-left: 20px;
 }
-
-.add{
-    width: fit-content;
-    background-color: white;
-    border: none;
-    color: blue;
+.proceed:hover:enabled {
+    color: rgb(230, 103, 0) ;
+    background-color: rgba(255, 115, 1, 0.37); 
+    transition-duration: .1s;
     cursor: pointer;
+    
 }
 
-.required:before {
-    content:" *";
-    color: red;
+span{ color: red;}
+
+.input-detail{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /*2col 1:1*/
+    grid-template-rows: 1fr 1fr;
+    row-gap: 20px;
+    padding: 2em;
+    
 }
+.ticket-details-div{
+    margin: 13px 10px;
+}
+
 /* mobile screen */
 
 @media screen and (max-width: 800px) {
@@ -90,11 +102,11 @@ form{
         row-gap: 20px;
     }
 
-    .input-content{
+    .input-detail{
         width: 50%;
         display: grid;
         grid-template-columns: 1fr;
-        margin: 20px auto;
+        margin:auto;
     }
 
 

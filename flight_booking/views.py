@@ -172,6 +172,7 @@ def logout(request):
     return redirect('/')
 
 # -----------------------------------------------------------------------
+<<<<<<< HEAD
 
 # class TicketForm(forms.ModelForm):
 #     class Meta:
@@ -184,6 +185,20 @@ def logout(request):
 #     class Meta:
 #         model = Passenger
 #         fields = '__all__'
+=======
+class TicketForm(forms.ModelForm):
+    class Meta:
+        model = Ticket
+        fields = '__all__'
+
+
+#TicketLineItem 
+class PassengerForm(forms.ModelForm):
+    class Meta:
+        model = Passenger
+        fields = '__all__'
+
+>>>>>>> 2a8a0fc2358ae8d13a955afd1ccbf2be164a8c1d
 # @method_decorator(csrf_exempt, name='dispatch')
 # class TicketCreate(View):
 #     def post(self, request):
@@ -191,9 +206,15 @@ def logout(request):
 #         request.POST = request.POST.copy()
 #         if Ticket.objects.count() != 0:
 #             ticket_id_max = Ticket.objects.aggregate(Max('ticket_id'))['ticket_id__max']
+<<<<<<< HEAD
 #             next_ticket_id = ticket_id_max[0:2] + str(int(ticket_id_max[2:5])+1) + "/" + ticket_id_max[6:8]
 #         else:
 #             next_ticket_id = "TK000/21"
+=======
+#             next_ticket_id = ticket_id_max[0:2] + str(int(ticket_id_max[2:5])+1)
+#         else:
+#             next_ticket_id = "TK000"
+>>>>>>> 2a8a0fc2358ae8d13a955afd1ccbf2be164a8c1d
 #         #*****input part*****
 #         request.POST['ticket_id'] = next_ticket_id
 
@@ -207,11 +228,19 @@ def logout(request):
 #                 Passenger.objects.create(
 #                     ticket_id=ticket,
 #                     id_no=lineitem['']
+<<<<<<< HEAD
 #                     # item_no=lineitem['item_no'],
 #                     # product_code=product_code,
 #                     # unit_price=reFormatNumber(lineitem['unit_price']),
 #                     # quantity=reFormatNumber(lineitem['quantity']),
 #                     # product_total=reFormatNumber(lineitem['product_total'])
+=======
+#                     item_no=lineitem['item_no'],
+#                     product_code=product_code,
+#                     unit_price=reFormatNumber(lineitem['unit_price']),
+#                     quantity=reFormatNumber(lineitem['quantity']),
+#                     product_total=reFormatNumber(lineitem['product_total'])
+>>>>>>> 2a8a0fc2358ae8d13a955afd1ccbf2be164a8c1d
 #                 )
 
 #             data['invoice'] = model_to_dict(invoice)
@@ -507,6 +536,17 @@ def booking(request,fid,path,date,seat_class):
         })
     # pass
 
+<<<<<<< HEAD
+=======
+class TicketDetail(View):
+    def get(self, request, pk):
+        ticket_id = pk
+        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id','flight_id','departure_date','flight_class','status'))
+        passenger = list(Passenger.objects.filter(ticket_id=ticket_id).order_by('id_no').values("id_no","ticket_id","first_name","last_name","phone_no","email"))
+        data = dict()
+        data['ticket'] = ticket[0]
+        data['passenger'] = passenger
+>>>>>>> 2a8a0fc2358ae8d13a955afd1ccbf2be164a8c1d
 
     
 def reFormatDateMMDDYYYY(ddmmyyyy):
