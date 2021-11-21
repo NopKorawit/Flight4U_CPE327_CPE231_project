@@ -6,7 +6,8 @@ from django.db.models import fields
 # Create your models here.
 
 class Passenger(models.Model):
-    id_no = models.CharField(max_length=20, primary_key=True) # id card/passport nunmber 
+    ticket_id = models.CharField(max_length=20, primary_key=True) # lineitem
+    id_no = models.CharField(max_length=20) # id card/passport nunmber 
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     phone_no = models.CharField(max_length=10)
@@ -20,8 +21,6 @@ class Passenger(models.Model):
 
 class Ticket(models.Model):
     ticket_id = models.CharField(max_length=10, primary_key=True)
-    seat_no = models.CharField(max_length=5)
-    id_no = models.CharField(max_length=15)
     flight_id = models.CharField(max_length=5)
     departure_date = models.DateField()
     flight_class = models.CharField(max_length=10)

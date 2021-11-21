@@ -58,25 +58,26 @@
         </table>
         <table cellspacing='0'>
             <tr class="tr-odd">
-                <th>Seat NO.</th>
+                <th>NO.</th>
                 <th>PASSENGER NAME</th>
-                <th>SEX</th>
+                <th>EMAIL</th>
                 <th>CLASS</th>
             </tr>
-            {% for passenger in ticket1.passengers.all %}
+            {% for lineitem in passenger %}
+            
                 {% if forloop.counter|divisibleby:2 %}
                     <tr class="tr-odd">
                         <td style="width: 20%; padding-left: 20px;">{{forloop.counter}}</td>
-                        <td style="width: 35%; padding-left: 20px;">{{passenger.last_name | upper}}/{{passenger.first_name | upper}}</td>
-                        <td style="width: 20%; padding-left: 20px;">{{passenger.gender | upper}}</td>
-                        <td style="width: 25%; padding-left: 20px;">{{ticket1.seat_class | upper}}</td>
+                        <td style="width: 35%; padding-left: 20px;">{{lineitem.last_name | upper}}/{{lineitem.first_name | upper}}</td>
+                        <td style="width: 20%; padding-left: 20px;">{{lineitem.email | upper}}</td>
+                        <td style="width: 25%; padding-left: 20px;">{{ticket.flight_class | upper}}</td>
                     </tr>
                 {% else %}
                     <tr class="tr-even">
                         <td style="width: 20%; padding-left: 20px;">{{forloop.counter}}</td>
-                        <td style="width: 35%; padding-left: 20px;">{{passenger.last_name | upper}}/{{passenger.first_name | upper}}</td>
-                        <td style="width: 20%; padding-left: 20px;">{{passenger.gender | upper}}</td>
-                        <td style="width: 25%; padding-left: 20px;">{{ticket1.seat_class | upper}}</td>
+                        <td style="width: 35%; padding-left: 20px;">{{lineitem.last_name | upper}}/{{lineitem.first_name | upper}}</td>
+                        <td style="width: 20%; padding-left: 20px;">{{lineitem.email | upper}}</td>
+                        <td style="width: 25%; padding-left: 20px;">{{ticket.flight_class | upper}}</td>
                     </tr>
                 {% endif %}
             {% endfor %}
@@ -104,30 +105,6 @@
                 <td style="width: 49%; padding-left: 20px;">{{ticket1.flight.destination.airport | upper}} ({{ticket1.flight.destination.code | upper}})</td>
             </tr>
         </table>
-        {% if ticket2 %}
-            <div>
-                <hr style="height: .1px; border: 0; background-color: grey;" noshade>
-                <table style="margin-top: 0;" cellspacing='0'>
-                    <tr class="tr-odd">
-                        <th>FLIGHT</th>
-                        <th>DEPART/ARRIVE</th>
-                        <th>AIRPORT/TERMINAL</th>
-                    </tr>
-                    <tr class="tr-even">
-                        <td style="padding-left: 20px; width: 29%;">{{ticket2.flight.airline | upper}}<br>{{ticket2.flight.plane | upper}}</td>
-                        <td style="padding-left: 20px; width: 22%;">{{ticket2.flight_ddate | date:'d M y' | upper}}<br>{{ticket2.flight.depart_time | time:'Hi'}}</td>
-                        <td style="padding-left: 20px; width: 49%;">{{ticket2.flight.origin.airport | upper}} ({{ticket2.flight.origin.code | upper}})</td>
-                    </tr>
-                    <tr class="tr-odd">
-                        <td style="padding-left: 20px; width: 29%;"></td>
-                        <td style="padding-left: 20px; width: 22%;">{{ticket2.flight_adate | date:'d M y' | upper}}<br>{{ticket2.flight.arrival_time | time:'Hi'}}</td>
-                        <td style="padding-left: 20px; width: 49%;">{{ticket2.flight.destination.airport | upper}} ({{ticket2.flight.destination.code | upper}})</td>
-                    </tr>
-                </table>
-                <hr style="height: .1px; border: 0; background-color: grey;" noshade>
-            </div>
-        {% endif %}
-        <!---->
     </div>
 
 

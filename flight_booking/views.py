@@ -329,12 +329,12 @@ class TicketDetail(View):
     def get(self, request, pk):
         ticket_id = pk
 
-        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id', 'seat_no', 'id_no','flight_id','departure_date','flight_class','status'))
-        # passenger = list(Passenger.objects.select_related('product_code').filter(invoice_no=invoice_no).order_by('item_no').values("item_no","invoice_no","product_code","product_code__name","product_code__units","unit_price","quantity","product_total"))
+        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id','flight_id','departure_date','flight_class','status'))
+        passenger = list(Passenger.objects.filter(ticket_id=ticket_id).order_by('id_no').values("id_no","ticket_id","first_name","last_name","phone_no","email"))
 
         data = dict()
         data['ticket'] = ticket[0]
-        # data['invoicelineitem'] = invoicelineitem
+        data['passenger'] = passenger
 
         response = JsonResponse(data)
         response["Access-Control-Allow-Origin"] = "*"
@@ -353,12 +353,12 @@ class TicketPDF(View):
     def get(self, request, pk):
         ticket_id = pk
 
-        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id', 'seat_no', 'id_no','flight_id','departure_date','flight_class','status'))
-        # invoice_line_item = list(InvoiceLineItem.objects.select_related('product_code').filter(invoice_no=invoice_no).order_by('invoice_no').values("invoice_no","product_code","product_code__name","unit_price","quantity","product_total"))
+        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id','flight_id','departure_date','flight_class','status'))
+        passenger = list(Passenger.objects.filter(ticket_id=ticket_id).order_by('id_no').values("id_no","ticket_id","first_name","last_name","phone_no","email"))
 
         data = dict()
         data['ticket'] = ticket[0]
-        # data['invoicelineitem'] = invoice_line_item
+        data['passenger'] = passenger
         
         #return JsonResponse(data)
         return render(request, 'ticket.html', data)
