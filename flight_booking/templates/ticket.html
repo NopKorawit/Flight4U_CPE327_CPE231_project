@@ -34,7 +34,7 @@
             <span style="font-weight: bold; font-size: 1em;">TICKET REFERENCE</span><br>
             {{ticket.ticket_id}}<br>
             <br><span style="font-weight: bold; font-size: 1em;">CLASS</span><br>
-            {{ticket.flight_class | upper}}
+            {{ticket.seat_class | upper}}
         </div>
         <div class="in_inform">
             <span style="font-weight: bold; font-size: 1em;">FLIGHT DATE</span><br>
@@ -61,7 +61,7 @@
                 <th>FLIGHT DATE</th>
                 <td>{{ticket.departure_date | date:'d M y' | upper}}</td>
                 <th>CLASS</th>
-                <td>{{ticket.flight_class | upper}}</td>
+                <td>{{ticket.seat_class | upper}}</td>
             </tr>
             <tr class="tr-odd">
                 <th>EMAIL</th>
@@ -107,14 +107,14 @@
                         <td style="width: 20%; padding-left: 20px;">{{forloop.counter}}</td>
                         <td style="width: 35%; padding-left: 20px;">{{lineitem.last_name | upper}}/{{lineitem.first_name | upper}}</td>
                         <td style="width: 20%; padding-left: 20px;">{{lineitem.email}}</td>
-                        <td style="width: 25%; padding-left: 20px;">{{ticket.flight_class | upper}}</td>
+                        <td style="width: 25%; padding-left: 20px;">{{ticket.seat_class | upper}}</td>
                     </tr>
                 {% else %}
                     <tr class="tr-even">
                         <td style="width: 20%; padding-left: 20px;">{{forloop.counter}}</td>
                         <td style="width: 35%; padding-left: 20px;">{{lineitem.last_name | upper}}/{{lineitem.first_name | upper}}</td>
                         <td style="width: 20%; padding-left: 20px;">{{lineitem.email}}</td>
-                        <td style="width: 25%; padding-left: 20px;">{{ticket.flight_class | upper}}</td>
+                        <td style="width: 25%; padding-left: 20px;">{{ticket.seat_class | upper}}</td>
                     </tr>
                 {% endif %}
             {% endfor %}

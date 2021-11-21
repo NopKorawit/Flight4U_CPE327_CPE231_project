@@ -13,8 +13,8 @@ urlpatterns = [
     path("logout",views.logout),
     path("<str:fid>&<str:path>&<str:date>&<str:seat_class>",views.booking),
     path("createTicket",views.createticket),
-    path('addPassenger',views.addPassenger),
-    path("payment",views.payment),
+    path('payment',views.addPassenger),
+    # path("payment",views.payment),
     path("confirm",views.confirm),
 
     path('city/list',views.CityList.as_view(),name='city_list'),

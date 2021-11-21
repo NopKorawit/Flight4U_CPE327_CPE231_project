@@ -8,69 +8,10 @@
 {% endblock %}
 
 {% block body %}
-<<<<<<< HEAD
-<form class="input" action="addPassenger" onsubmit="return book_submit()" method="post">
-{% csrf_token %}
-<div class="detail">
-    <div class="booking_detail">
-        <input type="text" name="flight_id" value="{{booking_detail.flight_id}}" readonly>
-        <input type="text" name="airline" value="{{booking_detail.airline}}" readonly>
-        {% for detail in departure %}
-        <input type="text" name="departure_id" value="{{detail.city_id}}" readonly>
-        <input type="text" name="departure" value="{{detail.city_name}}" readonly>
-        <input type="text" name="departure_airport" value="{{detail.airport}}" readonly>
-        {% endfor %}
-        {% for detail in destination %}
-        <input type="text" name="destination_id" value="{{detail.city_id}}" readonly>
-        <input type="text" name="destination" value="{{detail.city_name}}" readonly>
-        <input type="text" name="destination_airport" value="{{detail.airport}}" readonly>
-        {% endfor %}
-        <input type="text" name="departure_time" value="{{booking_detail.departure_time}}" readonly>
-        <input type="text" name="arrival_time" value="{{booking_detail.arrival_time}}" readonly>
-        <input type="text" name="departure_date" value="{{departure_date}}" readonly>
-        <input type="hidden" name="duration" value="{{duration}}">
-        <input type="hidden" name="seat_class" value="{{booking_detail.flight_id.seat_class}}">
-        <div class="duration" data-value="{{duration}}"></div>
-        
-    </div>
-    <div class="row fare shadow-3">
-        <table class="table" id="t_fare">
-            <tbody>
-                <tr>
-                    <th scope="row">Base fare: </th>
-                    <td class="base-fare" align="right" id="baseFare">{{booking_detail.flight_id.price}}</td>
-                    <input type='hidden' id='txt_Fee' name='fee' />
-                    <td align="right"> ฿ /passenger</td>
-                </tr>
-                <tr>
-                    <th scope="row">Total Passengers: </th>
-                    <td class="total-p" id="totalP" align="right">0</td>
-                    <input type='hidden' id='txt_Fee' name='fee' />
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">Fee: </th>
-                    <td class="fee" align="right"><label id='lbl_Fee' >0.00</label></td>
-                    <input type='hidden' id='txt_Fee' name='fee' />
-                    <td align="right"> ฿</td>
-                    
-                </tr>
-                <tr>
-                    <th scope="row">Total Amount: </th>
-                    <td class="total-amount" align="right"><label id='lbl_TotalAmount' ></label></td>
-                    <input type='hidden' id='txt_TotalAmount' name='total_amount' value="" />
-                    <td align="right"> ฿</td>
-                </tr>
-            </tbody>
-        </table>
-        
-    </div>
-</div>
-=======
-<form class="input" action="createTicket" onsubmit="return book_submit()" method="post">
+<form class="input" action="payment" onsubmit="return book_submit()" method="post">
     {% csrf_token %}
     <h3 style="margin-left: 10px;">Departure date:
-        <input type="text" class="data-value" name="departure_date" value="{{departure_date }}" readonly>
+        <input type="text" class="data-value" name="departure_date" value="{{departure_date}}" readonly>
     </h3>
     <div class="detail">
         <div class="booking_detail">
@@ -106,22 +47,21 @@
                     {% endfor %}
                 </div>
             </div>
-            <!-- <input type="text" name="flight_id" value="{{booking_detail.flight_id}}" readonly>
-            <input type="text" name="airline" value="{{booking_detail.airline}}" readonly>
+            <input type="hidden" name="flight_id" value="{{booking_detail.flight_id}}" readonly>
+            <input type="hidden" name="airline" value="{{booking_detail.airline}}" readonly>
             {% for detail in departure %}
-            <input type="text" name="departure" value="{{detail.city_name}}" readonly>
-            <input type="text" name="departure_airport" value="{{detail.airport}}" readonly>
+            <input type="hidden" name="departure" value="{{detail.city_name}}" readonly>
+            <input type="hidden" name="departure_airport" value="{{detail.airport}}" readonly>
             {% endfor %}
             {% for detail in destination %}
-            <input type="text" name="destination" value="{{detail.city_name}}" readonly>
-            <input type="text" name="destination_airport" value="{{detail.airport}}" readonly>
+            <input type="hidden" name="destination" value="{{detail.city_name}}" readonly>
+            <input type="hidden" name="destination_airport" value="{{detail.airport}}" readonly>
             {% endfor %}
-            <input type="text" name="departure_time" value="{{booking_detail.departure_time}}" readonly>
-            <input type="text" name="arrival_time" value="{{booking_detail.arrival_time}}" readonly>
-            <input type="text" name="duration" value="duration: {{duration}}">
+            <input type="hidden" name="departure_time" value="{{booking_detail.departure_time}}" readonly>
+            <input type="hidden" name="arrival_time" value="{{booking_detail.arrival_time}}" readonly>
+            <input type="hidden" name="duration" value="duration: {{duration}}">
             <input type="hidden" name="seat_class" value="{{booking_detail.flight_id.seat_class}}">
-            <div class="duration" data-value="{{duration}}"></div> -->
->>>>>>> 2a8a0fc2358ae8d13a955afd1ccbf2be164a8c1d
+            <!-- <div class="duration" data-value="{{duration}}"></div> -->
 
         </div>
         <div class="row fare shadow-3">

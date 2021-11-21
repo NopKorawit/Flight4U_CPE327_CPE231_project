@@ -10,7 +10,6 @@
 {% block body %}
 
 
-<form action="">
 
     <div class="payment-content">
         <div class="payment-box-head">
@@ -24,7 +23,7 @@
                 <h2 align="center">Payment Information</h2>
                 <div class="amount">
                     <label>PAYMENT AMOUNT</label><br>
-                    <input type='text' id='js_Amount' name='amount' readonly>
+                    <input type='text' id='js_Amount' name='amount' value=" ฿ {{total_amount}}" readonly>
                 </div>
                 <div class="creditcard">
                     <label>Credit Card Number<span>*</span></label><br>
@@ -107,10 +106,12 @@
                         CONFIRM
                     </button>
                 </div>
+                <div class="hidden">
+                    <input type="hidden" name="ticket_id" value="{{ticket_id}}" readonly>
+                </div>
             </form>
         </div>
     </div>
 
-</form>
 
 {% endblock %}
