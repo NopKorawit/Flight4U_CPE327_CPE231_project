@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 # from .DBHelper import DBHelper
 from django.db import connection
 from django.urls.conf import path
+from django.urls import reverse
 from flight_booking.models import *
 from datetime import datetime
 from django.contrib import messages
@@ -86,6 +87,13 @@ def search(request):
             'city': city
         })
 
+def my_booking(request):
+
+    tickets = Ticket.objects.filter(username=request.username).order_by('-booking_date')
+    return render(request, 'my_bookings.html', {
+        'page': 'bookings',
+        'tickets': tickets
+    })
 
 def my_booking(request):
     return render(request, 'my_booking.html')
@@ -111,11 +119,11 @@ def confirm(request):
         try:
             ticket = Ticket.objects.get(ticket_id=ticket_id)
             ticket.status = 'CONFIRMED'
-            # ticket.booking_date = datetime.now()
+            ticket.booking_date = datetime.now()
             ticket.save()
             return render(request,'confirm.html',{
                 'ticket_id': ticket_id
-         })
+        })
         except Exception as e:
             return HttpResponse(e)
     else:
@@ -180,6 +188,7 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
 
 # -----------------------------------------------------------------------
 
