@@ -203,7 +203,7 @@ class PassengerForm(forms.ModelForm):
 class TicketDetail(View):
     def get(self, request, pk):
         ticket_id = pk
-        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id','flight_id','departure_date','seat_class','status','user_id','booking_date'))
+        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id','flight_id','departure_date','seat_class','status','username','booking_date'))
         passenger = list(Passenger.objects.filter(ticket_id=ticket_id).order_by('id_no').values("id_no","ticket_id","first_name","last_name","phone_no","email"))
         flight_id = ticket[0]['flight_id']
         flight_detail = list(Flight.objects.select_related("flight_detail","flight_id","path_id").filter(flight_id=flight_id).values(
@@ -238,7 +238,7 @@ class TicketPDF(View):
     def get(self, request, pk):
         ticket_id = pk
 
-        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id','flight_id','departure_date','seat_class','status','user_id','booking_date'))
+        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id','flight_id','departure_date','seat_class','status','username','booking_date'))
         passenger = list(Passenger.objects.filter(ticket_id=ticket_id).order_by('id_no').values("id_no","ticket_id","first_name","last_name","phone_no","email"))
         flight_id = ticket[0]['flight_id']
         flight_detail = list(Flight.objects.select_related("flight_detail","flight_id","path_id").filter(flight_id=flight_id).values(
