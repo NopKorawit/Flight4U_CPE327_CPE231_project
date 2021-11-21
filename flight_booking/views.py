@@ -322,7 +322,8 @@ def cancel_ticket(request):
                 if ticket.username == request.user.username:
                     ticket.status = 'CANCELLED'
                     ticket.save()
-                    return JsonResponse({'success': True})
+                    # return JsonResponse({'success': True})
+                    return redirect('/my_booking')
                 else:
                     return JsonResponse({
                         'success': False,

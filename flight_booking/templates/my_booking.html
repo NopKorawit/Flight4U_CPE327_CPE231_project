@@ -72,7 +72,7 @@
                                         <input type="hidden" name="ticket_id" id="txt_ticketID" value="{{ticket.ticket_id}}">
                                         <button type="submit" class="btn btn-outline-primary btnp" id="btnPdf">Print Ticket</button>
                                     </form>
-                                    <form action="cancle" method="POST">
+                                    <form action="cancel" method="POST">
                                         {% csrf_token %}
                                         <input type="hidden" name="ticket_id" value="{{ticket.ticket_id}}">
                                         <button type="submit" class="btn btn-outline-primary btnp">Cancel Ticket</button>
@@ -85,7 +85,7 @@
                                         <input type="hidden" name="ticket_id" value="{{ticket.ticket_id}}">
                                         <button type="submit" class="btn btn-outline-primary btnp">Resume Booking</button>
                                     </form>
-                                    <form action="cancle" method="POST">
+                                    <form action="cancel" method="POST">
                                         {% csrf_token %}
                                         <input type="hidden" name="ticket_id" value="{{ticket.ticket_id}}">
                                         <button type="submit" class="btn btn-outline-primary btnp">Cancel Ticket</button>
