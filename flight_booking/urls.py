@@ -17,6 +17,7 @@ urlpatterns = [
     path("confirm",views.confirm),
     path('resume', views.resume_booking, name="resumebooking"),
     path('cancel', views.cancel_ticket, name="cancelticket"),
+    
     path('city/list',views.CityList.as_view(),name='city_list'),
     path('flight/list', views.FlightList.as_view(), name='flight_list'),
     path('flight/detail/<str:id>', views.FlightDetail.as_view(), name='flight_detail'),

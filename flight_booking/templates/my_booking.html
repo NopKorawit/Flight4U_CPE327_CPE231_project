@@ -11,7 +11,7 @@
     <section class="section section1">
         <div class="container">
             {% for ticket in tickets %}
-                <div class="row each-booking-div" id="{{ticket.ref_no}}">
+                <div class="row each-booking-div" id="{{ticket.ticket_id}}">
                     <div class="col-2" style="display: flex;">
                         <div style="display: flex; color: #666666; margin-top: auto;">
                             <div>
@@ -71,7 +71,12 @@
                                         <input type="hidden" name="ticket_id" value="{{ticket.ticket_id}}">
                                         <button type="submit" class="btn btn-outline-primary btnp">Print Ticket</button>
                                     </form>
-                                    <button class="btn btn-outline-primary btnp"  data-ref="{{ticket.ticket_id}}" onclick="popup(this)">Cancel Ticket</button>
+                                    <form action="cancle" method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="ticket_id" value="{{ticket.ticket_id}}">
+                                        <button type="submit" class="btn btn-outline-primary btnp">Cancel Ticket</button>
+                                        <!-- <button class="btn btn-outline-primary btnp"  data-ref="{{ticket.ticket_id}}" onclick="popup(this)">Cancel Ticket</button> -->
+                                    </form>
                                 {% endif %}
                                 {% if ticket.status == 'PENDING' %}
                                     <form action="resume" method="POST">
@@ -79,8 +84,12 @@
                                         <input type="hidden" name="ticket_id" value="{{ticket.ticket_id}}">
                                         <button type="submit" class="btn btn-outline-primary btnp">Resume Booking</button>
                                     </form>
-
-                                    <button type="button" class="btn btn-outline-primary btnp" data-ref="{{ticket.ticket_id}}" onclick="popup(this)">Cancel Ticket</button>
+                                    <form action="cancle" method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="ticket_id" value="{{ticket.ticket_id}}">
+                                        <button type="submit" class="btn btn-outline-primary btnp">Cancel Ticket</button>
+                                        <!-- <button class="btn btn-outline-primary btnp"  data-ref="{{ticket.ticket_id}}" onclick="popup(this)">Cancel Ticket</button> -->
+                                    </form>
                                 {% endif %}
                                 {% if ticket.status == 'CANCELLED' %}
                                 {% endif %}

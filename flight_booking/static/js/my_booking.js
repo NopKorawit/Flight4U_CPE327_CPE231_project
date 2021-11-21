@@ -13,7 +13,7 @@ function cancel_tkt() {
     let ticket_id = document.querySelector("#cancel_ticket_btn").dataset.ticket_id;
     let formData = new FormData();
     formData.append('ticket_id',ticket_id)
-    fetch('ticket/cancel',{
+    fetch('cancel',{
         method: "POST",
         body: formData
     })
