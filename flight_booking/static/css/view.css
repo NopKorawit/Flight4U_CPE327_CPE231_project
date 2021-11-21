@@ -2,6 +2,16 @@
 *{
     font-family: "Lato", sans-serif;
 }
+body,
+html {
+    margin: 0;
+    padding: 0; 
+    background-color:#ffffff;
+    background-image: url(/static/img/blackgroud_Flight4U.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
 
 /* .view-head{
     margin: 10px 10%;
@@ -9,9 +19,20 @@
     grid-template-columns:1fr 1fr 1fr 1fr 1fr;
 
 } */
-
+.container_views{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #ffffff;
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 30px;
+    opacity: 0.9 ;
+    
+}
 .btnSearch{
-    margin: 2em auto;
+    margin: auto;
     background-color: rgb(230, 103, 0);
     border: none;
     padding: 5px;
@@ -31,7 +52,7 @@ table{
 
 th, td {
     font-family: "Lato", sans-serif;
-    padding: 15px;
+    padding: 13px;
     text-align: left;
     border-bottom: 1px solid rgb(219, 215, 204);
     
@@ -47,7 +68,7 @@ input{
     text-align: center;
 }
 
-.btn{
+.btnChoose{
     background-color: rgb(230, 103, 0);
     border: none;
     padding: 5px;
@@ -55,7 +76,7 @@ input{
     border-radius: 5px;
 }
 
-.btn a {
+.btnChoose a {
     text-decoration: none;
     color: white;
 }

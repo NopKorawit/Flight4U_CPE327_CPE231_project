@@ -19,6 +19,7 @@ class Passenger(models.Model):
     def __str__(self):
         return self.id_no
 
+<<<<<<< HEAD
 class Booking(models.Model):
     booking_no = models.CharField(max_length=5,primary_key=True)
     booking_date = models.DateTimeField(default=datetime.datetime.now, blank=True)
@@ -32,6 +33,22 @@ class Booking(models.Model):
     #     managed = False
     # def __str__(self):
     #     return self.booking_no
+=======
+class Ticket(models.Model):
+    ticket_id = models.CharField(max_length=10, primary_key=True)
+    seat_no = models.CharField(max_length=5)
+    id_no = models.CharField(max_length=15)
+    flight_id = models.CharField(max_length=5)
+    departure_date = models.DateField()
+    flight_class = models.CharField(max_length=10)
+    status = models.CharField(max_length=10)
+
+    class Meta:
+        db_table = "ticket"
+        managed = False
+    def __str__(self):
+        return self.ticket_id
+>>>>>>> e825dab8bc60a5baaafc7d3a3e2250dba33a3daf
 
 #Departure
 class City_A(models.Model):

@@ -1,30 +1,48 @@
-body{
-    font-family:"Lato", sans-serif;
-    background-color: rgb(255, 255, 255);
+body,
+html {
+    margin: 0;
+    padding: 0; 
+    background-color:#ffffff;
+    background-image: url(/static/img/blackgroud_Flight4U.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    
 }
 
 label{
     margin-top: 10px;
-    display: flex;
-    
 }
 
 form{
-    margin: 20px;
+    margin: 30px;
     
 }
 
-.btn{
+.search_card {
+    margin-top: 80px;
+    margin-right: 670px ;
+    height: 360px;
+    width: 500px;
+    background: #ffffff;
+    display: flex;
+    /* justify-content: left; */
+    /* flex-direction: column; */
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+    border-radius: 30px;
+    opacity: 0.75 ;
+}
+
+#btnSearch{
     margin: 1em auto;
     background-color: rgb(230, 103, 0);
     border: none;
     padding: 5px;
     width: 10rem;
     border-radius: 5px;
-    color: white;
+    color: rgb(255, 255, 255);
 }
-
-
-
 
 
