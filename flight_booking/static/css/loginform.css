@@ -127,3 +127,6 @@ html {
     font-size: 15px;
     padding: 20px;
 }
+@media screen and (max-width: 800px) {
+    
+}

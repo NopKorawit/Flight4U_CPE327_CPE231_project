@@ -64,8 +64,6 @@
             <input type="hidden" name="arrival_time" value="{{booking_detail.arrival_time}}" readonly>
             <input type="hidden" name="duration" value="duration: {{duration}}">
             <input type="hidden" name="seat_class" value="{{booking_detail.flight_id.seat_class}}">
-            <!-- <div class="duration" data-value="{{duration}}"></div> -->
-
         </div>
         <div class="row fare shadow-3">
             <table class="table" id="t_fare">
@@ -102,34 +100,31 @@
         </div>
     </div>
 
-
     <h2>Contact Information</h2>
     {% csrf_token %}
     <div class="warn">First name and last name in English as on ID card/passport/driving license</div>
     <div class="input-content">
         <center>
-            <div class="row passenger-details-div">
-            <br><br>
             <div class="input-detail">
                 <div class="firstname">
                     <label class="required">First Name</label></br>
-                    <input type="text" name="firstname" id="fname" placeholder="e.g.ผู้ใหญ่บ้าน">
+                    <input type="text" name="firstname" id="fname" placeholder="Enter your Firstname">
                 </div>
                 <div class="lastname">
                     <label class="required">Last Name</label></br>
-                    <input type="text" name="lastname" placeholder="e.g.หมู่สิบ" id="lname">
+                    <input type="text" name="lastname" placeholder="Enter your Lastname" id="lname">
                 </div>
                 <div class="phone">
                     <label class="required">Mobile number</label></br>
-                    <input type="text" name="phone" placeholder="e.g.0101234567" id="phone">
+                    <input type="text" name="phone" placeholder="Enter your Phone NO." id="phone">
                 </div>
                 <div class="email">
                     <label class="required">Email</label></br>
-                    <input type="email" name="email" placeholder="e.g.exam@example.com" id="่js_email">
+                    <input type="email" name="email" placeholder="Enter your Email" id="่js_email">
                 </div>
                 <div class="idnum">
                     <label class="required">Passport/ID card number</label></br>
-                    <input type="text" name="idnum" placeholder="e.g. E11111/123456789123" id="idno">
+                    <input type="text" name="idnum" placeholder="Enter your Passport/ID card number" id="idno">
                 </div>
             </div>
         </center>
@@ -146,15 +141,6 @@
     <hr>
     <input type="hidden" id="p-count" name="passengersCount" value="0">
     <!-- for count -->
-
     <div class="passenger-list" id="plist"></div>
-
-    <!---------------------- test ----------------------->
-
-
-    <!------------------------------------------------------->
-
 </form>
-
-
 {% endblock %}

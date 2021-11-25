@@ -14,7 +14,7 @@ label{
 }
 
 form{
-    margin: 30px;
+    margin: 20px;
     
 }
 
@@ -25,12 +25,8 @@ form{
     width: 500px;
     background: #ffffff;
     display: flex;
-    /* justify-content: left; */
-    /* flex-direction: column; */
     padding: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    /* -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
     border-radius: 30px;
     opacity: 0.75 ;
 }
@@ -44,20 +40,3 @@ form{
     border-radius: 5px;
     color: rgb(255, 255, 255);
 }
-
-
-
-    /* mobile screen */
-
-@media screen and (max-width: 1200px) {
-    .search_card{
-     margin: 80px auto;
-     height: 360px;
-    width: 500px;
-     padding: 10px;
-    flex-direction: column
-        /* grid-template-columns: 1fr;
-        grid-row: 2fr 1fr; */
-        }
-    
-    }

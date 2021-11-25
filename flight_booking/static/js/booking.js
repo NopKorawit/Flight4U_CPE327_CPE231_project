@@ -6,32 +6,29 @@ document.addEventListener('DOMContentLoaded', () => {
 function flight_duration() {
     document.querySelectorAll(".duration").forEach(element => {
         let time = element.dataset.value.split(":");
-        if(time[1] == 0){
-            element.innerText = time[0]+" hr";
+        if (time[1] == 0) {
+            element.innerText = time[0] + " hr";
         }
-        else{
-            element.innerText = time[0]+" hr "+time[1]+" min";
+        else {
+            element.innerText = time[0] + " hr " + time[1] + " min";
         }
-        
+
     });
 }
 
-
-$(document).ready(function(){
+$(document).ready(function () {
 
     let btnAdd = document.getElementById('btnAdd');
     let i = 0;
     let max_p = 9;
-    if(i<max_p){
+    if (i < max_p) {
         i++
-        btnAdd.addEventListener('click',(e)=>{
+        btnAdd.addEventListener('click', (e) => {
             console.log('Add')
             e.preventDefault();
             displayDetails(i);
-    })
+        })
     }
-
-
 })
 
 function displayDetails(num_p) {
@@ -43,66 +40,59 @@ function displayDetails(num_p) {
     let phone = document.getElementById('phone').value;
     let idno = document.getElementById('idno').value;
 
-    if(!fname || !lname || !email || !phone){
+    if (!fname || !lname || !email || !phone) {
         alert('Please enter all the form');
         return;
     }
 
-    if( /^[A-Za-z]+$/.test(fname)==false && /^[A-Za-z]+$/.test(lname)==false){
+    if (/^[A-Za-z]+$/.test(fname) == false && /^[A-Za-z]+$/.test(lname) == false) {
         alert('Please enter your name correctly');
         return;
     }
 
-    if(ValidateEmail(email)==false){
+    if (ValidateEmail(email) == false) {
         return;
     }
 
-    if(phonenumber(phone)==false){
+    if (phonenumber(phone) == false) {
         return;
     }
 
-    if(validateID(idno)==false){
+    if (validateID(idno) == false) {
         return;
     }
 
-    if(validateName(fname)==false || validateName(lname)==false){
+    if (validateName(fname) == false || validateName(lname) == false) {
         return;
     }
 
-    else{
+    else {
 
-    let plist = document.getElementById('plist');
-    let count_p = document.querySelectorAll(".passenger-list .addP").length;
-    console.log(count_p);
-    passenger = `
+        let plist = document.getElementById('plist');
+        let count_p = document.querySelectorAll(".passenger-list .addP").length;
+        console.log(count_p);
+        passenger = `
     <div class="row addP">
         <div class="show-p col-3">
             <span class="p-name">${fname}&nbsp;&nbsp;${lname}</span><span>,</span>
             <span class="p-email">${email}</span>
         </div> 
-        <input type="hidden" name="fname${count_p+1}" value="${fname}">
-        <input type="hidden" name="lname${count_p+1}" value="${lname}">
-        <input type="hidden" name="email${count_p+1}" value="${email}">
-        <input type="hidden" name="idno${count_p+1}" value="${idno}">
-        <input type="hidden" name="phone${count_p+1}" value="${phone}">
+        <input type="hidden" name="fname${count_p + 1}" value="${fname}">
+        <input type="hidden" name="lname${count_p + 1}" value="${lname}">
+        <input type="hidden" name="email${count_p + 1}" value="${email}">
+        <input type="hidden" name="idno${count_p + 1}" value="${idno}">
+        <input type="hidden" name="phone${count_p + 1}" value="${phone}">
         <button class="btn fas fa-times col-2" type="button" onclick="del_passenger(this)"></button>
     `;
 
-    plist.innerHTML+= passenger
-    document.querySelector("#p-count").value = count_p+1;
-    document.querySelector(".p-head h6 span").innerText = count_p+1;
-    document.getElementById("totalP").innerText = count_p+1;
-    console.log(count_p);
-    re_calculate_total_price();
-    clearForm();
+        plist.innerHTML += passenger
+        document.querySelector("#p-count").value = count_p + 1;
+        document.querySelector(".p-head h6 span").innerText = count_p + 1;
+        document.getElementById("totalP").innerText = count_p + 1;
+        console.log(count_p);
+        re_calculate_total_price();
+        clearForm();
     }
-
-//-------------------------------------------------------------------------
-
-
-
-//-------------------------------------------------------------------------
-
 }
 
 function clearForm() {
@@ -113,10 +103,10 @@ function clearForm() {
 
 function del_passenger(btn) {
     console.log('del')
-    let passenger = btn.parentElement; 
+    let passenger = btn.parentElement;
     let psg = btn.parentElement.parentElement.parentElement;
     let cnt = psg.querySelector("#p-count");
-    cnt.value = parseInt(cnt.value)-1;
+    cnt.value = parseInt(cnt.value) - 1;
     console.log(cnt.value)
     document.querySelector(".p-head h6 span").innerText = cnt.value;
     document.getElementById("totalP").innerText = cnt.value;
@@ -127,7 +117,7 @@ function del_passenger(btn) {
 
 function book_submit() {
     let pcount = document.querySelector("#p-count");
-    if(parseInt(pcount.value) > 0) {
+    if (parseInt(pcount.value) > 0) {
         return true;
     }
     alert("Please add at least one passenger.")
@@ -136,7 +126,7 @@ function book_submit() {
 
 //---------------------------------------------------------------
 
-function re_calculate_total_price () {
+function re_calculate_total_price() {
     var total_price = 0;
     console.log("recalculating total price")
     var basefare = document.getElementById("baseFare").innerHTML;
@@ -156,57 +146,50 @@ function re_calculate_total_price () {
 }
 
 // ---------------------------------------------------------------
-
-function ValidateEmail(mail) 
-{
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
-    {
+function ValidateEmail(mail) {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
         return (true)
     }
     alert("You have entered an invalid email address!")
     return (false)
 }
 
-function phonenumber(number)
-{
+function phonenumber(number) {
     var phoneno = /^\d{10}$/;
-    if(number.match(phoneno)){
+    if (number.match(phoneno)) {
         return true;
     }
-    else{
+    else {
         alert("You have entered an invalid phone number!");
         return false;
     }
 }
 
-function validateID(idno)
-{
-        var passport = /^[A-PR-WYa-pr-wy][1-9]\d\s?\d{4}[1-9]$/;
-        var idcard = /^\d{13}$/;
-        
-        if(passport.test(idno) == true || idno.match(idcard))
-        {
-            return true;
-        }
-        else
-        {   alert("You have entered an invalid Passport/ID card number!");
-            return false;
-            
-        }
+function validateID(idno) {
+    var passport = /^[A-PR-WYa-pr-wy][1-9]\d\s?\d{4}[1-9]$/;
+    var idcard = /^\d{13}$/;
+
+    if (passport.test(idno) == true || idno.match(idcard)) {
+        return true;
+    }
+    else {
+        alert("You have entered an invalid Passport/ID card number!");
+        return false;
+
+    }
 }
 
-function validateName(name)
-{
-    if (/[^a-zA-Z0-9\-]/.test(name)){
+function validateName(name) {
+    if (/[^a-zA-Z0-9\-]/.test(name)) {
         alert("Family name can only contain alphanumeric characters and hypehns(-)")
         return false;
     }
-    
+
     return true;
 }
 
-function formatNumber (num) {
+function formatNumber(num) {
     if (num === '') return '0';
-    num = parseFloat(num); 
+    num = parseFloat(num);
     return num.toFixed(2).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 }
