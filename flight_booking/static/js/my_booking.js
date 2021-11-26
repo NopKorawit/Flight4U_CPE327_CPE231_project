@@ -1,6 +1,7 @@
 function popup(element) {
-    let ticket_id = element.dataset.ticket_id;
-    document.querySelector("#cancel_ticket_btn").dataset.ticket_id = ticket_id;
+    let ticket_id = element.dataset.ref;
+    console.log(ticket_id);
+    document.querySelector("#cancel_ticket_btn").dataset.ref = ticket_id;
     document.querySelector(".popup").style.display = 'block';
 }
 
@@ -10,10 +11,10 @@ function remove_popup() {
 }
 
 function cancel_tkt() {
-    let ticket_id = document.querySelector("#cancel_ticket_btn").dataset.ticket_id;
+    let ticket_id = document.querySelector("#cancel_ticket_btn").dataset.ref;
     let formData = new FormData();
     formData.append('ticket_id',ticket_id)
-    fetch('cancel',{
+    fetch('/cancel',{
         method: "POST",
         body: formData
     })

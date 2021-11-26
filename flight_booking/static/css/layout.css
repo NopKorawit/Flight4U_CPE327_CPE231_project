@@ -1,138 +1,170 @@
-/* mobile part */
-body{
-
-  font-family:"Lato", sans-serif;
-  height: auto;
-  background: rgb(255, 255, 255);
-  margin: 0;
-  padding: 0; /*remove nav border*/
-
+*{
+    margin: 0;
+    padding: 0;
 }
 
 .content{
-
-  margin: 2em 2em  ;
-
+    margin-top: 10px;
 }
-.brand_logo {
-  margin: 5px;
-  height: 35px;
-  width: 90px;
-}
+
+/*---full screen---*/
 
 nav{
-
-  background: rgb(230, 103, 0);
-  align-items: center;
-
-}
-.nav-link{
-  color: white;
+    background-color:rgb(255, 115, 0);
+    position: absolute;
 }
 
+#logo{
+    height: 30px;
+}
 
-#brand {
+.dropdown-menu{
+    min-width: auto;
+}
 
-  margin: 0;
-  color: white;
-  font-size: 30px;
-  text-decoration: none;
+ul li a{
+    color: rgba(255, 255, 255, 0.822) !important;
+}
 
+.nav-link.signup,.nav-link.login{
+    margin-top: 3px;
+}
+
+.nav-link.signup{
+    background-color: rgba(255, 255, 255, 0.904);
+    color: rgb(255, 115, 0) !important;
+    border-radius: 10px;
+    border: none;
+}
+
+.nav-link.signup:hover{
+    color: rgba(255, 255, 255) !important;
+    background-color: rgb(161, 57, 43);
+    border: 1px solid rgba(255, 255, 255);
+}
+
+.nav-link.login{
+    border-radius: 10px;
+    border: 1px solid white;
+    margin-right: 5px;
+}
+
+.nav-link.login:hover{
+    background-color: rgba(255, 255, 255, 0.904);
+    color: rgb(255, 115, 0) !important;
+    border: none;
 }
 
 
-
-/*Menu*/
-ul{   
-
-  flex-direction: column;
-  justify-content: center;
-  padding-left: 0px;
-  display: none;
-  
+.nav-link.logout{
+    border-radius: 10px;
+    border: 1px solid white;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-ul li {
+.nav-link.logout:hover{
+    color: rgb(255, 115, 0) !important;
+    background-color:white;
+}
 
-  list-style-type: none; /*remove bullet*/
-  font-size: 15px;
-  cursor: pointer;
-  margin: 10px;
-  text-align: center;
-  transition-duration: .1s;
-  /* display: none; */
+.nav-link.logged{
+    pointer-events: none;
+    margin-top: 5px;
+    margin-right: 10px;
+    font-size: 1.2em;
+    display: inline-flex;
+    vertical-align: center;
+}
+
+.nav-link.logged h5{
+    margin-top: 2px;
+    margin-left: 5px;
+}
+
+.my_booking{
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.my_booking:hover{
+    background-color:white;
+    color:rgb(255, 115, 0) !important;
+    border-radius: 10px;
 
 }
 
-ul li a {
+/*---medium and small screen ---*/
+@media screen and (max-width: 991.5px){
 
-  text-decoration: none; /*remove underline link*/
-  color: white;
+    ul,li{
+        display: flex;
+        margin: 0 auto;
+    }
+    
+    .nav-link.login{
+        border: none;
+        background-color: inherit;
+        color: white !important;
+        margin-bottom: 10px;
+        text-align: center;
+        border-radius: 0;
+        padding-bottom: 0;
+        border-bottom: 1px solid white;
+    }
 
-}
+    .nav-link.signup{
+        background-color: inherit;
+        border: 1px solid white;
+        color: rgba(255, 255, 255, 0.863)!important;
+        padding: 5px;
+    }
 
-ul li:first-child {
-  margin-top: 0px;
-}
+    .nav-link.signup:hover{
+        color: rgb(255, 115, 0)!important;
+        background-color: rgba(255, 255, 255, 0.781);
+        padding: 5px;
+        border: 1px solid white;
+    }
 
-ul li:hover {
+    .nav-link.login:hover{
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.781);
+        color: rgb(255, 115, 0)!important;
+        padding: 5px;
+    }
 
-  background-color: #ffba6cb7; 
-  padding: 10px;
-  border-radius: 5px;
-  transition-duration: .1s;
-  
-}
+    #log-sign{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 
-.active { /* in js use with hamburger*/
+    .nav-link.logged{
+        border: none;
+        background-color: inherit;
+        color: white !important;
+        margin-top: 17px;
+        padding: 0;
+        font-weight: 500;
+        font-size: 1em;
+    }
 
-  display: flex;
-}
+    .nav-link.logged h5{
+        margin-top: -2px;
+    }
 
-/*Desktop part*/
-@media screen and (min-width: 800px) {
-  nav{
-    height: 80px;
-    flex-direction: row;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    align-items:flex-end;
-  
-  }
-  .nav-link{
-    align-content: flex-end;
-  }
+    .nav-link.logout{
+        margin: 10px 10px ;
+    }
 
-  .logo {
+    .nav-link.logged,.nav-link.logout{
+        display: flex !important;
+    }
 
-    padding-left: 20px;
-    margin: 0;
-    width: 20%; 
+    #logo{
+        margin-left: -4rem;
+    }
 
-  }
-
-  ul{
-    display: block;
-    justify-content: left;
-    width: 80%;
-    flex-direction: row;
-  }
-
-  ul li {
-    display: inline-block;
-    margin: 0 50px 0 0;
-    text-align: left;
-    padding: 0;
-
-  }
-
-  .nav-toggle {
-    display: none;
-  }
-
-  .btn{
-    margin-left: 20px;
-}
 }

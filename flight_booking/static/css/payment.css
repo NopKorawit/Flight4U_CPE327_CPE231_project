@@ -5,7 +5,7 @@ html {
     background-color:#ffffff;
     background-image: url(/static/img/blackgroud_Flight4U.jpg);
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: unset;
     
 }
 

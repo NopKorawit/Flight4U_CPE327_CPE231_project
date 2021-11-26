@@ -1,59 +1,24 @@
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
-# from .DBHelper import DBHelper
-from django.db import connection
-from django.urls.conf import path
+
 from django.urls import reverse
 from flight_booking.models import *
 from datetime import datetime
 from django.contrib import messages
-# from django.contrib.auth import login,authenticate,logout
+
 from django.shortcuts import get_object_or_404
 from django.views.generic import View
-from django.http import JsonResponse, response
+from django.http import JsonResponse
 from django import forms
 from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
 from django.forms.models import model_to_dict
 from django.db.models import Max
-import json
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 
 # Generate account_no
 
-from string import ascii_uppercase
-import itertools
 
-
-def iter_all_strings():
-    for size in itertools.count(2):
-        for s in itertools.product(ascii_uppercase, repeat=size):
-            yield "".join(s)
-
-
-def noList():
-    nolist = []
-    for s in iter_all_strings():
-        nolist.append(s)
-        if s == 'AG':
-            break
-    return(nolist)
-
-
-def listID():
-    nolist = noList()
-    idlist = []
-    for no in nolist:
-        for i in range(1, 100):
-            idlist.append(f"{no}{i:02}")
-    return(idlist)
-
-# def genID():
-#     for id in listID():
-#         if not Account.objects.filter(account_no=id).exists():
-#             break
-#     return(id)
 
 # --------------------------------------------------------------
 
@@ -88,10 +53,13 @@ def search(request):
         })
 
 def my_booking(request):
-    tickets = Ticket.objects.filter(username=request.user.username).order_by('-booking_date').values('ticket_id','flight_id','departure_date',
+    # tickets = Ticket.objects.filter(username=request.user.username).order_by('-booking_date').values('ticket_id','flight_id','departure_date',
+    #                                                                                         'seat_class','total_amount','booking_date','status')
+    tickets = Ticket.objects.filter(username=request.user.username).order_by('-ticket_id').values('ticket_id','flight_id','departure_date',
                                                                                             'seat_class','total_amount','booking_date','status')
+
     return render(request, 'my_booking.html', {
-        'tickets': tickets
+        'tickets': tickets,
     })
 
 
@@ -145,9 +113,7 @@ def addUser(request):
         elif User.objects.filter(email=email).exists():
             messages.info(request, "This email is already used.")
             return redirect('/register')
-        # elif User.objects.filter(phone_no=phone_no).exists():
-        #     messages.info(request,"This phone number is already used.")
-        #     return redirect('/register')
+
         else:
             user = User.objects.create_user(
             # account_no=account_no,
@@ -280,7 +246,7 @@ def createticket(flight_id,departure_date,seat_class,total_amount,username):
     ticket_id = next_ticket_id
     date = reFormatDateYYYYMMDD(departure_date)
 
-    
+    print(ticket_id,flight_id,date,seat_class,status)
     ticket = Ticket.objects.create(
             ticket_id=ticket_id,
             flight_id_id=flight_id,
@@ -322,8 +288,8 @@ def cancel_ticket(request):
                 if ticket.username == request.user.username:
                     ticket.status = 'CANCELLED'
                     ticket.save()
-                    # return JsonResponse({'success': True})
-                    return redirect('/my_booking')
+                    return JsonResponse({'success': True})
+                    # return redirect('/my_booking')
                 else:
                     return JsonResponse({
                         'success': False,
@@ -523,24 +489,6 @@ def reFormatDateYYYYMMDD(yyyymmdd):
             return ''
     return yyyymmdd[6:10] + "-" + yyyymmdd[3:5] + "-" + yyyymmdd[:2]
 
-
-def CursorToDict(data,columns):
-    result = []
-    fieldnames = [name.replace(" ", "_").lower() for name in columns]
-    for row in data:
-        rowset = []
-        for field in zip(fieldnames, row):
-            rowset.append(field)
-        result.append(dict(rowset))
-    return result
-
-def dictfetchall(cursor):
-    "Return all rows from a cursor as a dict"
-    columns = [name[0].replace(" ", "_").lower() for name in cursor.description]
-    return [
-        dict(zip(columns, row))
-        for row in cursor.fetchall()
-    ]
 
 def reFormatNumber(str):
         if (str == ''):

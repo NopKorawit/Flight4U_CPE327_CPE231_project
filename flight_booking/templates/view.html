@@ -3,81 +3,81 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'css/view.css' %}">
-    <script src="{% static 'js/view.js' %}" ></script>
+<link rel="stylesheet" href="{% static 'css/view.css' %}">
+<script src="{% static 'js/view.js' %}"></script>
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 {% endblock %}
 
 
 
 {% block body %}
 
-<div class="container_views">
-    <div class='row'>
-        <div class="col-sm">
-            <label>From:</label>
-            <input type='text' id='js_Departure' name='departure' value='{{departure}}' readonly>
-        </div>
-        <div class="col-sm">
-            <label>To:</label>
-            <input type='text' id='js_Destination' name='destination' value='{{destination}}' readonly>
-        </div>
-        <br>
-        <div class="col-sm">
-            <label>Date:</label>
-            <input type='text' id='js_Date' name='date' value='{{departure_date}}' readonly>
-        </div>
-        <br>
-        <br>
-        <br>
-        <div class="col">
-            <label>Class:</label>
-            <input type='text' id='js_Class' name='seat_class' value='{{seat_class}}' readonly>
-        </div>
-        <div class="col">
-            <button type="button" class="btnSearch" ><a href="/">Search</a></button>
-        </div>
-    </div>
+<div class="container views">
+    <header>
+        <div class="row gx-3">
+            <div class="col-sm-6 col-md-3">
+                <label class="control-label">From:</label>
+                <input class="form-control" type="text" id='js_Departure' name='departure' value='{{departure}}'
+                    readonly>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <label class="col-sm-6 col-md-3">To:</label>
+                <input class="form-control" type='text' id='js_Destination' name='destination' value='{{destination}}'
+                    readonly>
+            </div>
 
-
-<table class='table'>
-    <thead>
-        <tr>
-            <th> Airline </th>
-            <th> Departure Time </th>
-            <th> Arrival Time </th>
-            <th> Price </th>
-            <th> Duration </th>
-        </tr>
-    </thead>
-    {% for flight in flights %}
-        <tr class="data">
-            <td> {{flight.airline}} </td>
-            <td> {{flight.departure_time}} </td>
-            <td> {{flight.arrival_time}} </td>
-            <td> {{flight.flight_id.price}}฿ </td>
-            <td class="duration" data-value="{{flight.duration}}"></td>
-            <td>
-                <!-- <button class="btn" id="btnChoose"><a href="{{flight.flight_id}}&{{flight.path_id}}&{{date}}&{{flight.flight_id.seat_class}}">Choose</a></button> -->
-
+            <div class="col-sm-6 col-md-2">
+                <label class="control-label">Date:</label>
+                <input class="form-control" type='text' id='js_Date' name='date' value='{{departure_date}}' readonly>
+            </div>
+            <div class="col-sm-6 col-md-2">
+                <label class="control-label">Class:</label>
+                <input class="form-control" type='text' id='js_Class' name='seat_class' value='{{seat_class}}' readonly>
+            </div>
+            <div class="d-flex justify-content-center col-md-2">
+                <a href="/" class="btn search" type="button" role="button">Search</a>
+            </div>
+        </div>
+    </header>
+    <section class="section section-1 container">
+        {% for flight in flights %}
+        <div class="row gy-5 flight">
+            <div class="col-lg-2 col-md-2" style="text-align:center;">
+                <p class="fs-5">{{flight.airline}}</p>
+                <p class="detail" style="font-size:12px;">{{flight.flight_id}}</p>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-4" align="right">
+                <p>{{flight.departure_time}}</p>
+                <p class="detail" style="font-size:12px;">{{flight.path_id.departure}}</p>
+                <p class="detail-2" style="font-size:12px;">{{departure.airport}}</p>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-4">
+                <div class="duration" style="font-size:12px; text-align: center;" data-value="{{flight.duration}}"></div>
+                <hr>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <p>{{flight.arrival_time}}</p>
+                <p class="detail" style="font-size:12px;">{{flight.path_id.destination}}</p>
+                <p class="detail-2" style="font-size:12px;">{{destination.airport}}</p>
+            </div>
+            <div class="col-lg-1 col-md-2 col-sm-6 price">
+                <p>{{flight.flight_id.price}}฿</p>
+            </div>
+            <div class="col-md-3 button" style="text-align: center;">
                 {% if user.is_authenticated %}
-                <button class="btnChoose" id="btn-Choose"><a href="{{flight.flight_id}}&{{flight.path_id}}&{{date}}&{{flight.flight_id.seat_class}}">Choose</a></button>
-
-                <!-- <button id="btnDetail">Detail</button> -->
+                <a href="{{flight.flight_id}}&{{flight.path_id}}&{{date}}&{{flight.flight_id.seat_class}}" 
+                class="btn choose" role="button">Choose</a>
                 {% else %}
-                <button class="btnChoose" id="btn-Choose" disabled>Choose</button>
+                <a class="btn choose" id="btn-Choose" role="button">Choose</a>
                 {% endif %}
-                
-            </td>
-        <tr>
-
-
-    {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </section>
 
 
 </div>
 
+</div>
+
 {% endblock %}
-    
-
-
-

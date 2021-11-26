@@ -31,8 +31,4 @@ urlpatterns = [
     path('ticket/pdf/<str:pk>', views.TicketPDF.as_view(), name='Ticket_pdf'),
 
 
-    # path('flight/ticket/api/<str:ref>', views.TicketList, name="ticketdata"),
-    # path('ticket/print',views.get_ticket, name="getticket"),
-    
-
 ]

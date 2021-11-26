@@ -4,27 +4,26 @@
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/confirm.css' %}">
 <script src="{% static 'js/confirm.js' %}"></script>
+
 {% endblock %}
-
 {% block body %}
-
 <body>
-    <div class="center">
-        <center>
+<div class="container">
+    <center>
         <div class="display-img">
             <img class="icon-img" src="{% static 'img/confirm.png' %}">
         </div>
-         
         <h2>
             Congratulations,Your flight booking is comfirmed.
         </h2>
         <p>
-            Booking Ref. Number :<input type='text' id='txt_ticketID' name='ticket_id' class='ticket_id' value='{{ticket_id}}' ><!--readonly -->
+            Booking Ref. Number :<input type='text' id='txt_ticketID' name='ticket_id' class='ticket_id'
+                value='{{ticket_id}}' readonly>
         </p>
         <button type="print" id='btnPdf' value="print" class="btn print_ticket">
             <h5>Print Ticket</h5>
         </button>
     </center>
-    </div>
+</div>
 </body>
 {% endblock %}

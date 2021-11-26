@@ -1,4 +1,3 @@
-
 $(document).ready( function () {
     $('#btnPdf').click(function () {
         if ($('#txt_ticketID').val() == '') {

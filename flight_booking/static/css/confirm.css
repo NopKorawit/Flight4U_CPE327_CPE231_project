@@ -1,35 +1,16 @@
-body,
-html {
+body{
     margin: 0;
     padding: 0; 
     background-color:#ffffff;
     background-image: url(/static/img/blackgroud_Flight4U.jpg);
     background-size: cover;
-    background-repeat: no-repeat;
-    
-}
-.confirm_content{
-    align-content: center;
-    height: 450px;
-    width: 600px;
-    margin-top: auto;
-    margin-bottom: 0px;
-    margin-left: 20px ;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-
-    padding: 10px;
+    background-repeat: unset;
 }
 .icon-img{
     width: 17%;
     margin: 30px 0 50px 0px;
-    /* height: auto; */
-    /* float: right; */
 }
-
-.center{
+center{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -38,27 +19,28 @@ html {
     padding: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 30px;
-    opacity: 0.8 ;
-    
+    opacity: 0.85 ;
 }
+
+p{
+    pointer-events: none;
+    border: none;
+}
+
 .print_ticket {
-    /* height: 50px; */
     width: 140px;
     padding: 10px;
-    /* width: 100%; */
-    background: rgb(230, 103, 0) !important;
-    color: white !important;
-}
-.print_ticket:focus {
-    box-shadow: none !important;
-    outline: 0px !important;
+    background: rgb(255, 115, 0);
+    color: white;
 }
 .print_ticket:hover {
-    color: rgb(230, 103, 0) ;
-    background-color: rgba(255, 115, 1, 0.37); 
-    transition-duration: .1s;
+    color: rgb(255, 115, 0);
+    border: 1px solid rgb(255, 115, 0);
+    background-color: rgba(255, 255, 255, 0.671); 
+    transition-duration: 0.3s;
 }
 .ticket_id{
     width: 60px;
-    border: transparent;
+    outline: none;
+    border: none;
 }

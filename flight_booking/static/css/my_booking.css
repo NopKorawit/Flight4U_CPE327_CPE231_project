@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
 
-*{
-    font-family: 'Roboto', sans-serif;
-}
 body{
-    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0; 
+    background-image: url(/static/img/blackgroud_Flight4U.jpg);
+    background-size: cover;
+    background-repeat: unset;
     word-wrap: break-word;
 }
 .container{
@@ -12,9 +12,9 @@ body{
 }
 .each-booking-div{
     width: 95%;
-    margin: 5px auto 8px auto;
+    margin: 10px auto 10px auto;
     transition-duration: .4s;
-    padding: 10px 15px;
+    padding: 15px;
     background-color: #fff;
     border: 1px solid #e6e6e6;
     border-radius: 5px;

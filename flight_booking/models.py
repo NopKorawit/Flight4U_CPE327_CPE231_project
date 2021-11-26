@@ -95,7 +95,6 @@ class Ticket(models.Model):
     seat_class = models.CharField(max_length=10)
     total_amount = models.FloatField()
     booking_date = models.DateTimeField(blank=True,null=True)
-    # user_id = models.ForeignKey(User,on_delete=models.CASCADE, blank=True, null=True,db_column='id')
     username = models.CharField(max_length=150)
     status = models.CharField(max_length=10)
     class Meta:
@@ -117,3 +116,20 @@ class Passenger(models.Model):
         managed = False
     def __str__(self):
         return f"Passenger: {self.first_name} {self.last_name} {self.email}"
+
+#-------------------------------------------------------------------------------
+
+class Payment(models.Model):
+    card_no = models.CharField(max_length=20,primary_key=True)
+    card_type = models.CharField(max_length=10)
+    holder_name = models.CharField(max_length=100)
+    username = models.ForeignKey(User, on_delete=models.CASCADE, db_column='username')
+    ticket_id = models.CharField(max_length=10)
+
+    class Meta:
+        db_table = "payment"
+        managed = False
+    def __str__(self):
+        return self.username,self.ticket_id
+
+

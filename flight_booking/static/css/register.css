@@ -1,107 +1,48 @@
-body,
-html {
+body{
     margin: 0;
     padding: 0; 
     background-color:#ffffff;
     background-image: url(/static/img/blackgroud_Flight4U.jpg);
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: unset;
+    height: 100vh;
     
 }
 
-.registration-form form{
-    background-color: #fff;
-    max-width: 600px;
-    max-height: 700px;  
-    margin: auto;
-    padding: 25px 70px 0px 70px;
+.user_card {
+    height: 500px;  
+    margin-top: 5rem; 
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px 40px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 30px;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
-    opacity: 0.8;
+    opacity: 0.9 ;
+
 }
 
-/* .registration-form .form-icon{
-	text-align: center;
-    background-color: rgb(230, 103, 0);
-    border-radius: 50%;
-    font-size: 40px;
-    color: white;
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    margin-bottom: 50px;
-    line-height: 100px;
-} */
-
-.registration-form .item{
-	border-radius: 20px;
-    margin-bottom: 25px;
-    padding: 10px 20px;
+input{
+    display: flex;
+    width: 50%;
+    margin-top: 10px;
 }
 
-.registration-form .create-account{
-    border-radius: 30px;
-    padding: 10px 20px;
-    font-size: 18px;
-    font-weight: bold;
-    background-color: rgb(230, 103, 0);
-    border: none;
-    color: white;
-    margin-top: 20px;
+.form-group h1{
+    margin-bottom: 1em;
 }
 
-.warn{
-    padding: 15px;
-    width: 15cm;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    background-color: #ff9595;
-    color: rgb(105, 16, 16);
-}
-
-.alert b{
-
-    font-size: 15px;
-    margin-left: 0px;
-}
-
-.btn-block{
-    margin: 10px 0 10px 0;
-    padding: 10px;
-    width: 75px;
+.btn{
+    margin: 20px 0;
+    width: 50%;
     background-color: rgb(230, 103, 0);
     color: white;
-    border: none;
-    border-radius: 5px;
-    transition-duration: .1s;
 }
 
-.btn-block:disabled{
-    background-color: rgba(255, 115, 0, 0.527);
-    color: rgb(255, 255, 255);
-
+.alert {
+    padding: 5px;
+    text-align: center;
 }
-
-.btn-block:hover:enabled {
-    color: rgb(230, 103, 0) ;
-    background-color: rgba(255, 115, 1, 0.37); 
-    transition-duration: .1s;
-    cursor: pointer;
-    
-}
-
-
-
-/* @media (max-width: 576px) {
-    .registration-form form{
-        padding: 50px 20px;
-    }
-
-    .registration-form .form-icon{
-        width: 70px;
-        height: 70px;
-        font-size: 30px;
-        line-height: 70px;
-    }
-   
-} */

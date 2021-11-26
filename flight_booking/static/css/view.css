@@ -1,100 +1,109 @@
-
-*{
-    font-family: "Lato", sans-serif;
-}
-body,
-html {
+body{
     margin: 0;
     padding: 0; 
-    background-color:#ffffff;
     background-image: url(/static/img/blackgroud_Flight4U.jpg);
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: unset;
     
 }
 
-/* .view-head{
-    margin: 10px 10%;
-    display: grid;
-    grid-template-columns:1fr 1fr 1fr 1fr 1fr;
 
-} */
-.container_views{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+.row.gx-3{
     background: #ffffff;
+    margin-top: 1em;
     padding: 20px;
+    padding-bottom: 30px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 30px;
     opacity: 0.9 ;
     
 }
-.btnSearch{
-    margin: auto;
-    background-color: rgb(230, 103, 0);
-    border: none;
-    padding: 5px;
-    width: 100px;
-    border-radius: 5px;
-}
 
-.btnSearch a{
-    text-decoration: none;
-    color: white;
-}
-
-
-table{
+.container.flight{
     margin: 2rem auto;
+    /* background: #ffffff; */
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+    border-radius: 30px;
+    opacity: 0.9 ;
+    padding: 2rem;
 }
 
-th, td {
-    font-family: "Lato", sans-serif;
-    padding: 13px;
-    text-align: left;
-    border-bottom: 1px solid rgb(219, 215, 204);
-    
-}
 
-input{
+.row input{
     pointer-events: none;
     outline: none;
-    border: none;
     border-bottom: 1px solid gray;
-    margin: 0 20px 0 0 ;
     font-size: medium;
     text-align: center;
 }
 
-.btnChoose{
-    background-color: rgb(230, 103, 0);
+section.section-1{
+    margin: 7em auto;
+}
+
+.flight{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4em;
+    border-radius: 30px;
+    padding-bottom: 30px;
+    background: #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+p{
+    margin: 0;
+    padding:0;
+}
+
+/* --------button ------------*/
+
+.d-flex a{
+    margin: 25px 0em auto;
+}
+
+
+.btn.choose{
+    background-color: rgb(255, 115, 0);
+    color: white;
     border: none;
-    padding: 5px;
+    padding: 5px 10px;
     width: 100px;
     border-radius: 5px;
 }
 
-.btnChoose a {
-    text-decoration: none;
-    color: white;
+.btn.choose:hover{
+    background-color:rgba(255, 255, 255, 0.877);
+    border: 1px solid rgb(255, 115, 0);
+    color: rgb(255, 115, 0) !important;
 }
 
 
-/* .col{
-    color: rgb(230, 103, 0);
-} */
+.btn.search{
+    background-color:rgb(255, 115, 0);
+    border: none;
+    padding: 5px 1rem;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
 
-/* mobile screen */
+}
 
-@media screen and (max-width: 800px) {
-    /* .view-head{
-        margin: 10px 10%;
-        display: grid;
-        grid-template-columns:1fr 1fr;
-        row-gap: 20px;
-    
+.btn.search:hover{
+    background-color:rgba(255, 255, 255, 0.877);
+    border: 1px solid rgb(255, 115, 0);
+    color: rgb(255, 115, 0);
+}
+
+/*---medium and small screen ---*/
+@media screen and (max-width: 767px){
+
+    .btn.choose{
+        margin-bottom: 0;
     }
-     */
+
+    .price{
+        display:none;
+    }
 }
+
+

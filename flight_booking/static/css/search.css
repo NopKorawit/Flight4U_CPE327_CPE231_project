@@ -1,63 +1,47 @@
-body,
-html {
+body{
     margin: 0;
     padding: 0; 
     background-color:#ffffff;
     background-image: url(/static/img/blackgroud_Flight4U.jpg);
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: unset;
     
 }
 
-label{
-    margin-top: 10px;
+.container{
+    margin: 5em auto;
+
 }
 
-form{
-    margin: 30px;
-    
+.card-head{
+    margin-bottom: 1rem;
 }
 
-.search_card {
-    margin-top: 50px;
-    margin-right: 670px ;
-    height: 360px;
-    width: 500px;
+.search_card{
+    height: 400px !;
     background: #ffffff;
     display: flex;
-    /* justify-content: left; */
-    /* flex-direction: column; */
-    padding: 10px;
+    padding: 2em;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    /* -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
     border-radius: 30px;
-    opacity: 0.75 ;
+    opacity: 0.80;
+
 }
+
 
 #btnSearch{
     margin: 1em auto;
-    background-color: rgb(230, 103, 0);
+    background-color:rgb(255, 115, 0);
     border: none;
-    padding: 5px;
-    width: 10rem;
+    padding: 5px 1rem;
     border-radius: 5px;
     color: rgb(255, 255, 255);
+    
 }
 
+#btnSearch:hover{
+    background-color: rgba(255, 115, 0, 0.151);
+    border: 1px solid rgb(255, 115, 0);
+    color:rgb(255, 115, 0);
+}
 
-
-    /* mobile screen */
-
-@media screen and (max-width: 1200px) {
-    .search_card{
-     margin: 80px auto;
-     height: 360px;
-    width: 500px;
-     padding: 10px;
-    flex-direction: column
-        /* grid-template-columns: 1fr;
-        grid-row: 2fr 1fr; */
-        }
-    
-    }

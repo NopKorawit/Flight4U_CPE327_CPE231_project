@@ -16,7 +16,6 @@ function flight_duration() {
     });
 }
 
-
 $(document).ready(function(){
 
     let btnAdd = document.getElementById('btnAdd');
@@ -75,17 +74,18 @@ function displayDetails(num_p) {
     let count_p = document.querySelectorAll(".passenger-list .addP").length;
     console.log(count_p);
     passenger = `
-    <div class="row addP">
-        <div class="show-p col-3">
-            <span class="p-name">${fname}&nbsp;&nbsp;${lname}</span><span>,</span>
-            <span class="p-email">${email}</span>
+    <div class="addP">
+        <div class="show-p row">
+            <div class="p-name col-4">${fname}&nbsp;&nbsp;${lname}</div><span class="col-1">,</span>
+            <div class="p-email col-6">${email}</div>
+            <button class="btn fas fa-times col-1" type="button" onclick="del_passenger(this)"></button>
         </div> 
         <input type="hidden" name="fname${count_p+1}" value="${fname}">
         <input type="hidden" name="lname${count_p+1}" value="${lname}">
         <input type="hidden" name="email${count_p+1}" value="${email}">
         <input type="hidden" name="idno${count_p+1}" value="${idno}">
         <input type="hidden" name="phone${count_p+1}" value="${phone}">
-        <button class="btn fas fa-times col-2" type="button" onclick="del_passenger(this)"></button>
+    </div>
     `;
 
     plist.innerHTML+= passenger
@@ -97,11 +97,7 @@ function displayDetails(num_p) {
     clearForm();
     }
 
-//-------------------------------------------------------------------------
 
-
-
-//-------------------------------------------------------------------------
 
 }
 
@@ -181,10 +177,9 @@ function phonenumber(number)
 
 function validateID(idno)
 {
-        var passport = /^[A-PR-WYa-pr-wy][1-9]\d\s?\d{4}[1-9]$/;
         var idcard = /^\d{13}$/;
         
-        if(passport.test(idno) == true || idno.match(idcard))
+        if(idno.match(idcard) || idno.length > 9)
         {
             return true;
         }

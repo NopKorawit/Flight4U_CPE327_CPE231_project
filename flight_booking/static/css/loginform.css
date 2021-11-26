@@ -1,35 +1,18 @@
-/* body,
-html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background-color:#ffffff;
-    background-image: url(/static/img/blackgroud_Flight4U.jpg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-} */
-body,
-html {
+
+body{
     margin: 0;
     padding: 0; 
     background-color:#ffffff;
     background-image: url(/static/img/blackgroud_Flight4U.jpg);
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: unset;
     
 }
 
-.content{
-    margin-top: 170px;
-}
-  
 .user_card {
-    height: 450px;
-    width: 600px;
-    margin-top: auto;
-    margin-bottom: 0px;
-    margin-left: 20px ;
+    height: 350px;
+    width: 350px;   
+    margin-top: 7rem; 
     background: #ffffff;
     position: relative;
     display: flex;
@@ -40,45 +23,38 @@ html {
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 30px;
-    opacity: 0.8 ;
+    opacity: 0.9 ;
 
 }
 .brand_logo_container {
-    margin-top: 170px;
     position: absolute;
-    height: 160px;
-    width: 160px;
+    /* height: 160px;
+    width: 160px; */
     top: -80px;
     border-radius: 50%;
-    /* background: rgb(255, 255, 255); */
     /* padding: 10px; */
-    /* text-align: center; */
-
+    text-align: center;
 }
 .brand_logIN {
-    height: 200px;
-    width: 200px;
-    margin-right: 20px ;
+    height: 170px;
+    width: 170px;
     border-radius: 50%;
-    border: 15px solid rgba(255, 255, 255,0.8);
-
+    border: 2px solid white;
 }
+
+.mt-4 a{
+    margin-left: 5px;
+}
+
 .form_container {
-    margin-top: 30px;
+    margin-top: 70px;
 }
-
 .login_btn {
-    /* height: 50px; */
-    width: 550px;
-    padding: 10px;
-    /* width: 100%; */
-    background: rgb(230, 103, 0) !important;
-    color: white !important;
+    width: 100%;
+    background-color: rgb(230, 103, 0);
+    color: white;
+
 }
-/* .login_btn:focus {
-    box-shadow: none !important;
-    outline: 0px !important;
-} */
 .login_btn:disabled{
     background-color: rgba(255, 115, 0, 0.527);
     color: rgb(255, 255, 255);
@@ -89,41 +65,24 @@ html {
     transition-duration: .1s;
 }
 
-
 .login_container {
-    height: 50px;
-    width: 450px;
-    justify-content: center;
     padding: 0 2rem;
 }
 .input-group-text {
-    height: 60px;
-    width: 60px;
-    background: rgb(230, 103, 0) !important;
-    color: white !important;
-    border: 0 !important;
-    border-radius: 0.25rem 0 0 0.25rem !important;
-    justify-content: center;
+    height: 40px;
+    width: 45px;
+    background: rgb(230, 103, 0);
+    color: white ;
+    border: 0 ;
+    border-radius: 0.25rem 0 0 0.25rem ;
 }
 .input_user,
 .input_pass:focus {
-    box-shadow: none !important;
-    outline: 0px !important;
-}
-.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
-    background-color: rgb(230, 103, 0) !important;
+    box-shadow: none;
+    outline: 0px;
 }
 
-.warn{
-    padding: 15px;
-    width: 15cm;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    background-color: #ff9595;
-    color: rgb(105, 16, 16);
-}
-
-.alert{
-    font-size: 15px;
-    padding: 20px;
+.alert {
+    padding: 5px;
+    text-align: center;
 }
