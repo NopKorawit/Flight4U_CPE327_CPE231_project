@@ -87,10 +87,3 @@ body{
     text-align: center;
 }
 
-@media screen and (max-width: 991.5px){
-
-    .d-flex.h-100{
-        justify-content:center;
-    }
-
-}

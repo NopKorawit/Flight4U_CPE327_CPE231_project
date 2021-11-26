@@ -45,3 +45,10 @@ body{
     color:rgb(255, 115, 0);
 }
 
+@media screen and (max-width: 991.5px){
+
+    .d-flex.h-100{
+        justify-content:center;
+    }
+
+}
