@@ -16,7 +16,7 @@ label{
 .payment-content{
     height: 500px;
     width: 500px;
-    margin: 2rem auto;
+    margin: 3rem auto;
     box-shadow:  3px 3px 10px rgba(0,0,0,0.2);
     border-radius:  50px;
     background: #ffffff;
@@ -31,6 +31,29 @@ input{
     width: 25em;
     font-size: 15px;
 }
+
+.col2 input{
+    width: auto;
+}
+
+.amount{
+    margin-left: -2rem;
+}
+
+.amount input{
+    text-align: center;
+    pointer-events: none;
+    background-color: rgba(211, 211, 211, 0.514);
+    border: 1px solid rgb(116, 116, 116);
+}
+
+.ticket_id input{
+    text-align: center;
+    pointer-events: none;
+    background-color: rgba(211, 211, 211, 0.514);
+    border: 1px solid rgb(116, 116, 116);
+}
+
 button{
     margin-top: 20px;
 }
@@ -50,12 +73,8 @@ button{
     display: table-cell;
     width: 30%;
 }
-#js_Amount{
-    pointer-events: none;
-    background-color: rgba(211, 211, 211, 0.514);
-    border: 1px solid rgb(116, 116, 116);
-    /* height: 18px; */
-}
+
+
 .expiry-input-div{
     display: flex;
     justify-content:stretch;

@@ -20,9 +20,15 @@
             <form action="confirm" method="post">
                 {% csrf_token %}
                 <h2 align="center">Payment Information</h2>
-                <div class="amount">
-                    <label>PAYMENT AMOUNT</label><br>
-                    <input type='text' id='js_Amount' name='amount' value=" ฿ {{total_amount}}" readonly>
+                <div class="row col2">
+                    <div class="ticket_id col-6">
+                        <label>TICKET ID</label><br>
+                        <input type="text" name="ticket_id" value="{{ticket_id}}" readonly>
+                    </div>
+                    <div class="amount col-6">
+                        <label>PAYMENT AMOUNT</label><br>
+                        <input type='text' id='js_Amount' name='amount' value=" ฿ {{total_amount}}" readonly>
+                    </div>
                 </div>
                 <div class="creditcard">
                     <label>Credit Card Number<span>*</span></label><br>
