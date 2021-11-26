@@ -14,3 +14,7 @@ function flight_duration() {
         
     });
 }
+
+function loginBeforeChoose() {
+    alert("Please 'Login' before choose flight for booking!")
+}

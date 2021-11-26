@@ -68,7 +68,7 @@
                 <a href="{{flight.flight_id}}&{{flight.path_id}}&{{date}}&{{flight.flight_id.seat_class}}" 
                 class="btn choose" role="button">Choose</a>
                 {% else %}
-                <a class="btn choose" id="btn-Choose" role="button">Choose</a>
+                <a class="btn choose" onclick="loginBeforeChoose()" role="button">Choose</a>
                 {% endif %}
             </div>
         </div>
