@@ -71,7 +71,6 @@ section input[type="text"]::placeholder{
     font-size: 15px;
     margin-left: 10px ;
 }
-
 .proceed{
     padding: 7px;
     cursor: pointer;
