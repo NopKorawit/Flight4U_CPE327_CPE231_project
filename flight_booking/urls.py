@@ -25,9 +25,6 @@ urlpatterns = [
     path('path/detail/<str:id>', views.PathDetail.as_view(), name='path_detail'),
     path('class/list',views.ClassList.as_view(),name='class_list'),
     path('class/detail/<str:id>', views.ClassDetail.as_view(), name='class_detail'),
-
-    path('ticket/list', views.TicketList.as_view(), name='Ticket_List'),
-    path('ticket/detail/<str:pk>', views.TicketDetail.as_view(), name='Ticket_detail'),
     path('ticket/pdf/<str:pk>', views.TicketPDF.as_view(), name='Ticket_pdf'),
 
 
