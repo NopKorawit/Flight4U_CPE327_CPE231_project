@@ -119,17 +119,3 @@ class Passenger(models.Model):
 
 #-------------------------------------------------------------------------------
 
-class Payment(models.Model):
-    card_no = models.CharField(max_length=20,primary_key=True)
-    card_type = models.CharField(max_length=10)
-    holder_name = models.CharField(max_length=100)
-    username = models.ForeignKey(User, on_delete=models.CASCADE, db_column='username')
-    ticket_id = models.CharField(max_length=10)
-
-    class Meta:
-        db_table = "payment"
-        managed = False
-    def __str__(self):
-        return self.username,self.ticket_id
-
-

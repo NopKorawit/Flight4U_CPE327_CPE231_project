@@ -7,7 +7,6 @@
 <script src="{% static 'js/search.js' %}" ></script>
 
 <link rel="stylesheet" href="{% static 'css/suggest_search.css' %}">
-<script src="{% static 'js/suggest_search.js' %}" ></script>
 
 
 {% endblock %}
@@ -20,7 +19,7 @@
         <div class="container h-100">
             <div class="d-flex h-100">
                 <div class="search_card">
-                    <form class="search-flight-form" action="viewflight" onsubmit="">
+                    <form class="search-flight-form" action="viewflight" onsubmit="return flight_search()">
                         <!----------------------create form ------------------>
                             <h1 class="card-head" align="center"> SEARCH FLIGHT </h1>
                             <div class="search-flight-form">

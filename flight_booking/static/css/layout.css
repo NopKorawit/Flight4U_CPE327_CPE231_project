@@ -25,12 +25,13 @@ ul li a{
     color: rgba(255, 255, 255, 0.822) !important;
 }
 
+
 .nav-link.signup,.nav-link.login{
     margin-top: 3px;
 }
 
 .nav-link.signup{
-    background-color: rgba(255, 255, 255, 0.904);
+    background-color: rgba(255, 255, 255, 0.678);
     color: rgb(255, 115, 0) !important;
     border-radius: 10px;
     border: none;
@@ -64,8 +65,7 @@ ul li a{
 }
 
 .nav-link.logout:hover{
-    color: rgb(255, 115, 0) !important;
-    background-color:white;
+    background-color:rgb(187, 0, 0);
 }
 
 .nav-link.logged{
@@ -83,14 +83,14 @@ ul li a{
 }
 
 .my_booking{
-    border-radius: 10px;
+    transition: 0.3s;
     padding: 5px;
 }
 
 .my_booking:hover{
-    background-color:white;
-    color:rgb(255, 115, 0) !important;
-    border-radius: 10px;
+    font-weight: bold;
+    font-size: 18px !important;
+    transition: 0.2s;
 
 }
 
@@ -166,4 +166,16 @@ ul li a{
         margin-left: -4rem;
     }
 
+}
+
+::-webkit-scrollbar-track {
+    background: none;
+}
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 5px;
 }

@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     flight_duration();
 });
@@ -8,15 +7,14 @@ function flight_duration() {
         let time = element.dataset.value.split(":");
         if (time[1] == 0) {
             element.innerText = time[0] + " hr";
-        }
-        else {
+        } else {
             element.innerText = time[0] + " hr " + time[1] + " min";
         }
 
     });
 }
 
-$(document).ready(function(){
+$(document).ready(function () {
 
     let btnAdd = document.getElementById('btnAdd');
     let i = 0;
@@ -26,12 +24,12 @@ $(document).ready(function(){
         btnAdd.addEventListener('click', (e) => {
             console.log('Add')
             e.preventDefault();
-            displayDetails(i);
+            displayDetails();
         })
     }
 })
 
-function displayDetails(num_p) {
+function displayDetails() {
 
     console.log('display Add')
     let fname = document.getElementById('fname').value;
@@ -54,24 +52,22 @@ function displayDetails(num_p) {
         return;
     }
 
-    if (phonenumber(phone) == false) {
+    if (ValidatePhone(phone) == false) {
         return;
     }
 
-    if (validateID(idno) == false) {
+    if (ValidateID(idno) == false) {
         return;
     }
 
-    if (validateName(fname) == false || validateName(lname) == false) {
+    if (ValidateName(fname) == false || ValidateName(lname) == false) {
         return;
-    }
+    } else {
 
-    else {
-
-    let plist = document.getElementById('plist');
-    let count_p = document.querySelectorAll(".passenger-list .addP").length;
-    console.log(count_p);
-    passenger = `
+        let plist = document.getElementById('plist');
+        let count_p = document.querySelectorAll(".passenger-list .addP").length;
+        console.log(count_p);
+        passenger = `
     <div class="addP">
         <div class="show-p row">
             <div class="p-name col-4">${fname}&nbsp;&nbsp;${lname}</div><span class="col-1">,</span>
@@ -107,14 +103,15 @@ function clearForm() {
 
 function del_passenger(btn) {
     console.log('del')
-    let passenger = btn.parentElement;
-    let psg = btn.parentElement.parentElement.parentElement;
+    let passenger = btn.parentElement.parentElement;
+    // console.log('passenger = '+ passenger.className);
+    let psg = btn.parentElement.parentElement.parentElement.parentElement;
+    // console.log('psg = '+ psg.className);
     let cnt = psg.querySelector("#p-count");
     cnt.value = parseInt(cnt.value) - 1;
-    console.log(cnt.value)
+
     document.querySelector(".p-head h6 span").innerText = cnt.value;
     document.getElementById("totalP").innerText = cnt.value;
-    console.log(cnt.value)
     passenger.remove();
     re_calculate_total_price();
 }
@@ -124,7 +121,7 @@ function book_submit() {
     if (parseInt(pcount.value) > 0) {
         return true;
     }
-    alert("Please add at least one passenger.")
+    alert("Please add at least one passenger.");
     return false;
 }
 
@@ -152,39 +149,35 @@ function re_calculate_total_price() {
 // ---------------------------------------------------------------
 function ValidateEmail(mail) {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
-        return (true)
+        return true;
+    } else {
+        alert("You have entered an invalid email address!");
+        return false;
     }
-    alert("You have entered an invalid email address!")
-    return (false)
 }
 
-function phonenumber(number) {
+function ValidatePhone(number) {
     var phoneno = /^\d{10}$/;
     if (number.match(phoneno)) {
         return true;
-    }
-    else {
+    } else {
         alert("You have entered an invalid phone number!");
         return false;
     }
 }
 
-function validateID(idno)
-{
-        var idcard = /^\d{13}$/;
-        
-        if(idno.match(idcard) || idno.length > 9)
-        {
-            return true;
-        }
-        else
-        {   alert("You have entered an invalid Passport/ID card number!");
-            return false;
-            
-        }
+function ValidateID(idno) {
+
+    if (idno.length > 9) {
+        return true;
+    } else {
+        alert("You have entered an invalid Passport/ID card number!");
+        return false;
+
+    }
 }
 
-function validateName(name) {
+function ValidateName(name) {
     if (/[^a-zA-Z0-9\-]/.test(name)) {
         alert("Family name can only contain alphanumeric characters and hypehns(-)")
         return false;

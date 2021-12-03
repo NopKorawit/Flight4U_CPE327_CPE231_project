@@ -4,7 +4,6 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/payment.css' %}">
-<!-- <script src="{% static 'js/payment.js' %}"></script> -->
 {% endblock %}
 
 {% block body %}
@@ -32,10 +31,11 @@
                 </div>
                 <div class="creditcard">
                     <label>Credit Card Number<span>*</span></label><br>
-                    <input type="tel" pattern="[0-9]*" name="card_no" autocomplete="off" maxlength="19"
-                        placeholder="Enter card number" required><br>
+                    <input type="tel" pattern="[0-9]*" name="card_no" id="cardNo" autocomplete="off" maxlength="19"
+                        placeholder="Enter card number" title="Fill card number again" required><br>
                     <label>Credit Card Holder's Name<span>*</span></label><br>
-                    <input type="text" name="card_name" placeholder="Enter name" required>
+                    <input type="text" name="card_name" id="cardName" placeholder="Enter name" 
+                    pattern="[A-Za-z]{1,20}" title="Fill holder's name again" required>
                 </div>
                 <div class="expire-date">
                     <label>Expiration Date<span>*</span></label><br>
@@ -103,7 +103,7 @@
                 </div>
                 <div class="cvv">
                     <label>CVV Number<span>*</span></label><br>
-                    <input type="password" name="cvv_no" placeholder="Enter CVV" required>
+                    <input type="password" name="cvv_no" pattern="[0-9]{3}" title="Invalid CVV Number"placeholder="Enter CVV" required>
                 </div>
                 <div class="button">
                     <a href="my_booking" class="cancle" id="btnCancle">CANCLE</a>

@@ -5,11 +5,7 @@
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/view.css' %}">
 <script src="{% static 'js/view.js' %}"></script>
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 {% endblock %}
-
-
-
 {% block body %}
 
 <div class="container views">
@@ -40,6 +36,7 @@
         </div>
     </header>
     <section class="section section-1 container">
+        {% if flights %}
         {% for flight in flights %}
         <div class="row gy-5 flight">
             <div class="col-lg-2 col-md-2" style="text-align:center;">
@@ -73,6 +70,14 @@
             </div>
         </div>
         {% endfor %}
+        {% else %}
+        <div class="no-flight text-center">
+            <span class="fas fa-search" style="font-size: 2rem; margin-bottom: 1rem;"></span>
+            <h3>No flights available</h3>
+            Please try another date or modify your search
+        </div>
+        {% endif %}
+
     </section>
 
 

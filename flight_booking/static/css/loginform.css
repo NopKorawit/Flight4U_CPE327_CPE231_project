@@ -61,7 +61,8 @@ body{
 }
 .login_btn:hover {
     color: rgb(230, 103, 0) ;
-    background-color: rgba(255, 115, 1, 0.37); 
+    border: 1px solid rgb(230, 103, 0);
+    background-color: white; 
     transition-duration: .1s;
 }
 
