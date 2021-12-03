@@ -10,7 +10,6 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.views.generic import View
 from django.http import JsonResponse
-from django import forms
 from django.views.decorators.csrf import csrf_exempt
 from django.forms.models import model_to_dict
 from django.db.models import Max
@@ -320,49 +319,6 @@ def cancel_ticket(request):
 
 
 # -----------------this part is used for ticket details ------------------------------------------------
-class TicketForm(forms.ModelForm):
-    class Meta:
-        model = Ticket
-        fields = '__all__'
-
-
-#TicketLineItem 
-class PassengerForm(forms.ModelForm):
-    class Meta:
-        model = Passenger
-        fields = '__all__'
-class TicketDetail(View):
-    def get(self, request, pk):
-        ticket_id = pk
-        ticket = list(Ticket.objects.filter(ticket_id=ticket_id).values('ticket_id','flight_id','departure_date','seat_class','status','username','booking_date'))
-        passenger = list(Passenger.objects.filter(ticket_id=ticket_id).order_by('id_no').values("id_no","ticket_id","first_name","last_name","phone_no","email"))
-        flight_id = ticket[0]['flight_id']
-        flight_detail = list(Flight.objects.select_related("flight_detail","flight_id","path_id").filter(flight_id=flight_id).values(
-                                                            'flight_id','airline','path_id__departure','path_id__destination','departure_time',
-                                                            'arrival_time','duration'))
-        departure_code = flight_detail[0]['path_id__departure']
-        destination_code = flight_detail[0]['path_id__destination']
-        departure = list(City_A.objects.filter(city_id=departure_code).values('city_id','city_name','airport'))
-        destination = list(City_B.objects.filter(city_id=destination_code).values('city_id','city_name','airport'))
-
-        data = dict()
-        data['ticket'] = ticket[0]
-        data['passenger'] = passenger
-        data['flight_detail'] = flight_detail[0]
-        data['departure'] = departure[0]
-        data['destination'] = destination[0]
-
-        response = JsonResponse(data)
-        response["Access-Control-Allow-Origin"] = "*"
-        return response
-class TicketList(View):
-    def get(self, request):
-        ticket = list(Ticket.objects.order_by('ticket_id').all().values())
-        data = dict()
-        data['ticket'] = ticket
-        response = JsonResponse(data)
-        response["Access-Control-Allow-Origin"] = "*"
-        return response
 
 class TicketPDF(View):
     def get(self, request, pk):
