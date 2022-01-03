@@ -28,8 +28,7 @@ nav{
 
 .header{
     text-align: right;
-    /* font-size: 2em;
-    font-weight: 600; */
+
 }
 li{
     margin-top: 5px;
@@ -98,18 +97,13 @@ caption{
     height: 70px;
     width: 420px;
     margin-top: 30px;
-    /* margin-bottom: 10px; */
     text-align: center;
     align-items: center;
-    /* background: rgb(255, 255, 255); */
 }
 
 .inform{
     display: flex;
     justify-content: space-around;
-    /* border-top: 2px solid #b8b8b8;
-    border-bottom: 2px solid #b8b8b8; */
-    /* margin-top: 10px; */
     margin-bottom: 30px;
 }
 
@@ -117,8 +111,6 @@ caption{
     height: 100px;
     width: 420px;
     margin-top: 30px;
-    /* margin-bottom: 10px; */
     text-align: center;
     align-items: center;
-    /* background: rgb(255, 255, 255); */
 }

@@ -1,8 +1,6 @@
 .carousel-item {
     margin: 2em 0 1em;
     height: 200px;
-
-    /* min-height: auto; */
     border-radius: 10px;
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
     background: no-repeat center center scroll;
